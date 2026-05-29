@@ -17,8 +17,9 @@ const Sidebar = () => (
         style="text"
         to={routes.root}
         tooltipProps={{
-          content: "posts",
+          content: "Posts",
           position: "right",
+          className: "bg-[#262626]",
         }}
       />
     </div>
