@@ -1,10 +1,15 @@
 import React from "react";
 
-import { Button } from "@bigbinary/neetoui";
+import Post from "./Post";
+
+import AppHeading from "../commons/AppHeading";
 
 const Home = () => (
-  <div>
-    <Button label="This is a button" style="primary" />
+  <div className="flex h-full w-full flex-col gap-5">
+    <AppHeading title="Blog Posts" />
+    <div className="flex w-full flex-col items-center gap-3">
+      <Post />
+    </div>
   </div>
 );
 
