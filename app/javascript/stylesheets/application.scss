@@ -13,3 +13,22 @@ body {
   font-family: "Montserrat", sans-serif;
   // font-family: "Open Sans", sans-serif;
 }
+
+input,
+textarea {
+  background-color: black !important;
+  color: white !important;
+}
+.neeto-ui-input {
+  border: 1px solid gray !important;
+}
+.neeto-ui-input--textarea {
+  background-color: black !important;
+}
+textarea {
+  padding: 0px !important;
+}
+
+label {
+  color: white !important;
+}

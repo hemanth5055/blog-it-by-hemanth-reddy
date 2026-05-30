@@ -44,7 +44,7 @@ const Home = () => {
   return (
     <div className="flex h-full w-full flex-col gap-5">
       <div className="flex w-full items-center justify-between pb-4">
-        <AppHeading title="Blog Posts" />
+        <AppHeading title="Blog posts" />
         <Link to={routes.create}>
           <Button label="Add new blog post" style="primary" />
         </Link>
