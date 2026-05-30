@@ -2,12 +2,15 @@ import React from "react";
 
 import { Typography } from "@bigbinary/neetoui";
 import dayjs from "dayjs";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
-const Post = ({ title, description, createdAt }) => (
+const Post = ({ title, description, createdAt, slug }) => (
   <div className="flex w-[70%] flex-col gap-2 p-3">
-    <Typography className="text-gray-100" style="h2" weight="semibold">
-      {title}
-    </Typography>
+    <Link to={`/posts/${slug}/show`}>
+      <Typography className="text-gray-100" style="h2" weight="semibold">
+        {title}
+      </Typography>
+    </Link>
     <div>
       <Typography
         className="line-clamp-2 italic text-gray-300"

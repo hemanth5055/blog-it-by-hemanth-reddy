@@ -9,7 +9,7 @@ import routes from "../../routes";
 const Sidebar = () => (
   <div className="flex h-full w-full flex-col items-center gap-5">
     <div className=" flex items-center justify-center rounded-md p-2">
-      <Book className="neeto-ui-text-white" />
+      <Book />
     </div>
     <div className="flex h-full w-full flex-col items-center gap-4">
       <Element icon={List} to={routes.root} tooltipContent="Posts" />

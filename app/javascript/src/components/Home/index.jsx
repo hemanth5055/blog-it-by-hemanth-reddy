@@ -19,7 +19,6 @@ const Home = () => {
       const {
         data: { posts },
       } = await postsApi.fetch();
-      Logger.log(posts);
       setPosts(posts);
       setIsLoading(false);
     } catch (error) {

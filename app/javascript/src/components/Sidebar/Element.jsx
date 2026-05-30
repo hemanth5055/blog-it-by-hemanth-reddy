@@ -13,7 +13,7 @@ const Element = ({ icon, to, tooltipContent }) => {
       icon={icon}
       style="link"
       to={to}
-      className={`rounded-sm text-white hover:bg-[#262626] ${
+      className={`rounded-sm text-white  ${
         isActive
           ? "neeto-ui-border-primary-500 border-b-2"
           : "border-b-2 border-transparent"
@@ -21,7 +21,6 @@ const Element = ({ icon, to, tooltipContent }) => {
       tooltipProps={{
         content: tooltipContent,
         position: "right",
-        className: "bg-[#262626]",
       }}
     />
   );

@@ -23,12 +23,7 @@ export const Form = () => (
       />
     </div>
     <div className="flex h-full w-full items-end justify-end gap-5">
-      <Button
-        className="bg-[#262626] text-white"
-        label="Reset"
-        style="primary"
-        type="reset"
-      />
+      <Button label="Reset" style="secondary" type="reset" />
       <Button label="Submit" style="primary" type="submit" />
     </div>
   </div>
