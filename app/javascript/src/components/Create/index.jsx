@@ -1,24 +1,24 @@
 import React from "react";
 
 import { Form as NeetoForm } from "@bigbinary/neetoui/formik";
-import Logger from "js-logger";
 import { useHistory } from "react-router-dom";
 
 import { INTIAL_FORM_VALUES, VALIDATION_SCHEMA } from "./constants";
 import { Form } from "./Form";
 
-import postsApi from "../../apis/posts";
+import { useCreatePost } from "../../hooks/reactQuery/usePostsApi";
 import AppHeading from "../commons/AppHeading";
 
 export const Create = () => {
   const history = useHistory();
+  const { mutate: createPost, isLoading } = useCreatePost();
+
   const handleFormSubmit = async values => {
-    try {
-      await postsApi.create(values);
-      history.push("/");
-    } catch (error) {
-      Logger.error(error);
-    }
+    createPost(values, {
+      onSuccess: () => {
+        history.push("/");
+      },
+    });
   };
 
   return (
@@ -36,7 +36,7 @@ export const Create = () => {
             onSubmit: handleFormSubmit,
           }}
         >
-          <Form />
+          <Form isLoading={isLoading} />
         </NeetoForm>
       </div>
     </div>

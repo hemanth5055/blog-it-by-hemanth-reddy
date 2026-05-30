@@ -21,6 +21,7 @@ const Element = ({ icon, to, tooltipContent }) => {
       tooltipProps={{
         content: tooltipContent,
         position: "right",
+        className: "font-medium",
       }}
     />
   );

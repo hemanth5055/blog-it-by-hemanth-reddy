@@ -1,35 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { Button, Spinner } from "@bigbinary/neetoui";
-import Logger from "js-logger";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 import Post from "./Post";
 
-import postsApi from "../../apis/posts";
+import { useFetchPosts } from "../../hooks/reactQuery/usePostsApi";
 import routes from "../../routes";
 import AppHeading from "../commons/AppHeading";
 
 const Home = () => {
-  const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const fetchPosts = async () => {
-    try {
-      const {
-        data: { posts },
-      } = await postsApi.fetch();
-      setPosts(posts);
-      setIsLoading(false);
-    } catch (error) {
-      Logger.error(error);
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  const { isLoading, data: { data: { posts = [] } = {} } = {} } =
+    useFetchPosts();
 
   if (isLoading) {
     <div className="flex h-full w-full flex-col gap-5">
@@ -45,7 +27,11 @@ const Home = () => {
       <div className="flex w-full items-center justify-between pb-4">
         <AppHeading title="Blog posts" />
         <Link to={routes.create}>
-          <Button label="Add new blog post" style="primary" />
+          <Button
+            className="font-semibold"
+            label="Add new blog post"
+            style="primary"
+          />
         </Link>
       </div>
       <div className="flex w-full flex-col items-center gap-3 overflow-y-scroll">
