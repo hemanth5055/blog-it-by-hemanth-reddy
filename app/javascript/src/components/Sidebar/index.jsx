@@ -1,7 +1,8 @@
 import React from "react";
 
-import { Book, List } from "@bigbinary/neeto-icons";
-import { Button } from "@bigbinary/neetoui";
+import { Book, List, Edit } from "@bigbinary/neeto-icons";
+
+import Element from "./Element";
 
 import routes from "../../routes";
 
@@ -11,17 +12,8 @@ const Sidebar = () => (
       <Book className="neeto-ui-text-white" />
     </div>
     <div className="flex h-full w-full flex-col items-center gap-4">
-      <Button
-        className="text-white hover:bg-[#262626]"
-        icon={List}
-        style="text"
-        to={routes.root}
-        tooltipProps={{
-          content: "Posts",
-          position: "right",
-          className: "bg-[#262626]",
-        }}
-      />
+      <Element icon={List} to={routes.root} tooltipContent="Posts" />
+      <Element icon={Edit} to={routes.create} tooltipContent="Create post" />
     </div>
     <div className="flex w-full flex-col items-center gap-4">
       <div className="neeto-ui-bg-gray-500 h-8 w-8 rounded-full" />

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-import { Spinner } from "@bigbinary/neetoui";
+import { Button, Spinner } from "@bigbinary/neetoui";
 import Logger from "js-logger";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 import Post from "./Post";
 
 import postsApi from "../../apis/posts";
+import routes from "../../routes";
 import AppHeading from "../commons/AppHeading";
 
 const Home = () => {
@@ -41,7 +43,12 @@ const Home = () => {
 
   return (
     <div className="flex h-full w-full flex-col gap-5">
-      <AppHeading title="Blog Posts" />
+      <div className="flex w-full items-center justify-between pb-4">
+        <AppHeading title="Blog Posts" />
+        <Link to={routes.create}>
+          <Button label="Add new blog post" style="primary" />
+        </Link>
+      </div>
       <div className="flex w-full flex-col items-center gap-3">
         {posts.map(post => (
           <Post
