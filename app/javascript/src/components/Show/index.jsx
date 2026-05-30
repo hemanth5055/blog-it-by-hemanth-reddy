@@ -1,11 +1,12 @@
 import React from "react";
 
-import { Spinner, Typography } from "@bigbinary/neetoui";
+import { Typography } from "@bigbinary/neetoui";
 import { useParams } from "react-router-dom";
 
 import NotFound from "./NotFound";
 
 import { useShowPost } from "../../hooks/reactQuery/usePostsApi";
+import PageLoader from "../commons/PageLoader";
 
 const Show = () => {
   const { slug } = useParams();
@@ -13,11 +14,7 @@ const Show = () => {
   const { isLoading, data: { data: { post } = {} } = {} } = useShowPost(slug);
 
   if (isLoading) {
-    return (
-      <div className="flex h-screen w-screen items-center justify-center">
-        <Spinner />
-      </div>
-    );
+    return <PageLoader />;
   }
 
   if (!post) {
@@ -34,7 +31,7 @@ const Show = () => {
         {post?.title}
       </Typography>
       <Typography
-        className="leading-7 text-gray-300"
+        className="whitespace-pre-line leading-7 text-gray-300"
         style="body1"
         weight="medium"
       >

@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Button, Spinner } from "@bigbinary/neetoui";
+import { isNotEmpty } from "@bigbinary/neeto-cist";
+import { Button, NoData, Spinner } from "@bigbinary/neetoui";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -17,12 +18,14 @@ const Home = () => {
   const { t } = useTranslation();
 
   if (isLoading) {
-    <div className="flex h-full w-full flex-col gap-5">
-      <AppHeading title={t("titles.blogPosts")} />
-      <div className="flex w-full flex-col items-center gap-3">
-        <Spinner />
+    return (
+      <div className="flex h-full w-full flex-col gap-5">
+        <AppHeading title={t("titles.blogPosts")} />
+        <div className="flex w-full flex-col items-center gap-3">
+          <Spinner />
+        </div>
       </div>
-    </div>;
+    );
   }
 
   return (
@@ -37,16 +40,26 @@ const Home = () => {
           />
         </Link>
       </div>
-      <div className="flex w-full flex-col items-center gap-3 overflow-y-scroll">
-        {posts.map(post => (
-          <Post
-            createdAt={post.createdAt}
-            description={post.description}
-            key={post.id}
-            slug={post.slug}
-            title={post.title}
-          />
-        ))}
+      <div className="flex h-full w-full flex-col items-center gap-3 overflow-y-scroll">
+        {isNotEmpty(posts) ? (
+          posts.map(post => (
+            <Post
+              createdAt={post.createdAt}
+              description={post.description}
+              key={post.id}
+              slug={post.slug}
+              title={post.title}
+            />
+          ))
+        ) : (
+          <div className="flex h-full w-full items-center justify-center">
+            <NoData
+              className="font-medium"
+              description={t("messages.noBlogPosts")}
+              title={t("titles.noBlogPostsAvailable")}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

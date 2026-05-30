@@ -2,7 +2,8 @@
   "titles": {
     "blogPosts": "Blog posts",
     "newBlogPost": "New blog post",
-    "blogPostNotFound": "Blog post not found"
+    "blogPostNotFound": "Blog post not found",
+    "noBlogPostsAvailable": "No blog posts available"
   },
   "placeholders": {
     "enterTitle": "Enter title",
@@ -17,7 +18,8 @@
     "submit": "Submit"
   },
   "messages": {
-    "blogPostNotFound": "We couldn't find a blog post matching that web address."
+    "blogPostNotFound": "We couldn't find a blog post matching that web address.",
+    "noBlogPosts": "Get started by creating your very first blog post today."
   },
   "tooltips": {
     "posts": "Posts",

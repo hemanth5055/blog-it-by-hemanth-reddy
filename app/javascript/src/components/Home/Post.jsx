@@ -7,7 +7,11 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 const Post = ({ title, description, createdAt, slug }) => (
   <div className="flex w-[70%] flex-col gap-2 p-3">
     <Link to={`/posts/${slug}/show`}>
-      <Typography className="text-gray-100" style="h2" weight="semibold">
+      <Typography
+        className="hover:neeto-ui-text-primary-500 "
+        style="h2"
+        weight="semibold"
+      >
         {title}
       </Typography>
     </Link>
