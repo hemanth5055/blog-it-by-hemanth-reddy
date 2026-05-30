@@ -49,7 +49,7 @@ const Home = () => {
           <Button label="Add new blog post" style="primary" />
         </Link>
       </div>
-      <div className="flex w-full flex-col items-center gap-3">
+      <div className="flex w-full flex-col items-center gap-3 overflow-y-scroll">
         {posts.map(post => (
           <Post
             createdAt={post.createdAt}
