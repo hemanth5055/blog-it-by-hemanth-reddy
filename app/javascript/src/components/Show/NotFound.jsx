@@ -3,17 +3,18 @@ import React from "react";
 import { NoData } from "@bigbinary/neetoui";
 
 import routes from "../../routes";
+import withT from "../../utils/withT";
 
-const NotFound = () => (
+const NotFound = ({ t }) => (
   <NoData
     className="font-medium"
-    description="We couldn't find a blog post matching that web address. "
-    title="Blog post not found"
+    description={t("messages.blogPostNotFound")}
+    title={t("titles.blogPostNotFound")}
     primaryButtonProps={{
-      label: "Go to home",
+      label: t("labels.goToHome"),
       to: routes.root,
     }}
   />
 );
 
-export default NotFound;
+export default withT(NotFound);

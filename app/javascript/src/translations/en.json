@@ -1,0 +1,26 @@
+{
+  "titles": {
+    "blogPosts": "Blog posts",
+    "newBlogPost": "New blog post",
+    "blogPostNotFound": "Blog post not found"
+  },
+  "placeholders": {
+    "enterTitle": "Enter title",
+    "enterDescription": "Enter description"
+  },
+  "labels": {
+    "addNewBlogPost": "Add new blog post",
+    "goToHome": "Go to home",
+    "title": "Title",
+    "description": "Description",
+    "reset": "Reset",
+    "submit": "Submit"
+  },
+  "messages": {
+    "blogPostNotFound": "We couldn't find a blog post matching that web address."
+  },
+  "tooltips": {
+    "posts": "Posts",
+    "createPost": "Create post"
+  }
+}

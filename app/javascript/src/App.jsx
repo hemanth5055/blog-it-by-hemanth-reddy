@@ -3,6 +3,7 @@ import React from "react";
 import { QueryClientProvider } from "react-query";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 
+import "./common/i18n";
 import { Create } from "./components/Create";
 import Home from "./components/Home";
 import Show from "./components/Show";

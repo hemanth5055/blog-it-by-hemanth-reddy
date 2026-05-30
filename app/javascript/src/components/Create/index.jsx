@@ -1,22 +1,29 @@
 import React from "react";
 
 import { Form as NeetoForm } from "@bigbinary/neetoui/formik";
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 
 import { INTIAL_FORM_VALUES, VALIDATION_SCHEMA } from "./constants";
 import { Form } from "./Form";
 
+import { QUERY_KEYS } from "../../constants/query";
 import { useCreatePost } from "../../hooks/reactQuery/usePostsApi";
+import queryClient from "../../utils/queryClient";
 import AppHeading from "../commons/AppHeading";
 
 export const Create = () => {
   const history = useHistory();
+
   const { mutate: createPost, isLoading } = useCreatePost();
+
+  const { t } = useTranslation();
 
   const handleFormSubmit = async values => {
     createPost(values, {
       onSuccess: () => {
         history.push("/");
+        queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.POSTS] });
       },
     });
   };
@@ -24,7 +31,7 @@ export const Create = () => {
   return (
     <div className="flex h-full w-full flex-col ">
       <div className="flex w-full items-center justify-between pb-4">
-        <AppHeading title="New blog post" />
+        <AppHeading title={t("titles.newBlogPost")} />
       </div>
       <div className="h-full w-full">
         <NeetoForm
