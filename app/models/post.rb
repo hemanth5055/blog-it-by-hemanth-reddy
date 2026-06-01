@@ -4,9 +4,9 @@ class Post < ApplicationRecord
   MAX_TITLE_LENGTH = 125
   MAX_DESC_LENGTH = 10_000
 
-  belongs_to :category
+  belongs_to :organization
   belongs_to :user
-  has_and_belongs_to_many :categories
+  has_and_belongs_to_many :categories, join_table: :posts_categories
 
   validates :title, presence: true, length: { maximum: MAX_TITLE_LENGTH }
   validates :description, presence: true, length: { maximum: MAX_DESC_LENGTH }

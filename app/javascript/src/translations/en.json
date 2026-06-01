@@ -3,7 +3,8 @@
     "blogPosts": "Blog posts",
     "newBlogPost": "New blog post",
     "blogPostNotFound": "Blog post not found",
-    "noBlogPostsAvailable": "No blog posts available"
+    "noBlogPostsAvailable": "No blog posts available",
+    "Categories": "Categories"
   },
   "placeholders": {
     "enterTitle": "Enter title",
@@ -23,6 +24,7 @@
   },
   "tooltips": {
     "posts": "Posts",
-    "createPost": "Create post"
+    "createPost": "Create post",
+    "viewAndAddCategories": "View and edit categories"
   }
 }
