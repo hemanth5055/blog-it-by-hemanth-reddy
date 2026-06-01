@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_06_01_065102) do
+ActiveRecord::Schema[8.0].define(version: 2026_06_01_083727) do
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
   end
 
@@ -29,7 +35,18 @@ ActiveRecord::Schema[8.0].define(version: 2026_06_01_065102) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug", null: false
+    t.integer "user_id", null: false
     t.index ["slug"], name: "index_posts_on_slug", unique: true
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "posts_categories", id: false, force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_posts_categories_on_category_id"
+    t.index ["post_id"], name: "index_posts_categories_on_post_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -42,5 +59,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_06_01_065102) do
     t.index ["organization_id"], name: "index_users_on_organization_id"
   end
 
+  add_foreign_key "posts", "users"
   add_foreign_key "users", "organizations"
 end
