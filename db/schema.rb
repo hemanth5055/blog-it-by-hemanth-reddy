@@ -10,8 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_05_29_052452) do
+ActiveRecord::Schema[8.0].define(version: 2026_06_01_061432) do
   create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "posts", force: :cascade do |t|
@@ -24,5 +30,13 @@ ActiveRecord::Schema[8.0].define(version: 2026_05_29_052452) do
     t.datetime "updated_at", null: false
     t.string "slug", null: false
     t.index ["slug"], name: "index_posts_on_slug", unique: true
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 end
