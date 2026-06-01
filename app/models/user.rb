@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   MINIMUM_PASSWORD_LENGTH = 8
+  belongs_to :organization
   has_secure_password
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
