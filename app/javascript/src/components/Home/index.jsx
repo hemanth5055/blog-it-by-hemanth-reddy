@@ -44,6 +44,7 @@ const Home = () => {
         {isNotEmpty(posts) ? (
           posts.map(post => (
             <Post
+              categoryIds={post.category_ids}
               createdAt={post.createdAt}
               description={post.description}
               key={post.id}
