@@ -1,11 +1,16 @@
 import React from "react";
 
 import { Button } from "@bigbinary/neetoui";
-import { Input, Textarea } from "@bigbinary/neetoui/formik";
+import { Input, Textarea, Select } from "@bigbinary/neetoui/formik";
 import { useTranslation } from "react-i18next";
 
-export const Form = ({ isLoading }) => {
+export const Form = ({ isLoading, categories }) => {
   const { t } = useTranslation();
+
+  const categoryOptions = categories.map(k => ({
+    label: k.name,
+    value: k.id,
+  }));
 
   return (
     <div className="flex h-full w-full flex-col gap-48 rounded-xl border-2 border-[#262626] p-10">
@@ -15,6 +20,13 @@ export const Form = ({ isLoading }) => {
           label={t("labels.title")}
           name="title"
           placeholder={t("placeholders.enterTitle")}
+          size="large"
+        />
+        <Select
+          isMulti
+          label="Category"
+          name="category_ids"
+          options={categoryOptions}
           size="large"
         />
         <Textarea

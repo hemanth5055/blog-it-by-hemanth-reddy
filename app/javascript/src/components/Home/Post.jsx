@@ -24,11 +24,6 @@ const Post = ({ title, description, createdAt, slug, categoryIds = [] }) => {
           {title}
         </Typography>
       </Link>
-      <div className="flex flex-wrap gap-1">
-        {postCategories.map(category => (
-          <Tag key={category.id} label={category.name} />
-        ))}
-      </div>
       <div>
         <Typography
           className="line-clamp-2 italic text-gray-500"
@@ -38,9 +33,16 @@ const Post = ({ title, description, createdAt, slug, categoryIds = [] }) => {
           {description}
         </Typography>
       </div>
-      <Typography className="text-gray-400" style="body2" weight="medium">
-        {dayjs(createdAt).format("MMM D, YYYY hh:mm A")}
-      </Typography>
+      <div className="flex justify-between gap-1 py-2">
+        <div className="flex items-center gap-2">
+          {postCategories.map(category => (
+            <Tag key={category.id} label={category.name} style="secondary" />
+          ))}
+        </div>
+        <Typography className="text-gray-400" style="body2" weight="medium">
+          {dayjs(createdAt).format("MMM D, YYYY hh:mm A")}
+        </Typography>
+      </div>
       <div className="neeto-ui-bg-gray-200 h-[1px] w-full" />
     </div>
   );

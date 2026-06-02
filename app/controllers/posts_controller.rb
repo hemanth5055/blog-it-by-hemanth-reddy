@@ -15,14 +15,15 @@ end
   end
 
   def show
-    post = Post.find_by(slug: params[:slug])
-    puts post
-    render_json({ post: post })
+    post = Post.includes(:categories).find_by(slug: params[:slug])
+    render status: :ok, json: {
+      post: post.as_json(methods: :category_ids)
+    }
   end
 
   private
 
     def post_params
-      params.require(:post).permit(:title, :description, :user_id, :category_ids, :organization_id)
+      params.require(:post).permit(:title, :description, :user_id, :organization_id, category_ids: [])
     end
 end

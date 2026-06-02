@@ -3,7 +3,11 @@ import * as Yup from "yup";
 const MAX_TITLE_LENGTH = 125;
 const MAX_DESC_LENGTH = 10_000;
 
-export const INTIAL_FORM_VALUES = { title: "", description: "" };
+export const INTIAL_FORM_VALUES = {
+  title: "",
+  description: "",
+  category_ids: [],
+};
 
 export const VALIDATION_SCHEMA = Yup.object({
   title: Yup.string()
@@ -19,4 +23,8 @@ export const VALIDATION_SCHEMA = Yup.object({
       MAX_DESC_LENGTH,
       `Description cannot exceed ${MAX_DESC_LENGTH} characters`
     ),
+
+  category_ids: Yup.array()
+    .min(1, "At least one category is required")
+    .required("Category is required"),
 });

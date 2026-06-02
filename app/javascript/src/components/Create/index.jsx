@@ -8,6 +8,7 @@ import { INTIAL_FORM_VALUES, VALIDATION_SCHEMA } from "./constants";
 import { Form } from "./Form";
 
 import { QUERY_KEYS } from "../../constants/query";
+import { useFetchCategories } from "../../hooks/reactQuery/useCategoriesApi";
 import { useCreatePost } from "../../hooks/reactQuery/usePostsApi";
 import queryClient from "../../utils/queryClient";
 import AppHeading from "../commons/AppHeading";
@@ -16,16 +17,23 @@ export const Create = () => {
   const history = useHistory();
 
   const { mutate: createPost, isLoading } = useCreatePost();
+  const { data: { data: { categories = [] } = {} } = {} } =
+    useFetchCategories();
 
   const { t } = useTranslation();
 
   const handleFormSubmit = async values => {
-    createPost(values, {
-      onSuccess: () => {
-        history.push("/");
-        queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.POSTS] });
-      },
-    });
+    let { category_ids } = values;
+    category_ids = category_ids.map(category => category.value);
+    createPost(
+      { ...values, category_ids, organization_id: 2, user_id: 2 },
+      {
+        onSuccess: () => {
+          history.push("/");
+          queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.POSTS] });
+        },
+      }
+    );
   };
 
   return (
@@ -43,7 +51,7 @@ export const Create = () => {
             onSubmit: handleFormSubmit,
           }}
         >
-          <Form isLoading={isLoading} />
+          <Form categories={categories} isLoading={isLoading} />
         </NeetoForm>
       </div>
     </div>
