@@ -4,14 +4,7 @@ import { Tag, Typography } from "@bigbinary/neetoui";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
-const Post = ({
-  title,
-  description,
-  createdAt,
-  slug,
-  categories = [],
-  author,
-}) => (
+const Post = ({ title, createdAt, slug, categories = [], author }) => (
   <div className="flex w-[70%] flex-col gap-2 p-3">
     <div className="flex items-center gap-2">
       {categories.map(category => (
@@ -27,15 +20,6 @@ const Post = ({
         {title}
       </Typography>
     </Link>
-    <div>
-      <Typography
-        className="line-clamp-2 italic text-gray-500"
-        style="body1"
-        weight="medium"
-      >
-        {description}
-      </Typography>
-    </div>
     <div className="flex w-full gap-2">
       <Typography className="text-gray-400" style="body2" weight="medium">
         {author.name} •

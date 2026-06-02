@@ -2,9 +2,9 @@
 
 class PostsController < ApplicationController
   def index
-    user_categories = params[:categories]&.split(",").presence
+    user_categories = params[:categories].presence
 
-    @posts = Post.includes(:categories, :user)
+    @posts = Post.includes(:categories)
     @posts = @posts.where(categories: { id: user_categories }) if user_categories
     render
  end
@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.includes(:categories).find_by(slug: params[:slug])
+    @post = Post.find_by(slug: params[:slug])
     render
   end
 

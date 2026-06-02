@@ -15,10 +15,10 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <Router>
       <div className="flex h-screen w-full">
-        <div className="h-full w-[5%] bg-[#171717] px-2 py-5">
+        <div className="h-full w-20 bg-[#171717] px-2 py-5">
           <Sidebar />
         </div>
-        <div className="h-full w-[95%] p-5">
+        <div className="h-full w-full p-5">
           <Switch>
             <Route exact component={Show} path={routes.show} />
             <Route exact component={Create} path={routes.create} />
