@@ -4,17 +4,9 @@ class PostsController < ApplicationController
   def index
     user_categories = params[:categories]&.split(",").presence
 
-    posts = Post.includes(:categories, :user)
-    posts = posts.where(categories: { id: user_categories }) if user_categories
-
-    render status: :ok, json: {
-      posts: posts.as_json(
-        include: {
-          user: { only: [:id, :name,] },
-          categories: { only: [:id, :name] }
-        },
-      )
-    }
+    @posts = Post.includes(:categories, :user)
+    @posts = @posts.where(categories: { id: user_categories }) if user_categories
+    render
  end
 
   def create
@@ -24,11 +16,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    post = Post.includes(:categories).find_by(slug: params[:slug])
-    render status: :ok, json: {
-      post: post.as_json(
-        include: { user: { only: [:id, :name,] }, categories: { only: [:id, :name] } })
-    }
+    @post = Post.includes(:categories).find_by(slug: params[:slug])
+    render
   end
 
   private
