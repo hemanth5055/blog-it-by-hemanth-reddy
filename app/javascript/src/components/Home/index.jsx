@@ -9,11 +9,13 @@ import Post from "./Post";
 
 import { useFetchPosts } from "../../hooks/reactQuery/usePostsApi";
 import routes from "../../routes";
+import { useCategoryStore } from "../../stores/useCategoryStore";
 import AppHeading from "../commons/AppHeading";
 
 const Home = () => {
+  const { selectedCategories } = useCategoryStore();
   const { isLoading, data: { data: { posts = [] } = {} } = {} } =
-    useFetchPosts();
+    useFetchPosts(selectedCategories);
 
   const { t } = useTranslation();
 

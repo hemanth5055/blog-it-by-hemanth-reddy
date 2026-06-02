@@ -111,7 +111,7 @@
     "vite": "6.0.3",
     "vite-plugin-svgr": "^4.3.0",
     "yup": "0.32.11",
-    "zustand": "4.3"
+    "zustand": "4.3.2"
   },
   "resolutions": {
     "strip-ansi": "^6.0.1",

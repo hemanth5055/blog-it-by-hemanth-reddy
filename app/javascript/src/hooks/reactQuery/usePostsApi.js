@@ -9,10 +9,10 @@ export const useShowPost = slug =>
     queryFn: () => postsApi.show(slug),
   });
 
-export const useFetchPosts = () =>
+export const useFetchPosts = selectedCategories =>
   useQuery({
-    queryKey: [QUERY_KEYS.POSTS],
-    queryFn: () => postsApi.fetch(),
+    queryKey: [QUERY_KEYS.POSTS, selectedCategories],
+    queryFn: () => postsApi.fetch(selectedCategories),
   });
 
 export const useCreatePost = () => useMutation(postsApi.create);

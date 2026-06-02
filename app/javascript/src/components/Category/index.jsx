@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import { Button, Input, Modal, Pane, Typography } from "@bigbinary/neetoui";
 
+import Item from "./Item";
+
 import { QUERY_KEYS } from "../../constants/query";
 import {
   useCreateCategory,
@@ -42,12 +44,7 @@ const CategorySidebar = ({ showCategories, setShowCategories }) => {
         </Pane.Header>
         <Pane.Body className="flex flex-col gap-3">
           {categories.map(category => (
-            <div
-              className="flex w-full items-center justify-center rounded-md bg-[#262626] p-2 "
-              key={category.id}
-            >
-              <Typography weight="medium">{category.name}</Typography>
-            </div>
+            <Item id={category.id} key={category.id} name={category.name} />
           ))}
         </Pane.Body>
         <Pane.Footer className="flex w-full items-center justify-center">
