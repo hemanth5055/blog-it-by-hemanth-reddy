@@ -16,6 +16,7 @@ export const Form = ({ isLoading, categories }) => {
     <div className="flex h-full w-full flex-col gap-48 rounded-xl border-2 border-[#262626] p-10">
       <div className="flex w-full flex-col gap-5 ">
         <Input
+          required
           id="title"
           label={t("labels.title")}
           name="title"
@@ -24,12 +25,14 @@ export const Form = ({ isLoading, categories }) => {
         />
         <Select
           isMulti
-          label="Category"
-          name="category_ids"
+          required
+          label={t("labels.category")}
+          name="categories"
           options={categoryOptions}
           size="large"
         />
         <Textarea
+          required
           className="text-white"
           id="description"
           label={t("labels.description")}

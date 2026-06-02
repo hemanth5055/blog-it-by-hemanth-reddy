@@ -4,7 +4,8 @@
     "newBlogPost": "New blog post",
     "blogPostNotFound": "Blog post not found",
     "noBlogPostsAvailable": "No blog posts available",
-    "Categories": "Categories"
+    "categories": "Categories",
+    "newCategory": "New category"
   },
   "placeholders": {
     "enterTitle": "Enter title",
@@ -15,12 +16,23 @@
     "goToHome": "Go to home",
     "title": "Title",
     "description": "Description",
+    "category": "Category",
     "reset": "Reset",
-    "submit": "Submit"
+    "submit": "Submit",
+    "addNewCategory": "Add new category",
+    "categoryName": "Category name",
+    "add": "Add",
+    "cancel": "Cancel"
   },
   "messages": {
     "blogPostNotFound": "We couldn't find a blog post matching that web address.",
-    "noBlogPosts": "Get started by creating your very first blog post today."
+    "noBlogPosts": "Get started by creating your very first blog post today.",
+    "titleExceedCharacters": "Title cannot exceed {{MAX_TITLE_LENGTH}} characters",
+    "descriptionExceedCharacters": "Description cannot exceed {{MAX_DESC_LENGTH}} characters",
+    "atLeastOneCategory": "At least one category is required",
+    "titleRequired": "Title is required",
+    "descriptionRequired": "Description is required",
+    "categoryRequired": "Category is required"
   },
   "tooltips": {
     "posts": "Posts",

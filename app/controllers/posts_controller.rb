@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   def create
     post = Post.new(post_params)
     post.save!
-    render_notice("Post was successfully created")
+    render_notice(t("post_created"))
   end
 
   def show

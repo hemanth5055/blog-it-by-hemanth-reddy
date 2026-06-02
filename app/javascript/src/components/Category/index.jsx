@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Button, Input, Modal, Pane, Typography } from "@bigbinary/neetoui";
+import { useTranslation } from "react-i18next";
 
 import Item from "./Item";
 
@@ -14,6 +15,8 @@ import queryClient from "../../utils/queryClient";
 const CategorySidebar = ({ showCategories, setShowCategories }) => {
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
   const [name, setName] = useState("");
+
+  const { t } = useTranslation();
 
   const { data: { data: { categories = [] } = {} } = {} } =
     useFetchCategories();
@@ -39,7 +42,7 @@ const CategorySidebar = ({ showCategories, setShowCategories }) => {
       <Pane isOpen={showCategories} onClose={() => setShowCategories(false)}>
         <Pane.Header>
           <Typography style="h2" weight="semibold">
-            Categories
+            {t("titles.categories")}
           </Typography>
         </Pane.Header>
         <Pane.Body className="flex flex-col gap-3">
@@ -50,7 +53,7 @@ const CategorySidebar = ({ showCategories, setShowCategories }) => {
         <Pane.Footer className="flex w-full items-center justify-center">
           <Button
             className="text-medium flex w-full items-center justify-center"
-            label="Add new category"
+            label={t("labels.addNewCategory")}
             size="large"
             style="primary"
             onClick={() => setShowAddCategoryModal(true)}
@@ -63,25 +66,26 @@ const CategorySidebar = ({ showCategories, setShowCategories }) => {
       >
         <Modal.Header>
           <Typography style="h3" weight="semibold">
-            New category
+            {t("titles.newCategory")}
           </Typography>
         </Modal.Header>
         <Modal.Body className="flex w-full flex-col gap-8 pt-2">
           <Input
-            label="Category title"
+            required
+            label={t("labels.categoryName")}
             value={name}
             onChange={e => setName(e.target.value)}
           />
           <div className="flex items-center justify-end gap-3">
             <Button
-              label="Add"
+              label={t("labels.add")}
               loading={isSubmitting}
               style="primary"
               onClick={handleCategorySubmit}
             />
             <Button
               disabled={isSubmitting}
-              label="Cancel"
+              label={t("labels.cancel")}
               style="secondary"
               onClick={() => setShowAddCategoryModal(false)}
             />

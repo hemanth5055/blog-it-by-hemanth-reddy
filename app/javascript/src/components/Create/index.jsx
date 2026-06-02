@@ -23,10 +23,10 @@ export const Create = () => {
   const { t } = useTranslation();
 
   const handleFormSubmit = async values => {
-    let { category_ids } = values;
-    category_ids = category_ids.map(category => category.value);
+    let { categories } = values;
+    categories = categories.map(category => category.value);
     createPost(
-      { ...values, category_ids, organization_id: 2, user_id: 2 },
+      { ...values, category_ids: categories, organization_id: 2, user_id: 2 },
       {
         onSuccess: () => {
           history.push("/");

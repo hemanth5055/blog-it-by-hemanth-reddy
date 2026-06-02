@@ -32,3 +32,5 @@ en:
     slug:
       immutable: "is immutable!"
   generic_error: "Something went wrong. Please try again later."
+  post_created: "Post is successfully created!"
+  category_created: "Category was successfully created!"
