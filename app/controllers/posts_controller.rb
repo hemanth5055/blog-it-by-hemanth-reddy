@@ -2,11 +2,17 @@
 
 class PostsController < ApplicationController
   def index
-    posts = Post.includes(:categories).all
+    posts = Post.includes(:categories, :user).all
+
     render status: :ok, json: {
-      posts: posts.as_json(methods: :category_ids)
+      posts: posts.as_json(
+        include: {
+          user: { only: [:id, :name,] },
+          categories: { only: [:id, :name] }
+        },
+      )
     }
-end
+ end
 
   def create
     post = Post.new(post_params)
@@ -17,7 +23,8 @@ end
   def show
     post = Post.includes(:categories).find_by(slug: params[:slug])
     render status: :ok, json: {
-      post: post.as_json(methods: :category_ids)
+      post: post.as_json(
+        include: { user: { only: [:id, :name,] }, categories: { only: [:id, :name] } })
     }
   end
 
