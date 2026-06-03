@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Form as NeetoForm } from "@bigbinary/neetoui/formik";
+import { Form as NeetoForm } from "neetoui/formik";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 

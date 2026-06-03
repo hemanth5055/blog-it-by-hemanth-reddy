@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Typography } from "@bigbinary/neetoui";
 import classNames from "classnames";
+import { Typography } from "neetoui";
 
 import { useCategoryStore } from "../../stores/useCategoryStore";
 

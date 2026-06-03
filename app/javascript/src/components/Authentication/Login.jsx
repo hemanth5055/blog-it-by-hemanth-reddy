@@ -1,0 +1,56 @@
+import React from "react";
+
+import { Form as NeetoForm } from "neetoui/formik";
+import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
+import {
+  INITIAL_LOGIN_FORM_VALUES,
+  LOGIN_FORM_VALIDATION_SCHEMA,
+} from "./constants";
+import LoginForm from "./Form/Login";
+
+import { setAuthHeaders } from "../../apis/axios";
+import { useCreateSession } from "../../hooks/reactQuery/useSessionApi";
+import routes from "../../routes";
+import { setToLocalStorage } from "../../utils/storage";
+import AppHeading from "../commons/AppHeading";
+
+const Login = () => {
+  const { mutate: loginUser } = useCreateSession();
+
+  const history = useHistory();
+
+  const { t } = useTranslation();
+
+  const handleFormSubmit = values => {
+    loginUser(values, {
+      onSuccess: result => {
+        setToLocalStorage(result.data);
+        setAuthHeaders();
+        history.push(routes.root);
+      },
+    });
+  };
+
+  return (
+    <div className="flex h-full w-full flex-col  p-10">
+      <AppHeading title={t("titles.login")} />
+      <div className="flex h-full w-full items-center justify-center">
+        <NeetoForm
+          className="flex h-full w-full items-center justify-center p-10"
+          formProps={{ noValidate: true }}
+          formikProps={{
+            initialValues: INITIAL_LOGIN_FORM_VALUES,
+            validationSchema: LOGIN_FORM_VALIDATION_SCHEMA,
+            onSubmit: handleFormSubmit,
+          }}
+        >
+          <LoginForm />
+        </NeetoForm>
+      </div>
+    </div>
+  );
+};
+
+export default Login;

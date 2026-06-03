@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button } from "@bigbinary/neetoui";
+import { Button } from "neetoui";
 import { useLocation } from "react-router-dom";
 
 const Element = ({ icon, to, tooltipContent, onClick }) => {

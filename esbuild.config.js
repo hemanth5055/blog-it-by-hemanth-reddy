@@ -47,8 +47,7 @@ const defaultConfigurations = {
         });
         return css;
       },
-      importMapper: filePath =>
-        filePath.replace("@bigbinary/neetoui", "@bigbinary/neetoui/dist"),
+      importMapper: filePath => filePath.replace("neetoui", "neetoui/dist"),
       logger: sass.Logger.silent,
     }),
     nodeModulesPolyfillPlugin({

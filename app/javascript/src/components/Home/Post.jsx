@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Tag, Typography } from "@bigbinary/neetoui";
 import dayjs from "dayjs";
+import { Tag, Typography } from "neetoui";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const Post = ({ title, createdAt, slug, categories = [], author }) => (

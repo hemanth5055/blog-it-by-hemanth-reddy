@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Button } from "@bigbinary/neetoui";
-import { Input, Textarea, Select } from "@bigbinary/neetoui/formik";
+import { Button } from "neetoui";
+import { Input, Textarea, Select } from "neetoui/formik";
 import { useTranslation } from "react-i18next";
 
 export const Form = ({ isLoading, categories }) => {

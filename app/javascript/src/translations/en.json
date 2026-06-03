@@ -5,7 +5,9 @@
     "blogPostNotFound": "Blog post not found",
     "noBlogPostsAvailable": "No blog posts available",
     "categories": "Categories",
-    "newCategory": "New category"
+    "newCategory": "New category",
+    "signup": "Signup",
+    "login": "Login"
   },
   "placeholders": {
     "enterTitle": "Enter title",
@@ -22,17 +24,35 @@
     "addNewCategory": "Add new category",
     "categoryName": "Category name",
     "add": "Add",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "create": "Create",
+    "login": "Login"
   },
   "messages": {
     "blogPostNotFound": "We couldn't find a blog post matching that web address.",
     "noBlogPosts": "Get started by creating your very first blog post today.",
     "titleExceedCharacters": "Title cannot exceed {{MAX_TITLE_LENGTH}} characters",
     "descriptionExceedCharacters": "Description cannot exceed {{MAX_DESC_LENGTH}} characters",
+    "nameExceedCharacters": "Name cannot exceed {{MAX_NAME_LENGTH}} characters",
+    "emailExceedCharacters": "Email cannot exceed {{MAX_EMAIL_LENGTH}} characters",
+    "passwordMinCharactersNotMet": "Password should be atleast {{MIN_PASSWORD_LENGTH}} characters long",
     "atLeastOneCategory": "At least one category is required",
     "titleRequired": "Title is required",
     "descriptionRequired": "Description is required",
-    "categoryRequired": "Category is required"
+    "categoryRequired": "Category is required",
+    "nameRequired": "Name is required",
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required",
+    "confirmPasswordRequired": "Confirm password is required",
+    "passwordsNotMatch": "Password and confirm password must match",
+    "alreadyHaveAnAccount": "Already have an account?",
+    "DontHaveAnAccount": "Don't have an account?",
+    "login": "Log in",
+    "signup": "Sign up"
   },
   "tooltips": {
     "posts": "Posts",

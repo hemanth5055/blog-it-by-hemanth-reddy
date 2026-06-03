@@ -1028,9 +1028,9 @@
   resolved "https://registry.yarnpkg.com/@bigbinary/neeto-icons/-/neeto-icons-1.20.64.tgz#bbdf11043fe6d6ddf0f1455a6f7d0f150473456d"
   integrity sha512-naGxIyhd28eD89caMJrgUlR+xhmM0T6weIu97Y76p6UNVdxSM4oNK0NGe19th7BNT7uqkx1JD4HED3RG5Jv5sg==
 
-"@bigbinary/neetoui@^8.8.1":
+"neetoui@^8.8.1":
   version "8.8.1"
-  resolved "https://registry.yarnpkg.com/@bigbinary/neetoui/-/neetoui-8.8.1.tgz#cdee6d8d4b15e4f151d490ced7f43254dab7e6c7"
+  resolved "https://registry.yarnpkg.com/neetoui/-/neetoui-8.8.1.tgz#cdee6d8d4b15e4f151d490ced7f43254dab7e6c7"
   integrity sha512-joEvCxpTKU6U5Mym3h6YHRYZLsiA2OObMVC2CaMEhd7u7F6O5sX8N7UA1bPgIBSyqRNOevMWuvouVCXT4HjIfw==
 
 "@csstools/postcss-cascade-layers@^1.1.0":
@@ -6345,10 +6345,10 @@ react-time-picker@^6.5.0, react-time-picker@^6.5.2:
     react-fit "^1.7.0"
     update-input-width "^1.4.0"
 
-react-toastify@9.0.1:
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-9.0.1.tgz#2f3abd26a75efd55a82cb9c0a897c865218ea420"
-  integrity sha512-c2zeZHkCX+WXuItS/JRqQ/8CH8Qm/je+M0rt09xe9fnu5YPJigtNOdD8zX4fwLA093V2am3abkGfOowwpkrwOQ==
+react-toastify@8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-8.0.2.tgz#11f73b3a847fcffeb47b1823e8974e9895f98fae"
+  integrity sha512-0Nud2d0VD4LIevgkB4L8NYoQ5plTpfqgj2CRVxs58SGA/TTO+2Ojz4C1bLUdGUWsw0zuWqd4GJqxNuMIv0cXMw==
   dependencies:
     clsx "^1.1.1"
 

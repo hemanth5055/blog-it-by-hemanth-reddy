@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Button, Input, Modal, Pane, Typography } from "@bigbinary/neetoui";
+import { Button, Input, Modal, Pane, Typography } from "neetoui";
 import { useTranslation } from "react-i18next";
 
 import Item from "./Item";

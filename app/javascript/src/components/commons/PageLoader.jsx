@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Spinner } from "@bigbinary/neetoui";
+import { Spinner } from "neetoui";
 
 const PageLoader = () => (
   <div className="flex h-screen w-screen items-center justify-center">
