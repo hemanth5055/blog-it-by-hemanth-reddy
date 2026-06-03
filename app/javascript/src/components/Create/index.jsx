@@ -25,7 +25,7 @@ export const Create = () => {
     let { categories } = values;
     categories = categories.map(category => category.value);
     createPost(
-      { ...values, category_ids: categories, organization_id: 2, user_id: 2 },
+      { ...values, category_ids: categories },
       {
         onSuccess: () => {
           history.push("/");

@@ -3,15 +3,19 @@
 class PostsController < ApplicationController
   def index
     user_categories = params[:categories].presence
-
-    @posts = Post.includes(:categories)
+    puts @current_user.organization_id
+    @posts = Post.includes(:categories).where(organization_id: @current_user.organization_id)
     @posts = @posts.where(categories: { id: user_categories }) if user_categories
     render
  end
 
   def create
-    post = Post.new(post_params)
-    post.save!
+    full_params = post_params.merge(
+      organization_id: @current_user.organization_id,
+      user_id: @current_user.id
+    )
+
+    post = Post.create!(full_params)
     render_notice(t("successfully_created", entity: "Post"))
   end
 
@@ -23,6 +27,6 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:title, :description, :user_id, :organization_id, category_ids: [])
+      params.require(:post).permit(:title, :description, category_ids: [])
     end
 end

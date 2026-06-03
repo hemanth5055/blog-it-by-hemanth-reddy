@@ -7,10 +7,7 @@ import { ToastContainer } from "react-toastify";
 import "./common/i18n";
 import Login from "./components/Authentication/Login";
 import Signup from "./components/Authentication/Signup";
-import PageNotFound from "./components/commons/PageNotFound";
-import { Create } from "./components/Create";
-import Home from "./components/Home";
-import Show from "./components/Show";
+import PrivateRoutes from "./components/commons/PrivateRoute";
 import Sidebar from "./components/Sidebar";
 import routes from "./routes";
 import queryClient from "./utils/queryClient";
@@ -23,12 +20,9 @@ const App = () => (
         <Sidebar />
         <div className="h-full w-full overflow-hidden">
           <Switch>
-            <Route exact component={Show} path={routes.show} />
-            <Route exact component={Create} path={routes.create} />
-            <Route exact component={Home} path={routes.root} />
-            <Route exact component={Signup} path={routes.signup} />
             <Route exact component={Login} path={routes.login} />
-            <Route component={PageNotFound} path="*" />
+            <Route exact component={Signup} path={routes.signup} />
+            <PrivateRoutes />
           </Switch>
         </div>
       </div>

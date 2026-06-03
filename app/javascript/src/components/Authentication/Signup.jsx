@@ -41,7 +41,7 @@ const Signup = () => {
       email,
       password,
       password_confirmation,
-      organization_id: 2,
+      organization_id: 3,
     };
 
     createUser(payload, {
