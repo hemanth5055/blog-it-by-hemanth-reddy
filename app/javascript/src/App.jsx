@@ -7,7 +7,14 @@ import { ToastContainer } from "react-toastify";
 import "./common/i18n";
 import Login from "./components/Authentication/Login";
 import Signup from "./components/Authentication/Signup";
-import { PrivateRoutes } from "./components/commons";
+import {
+  PageNotFound,
+  ProtectedRoute,
+  PublicRestrictedRoute,
+} from "./components/commons";
+import Home from "./components/Home";
+import Create from "./components/Post/Create";
+import Show from "./components/Post/Show";
 import Sidebar from "./components/Sidebar";
 import routes from "./routes";
 import queryClient from "./utils/queryClient";
@@ -20,9 +27,20 @@ const App = () => (
         <Sidebar />
         <div className="h-full w-full overflow-hidden">
           <Switch>
-            <Route exact component={Login} path={routes.login} />
-            <Route exact component={Signup} path={routes.signup} />
-            <PrivateRoutes />
+            <ProtectedRoute exact component={Home} path={routes.root} />
+            <ProtectedRoute exact component={Create} path={routes.create} />
+            <ProtectedRoute exact component={Show} path={routes.show} />
+            <PublicRestrictedRoute
+              exact
+              component={Signup}
+              path={routes.signup}
+            />
+            <PublicRestrictedRoute
+              exact
+              component={Login}
+              path={routes.login}
+            />
+            <Route component={PageNotFound} path="*" />
           </Switch>
         </div>
       </div>
