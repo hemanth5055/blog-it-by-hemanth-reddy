@@ -1,7 +1,7 @@
 import AppHeading from "./AppHeading";
 import PageNotFound from "./PageNotFound";
 import ProtectedRoute from "./ProtectedRoute";
-import PublicRestrictedRoute from "./PublicRestrictedRoute";
+import PublicButRestrictedWhenLoggedIn from "./PublicButRestrictedWhenLoggedIn";
 import Toastr from "./Toastr";
 
 export {
@@ -9,5 +9,5 @@ export {
   PageNotFound,
   ProtectedRoute,
   Toastr,
-  PublicRestrictedRoute,
+  PublicButRestrictedWhenLoggedIn,
 };

@@ -6,7 +6,7 @@ import { Redirect, Route } from "react-router-dom";
 import routes from "../../routes";
 import { getFromLocalStorage } from "../../utils/storage";
 
-const PublicRestrictedRoute = ({ component: Component, ...rest }) => {
+const PublicButRestrictedWhenLoggedIn = ({ component: Component, ...rest }) => {
   const authToken = getFromLocalStorage("authToken");
   const isLoggedIn = !either(isNil, isEmpty)(authToken);
 
@@ -20,4 +20,4 @@ const PublicRestrictedRoute = ({ component: Component, ...rest }) => {
   );
 };
 
-export default PublicRestrictedRoute;
+export default PublicButRestrictedWhenLoggedIn;

@@ -5,12 +5,11 @@ import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import "./common/i18n";
-import Login from "./components/Authentication/Login";
-import Signup from "./components/Authentication/Signup";
+import { Login, Signup } from "./components/Authentication";
 import {
   PageNotFound,
   ProtectedRoute,
-  PublicRestrictedRoute,
+  PublicButRestrictedWhenLoggedIn,
 } from "./components/commons";
 import Home from "./components/Home";
 import Create from "./components/Post/Create";
@@ -30,12 +29,12 @@ const App = () => (
             <ProtectedRoute exact component={Home} path={routes.root} />
             <ProtectedRoute exact component={Create} path={routes.create} />
             <ProtectedRoute exact component={Show} path={routes.show} />
-            <PublicRestrictedRoute
+            <PublicButRestrictedWhenLoggedIn
               exact
               component={Signup}
               path={routes.signup}
             />
-            <PublicRestrictedRoute
+            <PublicButRestrictedWhenLoggedIn
               exact
               component={Login}
               path={routes.login}
