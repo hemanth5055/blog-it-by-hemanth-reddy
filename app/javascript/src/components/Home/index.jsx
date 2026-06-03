@@ -19,7 +19,7 @@ const Home = () => {
 
   const { selectedCategories } = useCategoryStore();
 
-  const { isLoading, data: { data: { posts = [] } = {} } = {} } =
+  const { isLoading, data: { posts = [] } = {} } =
     useFetchPosts(selectedCategories);
 
   const { t } = useTranslation();

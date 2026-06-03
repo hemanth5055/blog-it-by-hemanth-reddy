@@ -12,7 +12,7 @@ import PageLoader from "../commons/PageLoader";
 const Show = () => {
   const { slug } = useParams();
 
-  const { isLoading, data: { data: { post } = {} } = {} } = useShowPost(slug);
+  const { isLoading, data: { post = {} } = {} } = useShowPost(slug);
 
   if (isLoading) {
     return <PageLoader />;

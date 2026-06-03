@@ -18,8 +18,7 @@ const CategorySidebar = ({ showCategories, setShowCategories }) => {
 
   const { t } = useTranslation();
 
-  const { data: { data: { categories = [] } = {} } = {} } =
-    useFetchCategories();
+  const { data: { categories = [] } = {} } = useFetchCategories();
 
   const { mutate: createCategory, isLoading: isSubmitting } =
     useCreateCategory();

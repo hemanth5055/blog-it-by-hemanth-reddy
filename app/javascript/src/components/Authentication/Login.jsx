@@ -26,7 +26,7 @@ const Login = () => {
   const handleFormSubmit = values => {
     loginUser(values, {
       onSuccess: result => {
-        setToLocalStorage(result.data);
+        setToLocalStorage(result);
         setAuthHeaders();
         history.push(routes.root);
       },

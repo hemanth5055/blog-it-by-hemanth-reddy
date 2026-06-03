@@ -31,7 +31,7 @@ const handleSuccessResponse = response => {
     }
   }
 
-  return response;
+  return response.data;
 };
 
 const handleErrorResponse = axiosErrorObject => {

@@ -17,8 +17,7 @@ export const Create = () => {
   const history = useHistory();
 
   const { mutate: createPost, isLoading } = useCreatePost();
-  const { data: { data: { categories = [] } = {} } = {} } =
-    useFetchCategories();
+  const { data: { categories = [] } = {} } = useFetchCategories();
 
   const { t } = useTranslation();
 
