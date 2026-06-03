@@ -53,7 +53,8 @@
     "alreadyHaveAnAccount": "Already have an account?",
     "DontHaveAnAccount": "Don't have an account?",
     "login": "Log in",
-    "signup": "Sign up"
+    "signup": "Sign up",
+    "enterValidEmail": "Enter a valid email"
   },
   "tooltips": {
     "posts": "Posts",

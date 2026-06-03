@@ -25,6 +25,7 @@ export const SIGNUP_FORM_VALIDATION_SCHEMA = Yup.object({
     ),
 
   email: Yup.string()
+    .email(t("messages.enterValidEmail"))
     .required(t("messages.emailRequired"))
     .max(
       MAX_NAME_LENGTH,
@@ -48,6 +49,7 @@ export const SIGNUP_FORM_VALIDATION_SCHEMA = Yup.object({
 
 export const LOGIN_FORM_VALIDATION_SCHEMA = Yup.object({
   email: Yup.string()
+    .email(t("messages.enterValidEmail"))
     .required(t("messages.emailRequired"))
     .max(
       MAX_NAME_LENGTH,
