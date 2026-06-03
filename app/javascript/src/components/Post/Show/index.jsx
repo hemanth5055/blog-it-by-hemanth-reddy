@@ -1,13 +1,13 @@
 import React from "react";
 
 import dayjs from "dayjs";
-import { Tag, Typography } from "neetoui";
+import { Tag, Typography, Avatar } from "neetoui";
 import { useParams } from "react-router-dom";
 
 import NotFound from "./NotFound";
 
-import { useShowPost } from "../../hooks/reactQuery/usePostsApi";
-import PageLoader from "../commons/PageLoader";
+import { useShowPost } from "../../../hooks/reactQuery/usePostsApi";
+import PageLoader from "../../commons/PageLoader";
 
 const Show = () => {
   const { slug } = useParams();
@@ -36,13 +36,18 @@ const Show = () => {
       <Typography className="text-gray-200" style="h1" weight="medium">
         {post?.title}
       </Typography>
-      <div className="flex w-full gap-2 pb-2">
-        <Typography className="text-gray-400" style="body2" weight="medium">
-          {post.user.name} •
-        </Typography>
-        <Typography className="text-gray-400" style="body2" weight="medium">
-          {dayjs(post.createdAt).format("MMM D, YYYY")}
-        </Typography>
+      <div className="flex w-full items-center gap-2 pb-2">
+        <div>
+          <Avatar user={{ name: "Hello" }} />
+        </div>
+        <div className="flex flex-col">
+          <Typography className="text-gray-400" style="body2" weight="medium">
+            {post.user.name}
+          </Typography>
+          <Typography className="text-gray-400" style="body2" weight="medium">
+            {dayjs(post.createdAt).format("MMM D, YYYY")}
+          </Typography>
+        </div>
       </div>
       <Typography
         className="whitespace-pre-line leading-7 text-gray-300"

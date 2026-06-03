@@ -7,11 +7,11 @@ import { useHistory } from "react-router-dom";
 import { INTIAL_FORM_VALUES, VALIDATION_SCHEMA } from "./constants";
 import { Form } from "./Form";
 
-import { QUERY_KEYS } from "../../constants/query";
-import { useFetchCategories } from "../../hooks/reactQuery/useCategoriesApi";
-import { useCreatePost } from "../../hooks/reactQuery/usePostsApi";
-import queryClient from "../../utils/queryClient";
-import { AppHeading } from "../commons";
+import { QUERY_KEYS } from "../../../constants/query";
+import { useFetchCategories } from "../../../hooks/reactQuery/useCategoriesApi";
+import { useCreatePost } from "../../../hooks/reactQuery/usePostsApi";
+import queryClient from "../../../utils/queryClient";
+import { AppHeading } from "../../commons";
 
 export const Create = () => {
   const history = useHistory();
@@ -56,3 +56,5 @@ export const Create = () => {
     </div>
   );
 };
+
+export default Create;

@@ -8,9 +8,9 @@ import PageNotFound from "./PageNotFound";
 
 import routes from "../../routes";
 import { getFromLocalStorage } from "../../utils/storage";
-import { Create } from "../Create";
 import Home from "../Home";
-import Show from "../Show";
+import Create from "../Post/Create";
+import Show from "../Post/Show";
 
 const PrivateRoutes = () => {
   const authToken = getFromLocalStorage("authToken");
