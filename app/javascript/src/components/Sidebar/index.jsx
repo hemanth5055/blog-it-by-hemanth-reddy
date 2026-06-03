@@ -3,7 +3,10 @@ import React, { useRef, useState } from "react";
 import { Book, List, Edit, Category, LeftArrow } from "@bigbinary/neeto-icons";
 import { Avatar, Button, Popover, Typography } from "neetoui";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  useHistory,
+  useLocation,
+} from "react-router-dom/cjs/react-router-dom.min";
 
 import { EMAIL_KEY, USERNAME_KEY } from "./constants";
 import Element from "./Element";
@@ -12,12 +15,14 @@ import authApi from "../../apis/auth";
 import { resetAuthTokens } from "../../apis/axios";
 import routes from "../../routes";
 import { getFromLocalStorage, setToLocalStorage } from "../../utils/storage";
-import withT from "../../utils/withT";
 import CategorySidebar from "../Category";
 
 const Sidebar = () => {
   const { t } = useTranslation();
   const [showCategories, setShowCategories] = useState(false);
+
+  const location = useLocation();
+
   const history = useHistory();
 
   const popoverRef = useRef(null);
@@ -41,9 +46,15 @@ const Sidebar = () => {
     }
   };
 
+  const isPublicRoute = [routes.login, routes.signup].includes(
+    location.pathname
+  );
+
+  if (isPublicRoute) return null;
+
   return (
     <>
-      <div className="flex h-full w-full flex-col items-center gap-5">
+      <div className="flex w-fit flex-col items-center gap-5 bg-[#262626] px-5 py-5">
         <div className=" flex items-center justify-center rounded-md p-2">
           <Book />
         </div>
@@ -99,4 +110,4 @@ const Sidebar = () => {
   );
 };
 
-export default withT(Sidebar);
+export default Sidebar;

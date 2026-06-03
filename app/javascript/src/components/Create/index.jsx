@@ -37,7 +37,7 @@ export const Create = () => {
   };
 
   return (
-    <div className="flex h-full w-full flex-col ">
+    <div className="flex h-full w-full flex-col p-7">
       <div className="flex w-full items-center justify-between pb-4">
         <AppHeading title={t("titles.newBlogPost")} />
       </div>
