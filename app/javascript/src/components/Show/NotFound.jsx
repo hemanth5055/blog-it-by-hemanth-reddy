@@ -13,6 +13,7 @@ const NotFound = ({ t }) => (
     primaryButtonProps={{
       label: t("labels.goToHome"),
       to: routes.root,
+      weight: "medium",
     }}
   />
 );

@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by(slug: params[:slug])
+    @post = Post.find_by!(slug: params[:slug])
     render
   end
 

@@ -7,6 +7,7 @@ export const useFetchCategories = () =>
   useQuery({
     queryKey: [QUERY_KEYS.CATEGORIES],
     queryFn: () => categoriesApi.fetch(),
+    retry: false,
   });
 
 export const useCreateCategory = () => useMutation(categoriesApi.create);

@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import "./common/i18n";
 import Login from "./components/Authentication/Login";
 import Signup from "./components/Authentication/Signup";
+import PageNotFound from "./components/commons/PageNotFound";
 import { Create } from "./components/Create";
 import Home from "./components/Home";
 import Show from "./components/Show";
@@ -27,6 +28,7 @@ const App = () => (
             <Route exact component={Home} path={routes.root} />
             <Route exact component={Signup} path={routes.signup} />
             <Route exact component={Login} path={routes.login} />
+            <Route component={PageNotFound} path="*" />
           </Switch>
         </div>
       </div>

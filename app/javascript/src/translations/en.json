@@ -7,7 +7,8 @@
     "categories": "Categories",
     "newCategory": "New category",
     "signup": "Signup",
-    "login": "Login"
+    "login": "Login",
+    "pageNotFound": "The page you're looking for can't be found"
   },
   "placeholders": {
     "enterTitle": "Enter title",

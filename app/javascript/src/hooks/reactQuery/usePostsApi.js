@@ -7,12 +7,14 @@ export const useShowPost = slug =>
   useQuery({
     queryKey: [QUERY_KEYS.POST, slug],
     queryFn: () => postsApi.show(slug),
+    retry: false,
   });
 
 export const useFetchPosts = selectedCategories =>
   useQuery({
     queryKey: [QUERY_KEYS.POSTS, selectedCategories],
     queryFn: () => postsApi.fetch(selectedCategories),
+    retry: false,
   });
 
 export const useCreatePost = () => useMutation(postsApi.create);
