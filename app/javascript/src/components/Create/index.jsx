@@ -11,7 +11,7 @@ import { QUERY_KEYS } from "../../constants/query";
 import { useFetchCategories } from "../../hooks/reactQuery/useCategoriesApi";
 import { useCreatePost } from "../../hooks/reactQuery/usePostsApi";
 import queryClient from "../../utils/queryClient";
-import AppHeading from "../commons/AppHeading";
+import { AppHeading } from "../commons";
 
 export const Create = () => {
   const history = useHistory();

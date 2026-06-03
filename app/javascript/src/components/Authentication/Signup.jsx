@@ -13,8 +13,7 @@ import SignupForm from "./Form/Signup";
 
 import { useCreateUser } from "../../hooks/reactQuery/useUsersApi";
 import routes from "../../routes";
-import AppHeading from "../commons/AppHeading";
-import Toastr from "../commons/Toastr";
+import { AppHeading, Toastr } from "../commons";
 
 const Signup = () => {
   const { mutate: createUser } = useCreateUser();
@@ -41,7 +40,7 @@ const Signup = () => {
       email,
       password,
       password_confirmation,
-      organization_id: 3,
+      organization_id: 2,
     };
 
     createUser(payload, {

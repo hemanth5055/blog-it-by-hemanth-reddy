@@ -7,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 import "./common/i18n";
 import Login from "./components/Authentication/Login";
 import Signup from "./components/Authentication/Signup";
-import PrivateRoutes from "./components/commons/PrivateRoute";
+import { PrivateRoutes } from "./components/commons";
 import Sidebar from "./components/Sidebar";
 import routes from "./routes";
 import queryClient from "./utils/queryClient";

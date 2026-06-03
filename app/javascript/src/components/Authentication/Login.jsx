@@ -14,7 +14,7 @@ import { setAuthHeaders } from "../../apis/axios";
 import { useCreateSession } from "../../hooks/reactQuery/useSessionApi";
 import routes from "../../routes";
 import { setToLocalStorage } from "../../utils/storage";
-import AppHeading from "../commons/AppHeading";
+import { AppHeading } from "../commons";
 
 const Login = () => {
   const { mutate: loginUser } = useCreateSession();

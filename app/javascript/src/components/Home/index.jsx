@@ -12,7 +12,7 @@ import { useFetchPosts } from "../../hooks/reactQuery/usePostsApi";
 import routes from "../../routes";
 import { useCategoryStore } from "../../stores/useCategoryStore";
 import CategorySidebar from "../Category";
-import AppHeading from "../commons/AppHeading";
+import { AppHeading } from "../commons";
 
 const Home = () => {
   const [showCategories, setShowCategories] = useState(false);
