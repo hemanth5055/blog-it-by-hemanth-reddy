@@ -121,12 +121,12 @@ const User = () => {
       ),
     },
     {
-      title: t("labels.updatedAt"),
-      dataIndex: "updatedAt",
-      key: "updatedAt",
-      render: updatedAt => (
+      title: t("labels.lastUpdatedAt"),
+      dataIndex: "lastUpdatedAt",
+      key: "lastUpdatedAt",
+      render: lastUpdatedAt => (
         <Typography className="text-gray-400" style="body1" weight="medium">
-          {dayjs(updatedAt).format("MMM D, YYYY - hh:mm:ss A")}
+          {dayjs(lastUpdatedAt).format("MMM D, YYYY - hh:mm:ss A")}
         </Typography>
       ),
     },

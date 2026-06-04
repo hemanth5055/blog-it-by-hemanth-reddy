@@ -4,7 +4,7 @@ json.posts @posts do |post|
   json.id post.id
   json.title post.title
   json.slug post.slug
-  json.updatedAt post.updated_at
+  json.lastUpdatedAt post.last_updated_at
   json.status post.status
 
   json.categories post.categories do |category|

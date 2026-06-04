@@ -16,6 +16,7 @@ class Post < ApplicationRecord
   validate :slug_not_changed
   validates :status, presence: true
   before_create :set_slug
+  before_save :set_last_updated_at
 
   private
 
@@ -41,4 +42,8 @@ class Post < ApplicationRecord
         errors.add(:slug, I18n.t("post.slug.immutable"))
       end
    end
+
+    def set_last_updated_at
+      self.last_updated_at = Time.current if new_record? || published?
+    end
 end
