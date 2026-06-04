@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 
+import { Redirect } from "@bigbinary/neeto-icons";
 import { useShowPost, useUpdatePost } from "hooks/reactQuery/usePostsApi";
 import { Form as NeetoForm } from "neetoformik";
 import { MenuHorizontal } from "neetoicons";
@@ -20,6 +21,7 @@ import NotFound from "../commons/NotFound";
 
 const Edit = () => {
   const [showActionPublish, setShowActionPublish] = useState(true);
+  const [isRedirecting, setIsRedirecting] = useState(false);
   const { t } = useTranslation();
   const history = useHistory();
 
@@ -53,9 +55,21 @@ const Edit = () => {
     history.push(routes.root);
   };
 
+  const handleRedirect = () => {
+    setIsRedirecting(true);
+    setShowActionPublish(false);
+    if (submitRef.current) {
+      submitRef.current.click();
+    }
+  };
+
   const handleFormikSubmit = async values => {
     updatePost(
-      { slug, payload: values, isPostBeingPublished: showActionPublish },
+      {
+        slug,
+        payload: values,
+        isPostBeingPublished: isRedirecting ? false : showActionPublish,
+      },
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
@@ -73,7 +87,12 @@ const Edit = () => {
             refetchType: "active",
           });
 
-          history.push(routes.root);
+          if (isRedirecting) {
+            setIsRedirecting(false);
+            history.push(routes.show.replace(":slug", slug));
+          } else {
+            history.push(routes.root);
+          }
         },
       }
     );
@@ -108,6 +127,16 @@ const Edit = () => {
       <div className="flex w-full items-center justify-between pb-4">
         <AppHeading title={t("titles.editBlogPost")} />
         <div className="flex items-center gap-3">
+          <Button
+            icon={Redirect}
+            style="text"
+            tooltipProps={{
+              content: t("tooltips.saveAsDraftAndRedirect"),
+              position: "top",
+              weight: "medium",
+            }}
+            onClick={handleRedirect}
+          />
           <Button
             label={t("labels.cancel")}
             style="secondary"

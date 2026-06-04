@@ -74,6 +74,7 @@
     "posts": "Posts",
     "createPost": "Create post",
     "myPosts": "My posts",
-    "viewAndAddCategories": "View and edit categories"
+    "viewAndAddCategories": "View and edit categories",
+    "saveAsDraftAndRedirect": "Save as draft and redirect"
   }
 }
