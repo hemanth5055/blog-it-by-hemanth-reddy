@@ -18,3 +18,7 @@ export const useFetchPosts = selectedCategories =>
   });
 
 export const useCreatePost = () => useMutation(postsApi.create);
+export const useUpdatePost = () =>
+  useMutation(({ slug, payload, isPostBeingPublished }) =>
+    postsApi.update(slug, payload, isPostBeingPublished)
+  );

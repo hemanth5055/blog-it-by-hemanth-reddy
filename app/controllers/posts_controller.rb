@@ -4,10 +4,10 @@ class PostsController < ApplicationController
   def index
     user_categories = params[:categories].presence
     puts @current_user.organization_id
-    @posts = Post.includes(:categories).where(organization_id: @current_user.organization_id)
+    @posts = Post.includes(:categories).published.where(organization_id: @current_user.organization_id)
     @posts = @posts.where(categories: { id: user_categories }) if user_categories
     render
- end
+  end
 
   def create
     full_params = post_params.merge(
@@ -21,12 +21,26 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by!(slug: params[:slug])
+    @isOwner = @post.user_id == current_user.id
     render
+  end
+
+  def update
+    @post = Post.find_by!(slug: params[:slug])
+    puts post_params
+    @post.update!(post_params)
+    render_notice(t("successfully_updated", entity: "Post"))
+  end
+
+  def destroy
+    @post = Post.find_by!(slug: params[:slug])
+    @post.destroy!
+    render_notice(t("successfully_deleted", entity: "Post"))
   end
 
   private
 
     def post_params
-      params.require(:post).permit(:title, :description, category_ids: [])
+      params.require(:post).permit(:title, :description, :status, category_ids: [],)
     end
 end

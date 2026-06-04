@@ -8,7 +8,8 @@
     "newCategory": "New category",
     "signup": "Signup",
     "login": "Login",
-    "pageNotFound": "The page you're looking for can't be found"
+    "pageNotFound": "The page you're looking for can't be found",
+    "editBlogPost": "Edit blog post"
   },
   "placeholders": {
     "enterTitle": "Enter title",
@@ -31,7 +32,10 @@
     "password": "Password",
     "confirmPassword": "Confirm password",
     "create": "Create",
-    "login": "Login"
+    "login": "Login",
+    "publish": "Publish",
+    "saveAsDraft": "Save as draft",
+    "delete": "Delete"
   },
   "messages": {
     "blogPostNotFound": "We couldn't find a blog post matching that web address.",

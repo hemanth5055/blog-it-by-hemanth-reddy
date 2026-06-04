@@ -50,7 +50,7 @@ const SignupForm = () => {
       </div>
       <div className="flex w-full items-center justify-center gap-2">
         <Typography weight="medium">
-          {t("messages.alreadyHaveAnAccount")}{" "}
+          {t("messages.alreadyHaveAnAccount")}
           <Link
             className="neeto-ui-text-primary-500 font-semibold underline"
             to={routes.login}

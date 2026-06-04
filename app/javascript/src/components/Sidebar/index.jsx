@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 
 import { Book, List, Edit, LeftArrow } from "@bigbinary/neeto-icons";
 import { Avatar, Button, Popover, Typography } from "neetoui";
+import { isNil, isEmpty, either } from "ramda";
 import { useTranslation } from "react-i18next";
 import {
   useHistory,
@@ -44,11 +45,13 @@ const Sidebar = () => {
     }
   };
 
-  const isPublicRoute = [routes.login, routes.signup].includes(
-    location.pathname
-  );
+  const authToken = getFromLocalStorage("authToken");
+  const isLoggedIn = !either(isNil, isEmpty)(authToken);
 
-  if (isPublicRoute) return null;
+  if (!isLoggedIn) return null;
+
+  const isCreatePage = location.pathname === routes.create;
+  const isEditPage = location.pathname.split("/").at(-1) === "edit";
 
   return (
     <div className="flex w-fit flex-col items-center gap-5 bg-[#262626] px-5 py-5">
@@ -58,11 +61,13 @@ const Sidebar = () => {
       <div className="flex h-full w-full flex-col items-center gap-4">
         <Element
           icon={List}
+          isActive={location.pathname === routes.to}
           to={routes.root}
           tooltipContent={t("tooltips.posts")}
         />
         <Element
           icon={Edit}
+          isActive={isCreatePage || isEditPage}
           to={routes.create}
           tooltipContent={t("tooltips.createPost")}
         />

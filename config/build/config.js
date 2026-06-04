@@ -19,6 +19,7 @@ const alias = {
   utils: absolutePath("src/utils"),
   neetoui: "@bigbinary/neetoui",
   neetocist: "@bigbinary/neeto-cist",
+  neetoformik: "@bigbinary/neetoui/formik",
 };
 
 export { alias };

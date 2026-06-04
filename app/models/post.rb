@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   MAX_TITLE_LENGTH = 125
   MAX_DESC_LENGTH = 10_000
 
+  enum :status, { published: 1, draft: 0 }, default: :published
   belongs_to :organization
   belongs_to :user
   has_and_belongs_to_many :categories, join_table: :posts_categories
@@ -13,7 +14,7 @@ class Post < ApplicationRecord
   validates_inclusion_of :is_bloggable, in: [true, false]
   validates :slug, uniqueness: true
   validate :slug_not_changed
-
+  validates :status, presence: true
   before_create :set_slug
 
   private

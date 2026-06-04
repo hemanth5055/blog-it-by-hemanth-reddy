@@ -13,6 +13,7 @@ import {
 } from "./components/commons";
 import Home from "./components/Home";
 import Create from "./components/Post/Create";
+import Edit from "./components/Post/Edit/Index";
 import Show from "./components/Post/Show";
 import Sidebar from "./components/Sidebar";
 import routes from "./routes";
@@ -29,6 +30,7 @@ const App = () => (
             <ProtectedRoute exact component={Home} path={routes.root} />
             <ProtectedRoute exact component={Create} path={routes.create} />
             <ProtectedRoute exact component={Show} path={routes.show} />
+            <ProtectedRoute exact component={Edit} path={routes.edit} />
             <PublicButRestrictedWhenLoggedIn
               exact
               component={Signup}

@@ -1,18 +1,22 @@
 import React from "react";
 
+import { Edit } from "@bigbinary/neeto-icons";
 import dayjs from "dayjs";
-import { Tag, Typography, Avatar } from "neetoui";
+import { Tag, Typography, Avatar, Button } from "neetoui";
 import { useParams } from "react-router-dom";
-
-import NotFound from "./NotFound";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import { useShowPost } from "../../../hooks/reactQuery/usePostsApi";
+import routes from "../../../routes";
 import PageLoader from "../../commons/PageLoader";
+import NotFound from "../commons/NotFound";
 
 const Show = () => {
   const { slug } = useParams();
 
-  const { isLoading, data: { post = {} } = {} } = useShowPost(slug);
+  const history = useHistory();
+
+  const { isLoading, data: { post = null } = {} } = useShowPost(slug);
 
   if (isLoading) {
     return <PageLoader />;
@@ -27,11 +31,22 @@ const Show = () => {
   }
 
   return (
-    <div className="flex w-full flex-col gap-3 p-10">
-      <div className="flex w-full gap-2">
-        {post?.categories?.map(category => (
-          <Tag key={category.id} label={category.name} style="secondary" />
-        ))}
+    <div className="flex h-full w-full flex-col gap-3 p-10">
+      <div className="flex w-full items-center justify-between pl-5">
+        <div className="flex w-full gap-2">
+          {post?.categories?.map(category => (
+            <Tag key={category.id} label={category.name} style="secondary" />
+          ))}
+        </div>
+        {post?.isOwner && (
+          <Button
+            icon={Edit}
+            style="secondary"
+            onClick={() => {
+              history.push(routes.edit.replace(":slug", slug));
+            }}
+          />
+        )}
       </div>
       <Typography className="text-gray-200" style="h1" weight="medium">
         {post?.title}
@@ -49,13 +64,15 @@ const Show = () => {
           </Typography>
         </div>
       </div>
-      <Typography
-        className="whitespace-pre-line leading-7 text-gray-300"
-        style="body1"
-        weight="medium"
-      >
-        {post?.description}
-      </Typography>
+      <div className="h-full w-full overflow-y-scroll whitespace-pre-line">
+        <Typography
+          className="whitespace-pre-line leading-7 text-gray-300"
+          style="body1"
+          weight="medium"
+        >
+          {post?.description}
+        </Typography>
+      </div>
     </div>
   );
 };
