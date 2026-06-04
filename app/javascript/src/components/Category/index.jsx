@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 
+import {
+  useCreateCategory,
+  useFetchCategories,
+} from "hooks/reactQuery/useCategoriesApi";
 import { Button, Input, Modal, Pane, Typography } from "neetoui";
 import { useTranslation } from "react-i18next";
+import queryClient from "utils/queryClient";
 
 import Item from "./Item";
 
 import { QUERY_KEYS } from "../../constants/query";
-import {
-  useCreateCategory,
-  useFetchCategories,
-} from "../../hooks/reactQuery/useCategoriesApi";
-import queryClient from "../../utils/queryClient";
 
 const CategorySidebar = ({ showCategories, setShowCategories }) => {
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
@@ -28,7 +28,10 @@ const CategorySidebar = ({ showCategories, setShowCategories }) => {
       { name },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.CATEGORIES] });
+          queryClient.invalidateQueries({
+            queryKey: [QUERY_KEYS.CATEGORIES],
+            refetchType: "active",
+          });
           setShowAddCategoryModal(false);
           setName("");
         },

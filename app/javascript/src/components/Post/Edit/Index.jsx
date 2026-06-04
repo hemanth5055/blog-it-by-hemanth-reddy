@@ -1,18 +1,18 @@
 import React, { useRef, useState } from "react";
 
-import { MenuHorizontal } from "@bigbinary/neeto-icons";
+import { useShowPost, useUpdatePost } from "hooks/reactQuery/usePostsApi";
 import { Form as NeetoForm } from "neetoformik";
+import { MenuHorizontal } from "neetoicons";
 import { Button, ActionDropdown, Dropdown } from "neetoui";
 import { useTranslation } from "react-i18next";
-import { QueryClient } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
+import queryClient from "utils/queryClient";
 
 import { VALIDATION_SCHEMA } from "./constants";
 import { Form } from "./Form";
 
-import postsApi from "../../../apis/posts";
 import { QUERY_KEYS } from "../../../constants/query";
-import { useShowPost } from "../../../hooks/reactQuery/usePostsApi";
+import { useDeletePost } from "../../../hooks/reactQuery/usePostsApi";
 import routes from "../../../routes";
 import { AppHeading } from "../../commons";
 import PageLoader from "../../commons/PageLoader";
@@ -28,6 +28,8 @@ const Edit = () => {
   const { slug } = useParams();
 
   const { isLoading, data: { post = null } = {} } = useShowPost(slug);
+  const { mutate: updatePost } = useUpdatePost();
+  const { mutate: deletePost } = useDeletePost();
 
   if (isLoading) {
     return <PageLoader />;
@@ -52,25 +54,41 @@ const Edit = () => {
   };
 
   const handleFormikSubmit = async values => {
-    try {
-      await postsApi.update(slug, {
-        ...values,
-        isPublished: showActionPublish,
-      });
-      history.push(routes.root);
-      QueryClient.invalidateQueries({ queryKey: [QUERY_KEYS.POSTS] });
-    } catch (error) {
-      logger.error(error);
-    }
+    updatePost(
+      { slug, payload: values, isPostBeingPublished: showActionPublish },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [QUERY_KEYS.POSTS, QUERY_KEYS.USER],
+            refetchType: "active",
+          });
+
+          queryClient.invalidateQueries({
+            queryKey: [QUERY_KEYS.POST, slug],
+            refetchType: "active",
+          });
+
+          queryClient.invalidateQueries({
+            queryKey: [QUERY_KEYS.POSTS],
+            refetchType: "active",
+          });
+
+          history.push(routes.root);
+        },
+      }
+    );
   };
 
   const handleDelete = async () => {
-    try {
-      await postsApi.destroy(slug);
-      history.push(routes.root);
-    } catch (error) {
-      logger.error(error);
-    }
+    deletePost(slug, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.POSTS],
+          refetchType: "active",
+        });
+        history.push(routes.root);
+      },
+    });
   };
 
   const { Menu, MenuItem } = ActionDropdown;

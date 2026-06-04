@@ -2,8 +2,7 @@ import React from "react";
 
 import classNames from "classnames";
 import { Typography } from "neetoui";
-
-import { useCategoryStore } from "../../stores/useCategoryStore";
+import { useCategoryStore } from "stores/useCategoryStore";
 
 const Item = ({ name, id }) => {
   const { selectedCategories, toggleCategorySelection } = useCategoryStore(

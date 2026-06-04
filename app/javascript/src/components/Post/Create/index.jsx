@@ -1,16 +1,16 @@
 import React from "react";
 
+import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
+import { useCreatePost } from "hooks/reactQuery/usePostsApi";
 import { Form as NeetoForm } from "neetoui/formik";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
+import queryClient from "utils/queryClient";
 
 import { INTIAL_FORM_VALUES, VALIDATION_SCHEMA } from "./constants";
 import { Form } from "./Form";
 
 import { QUERY_KEYS } from "../../../constants/query";
-import { useFetchCategories } from "../../../hooks/reactQuery/useCategoriesApi";
-import { useCreatePost } from "../../../hooks/reactQuery/usePostsApi";
-import queryClient from "../../../utils/queryClient";
 import { AppHeading } from "../../commons";
 
 export const Create = () => {
@@ -28,8 +28,11 @@ export const Create = () => {
       { ...values, category_ids: categories },
       {
         onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [QUERY_KEYS.POSTS],
+            refetchType: "active",
+          });
           history.push("/");
-          queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.POSTS] });
         },
       }
     );

@@ -1,9 +1,8 @@
 import React from "react";
 
 import { NoData } from "neetoui";
+import routes from "src/routes";
 import withT from "utils/withT";
-
-import routes from "../../routes";
 
 const PageNotFound = ({ t }) => (
   <div className="flex h-full w-full items-center justify-center">

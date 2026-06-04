@@ -1,9 +1,10 @@
 import axios from "axios";
+import { t } from "i18next";
 import { setToLocalStorage, getFromLocalStorage } from "utils/storage";
 
 import { Toastr } from "../components/commons";
 
-const DEFAULT_ERROR_NOTIFICATION = "Something went wrong!";
+const DEFAULT_ERROR_NOTIFICATION = t("messages.somethingWentWrong");
 
 axios.defaults.baseURL = "/";
 

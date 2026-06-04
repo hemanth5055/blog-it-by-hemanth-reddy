@@ -3,7 +3,6 @@
 class PostsController < ApplicationController
   def index
     user_categories = params[:categories].presence
-    puts @current_user.organization_id
     @posts = Post.includes(:categories).published.where(organization_id: @current_user.organization_id)
     @posts = @posts.where(categories: { id: user_categories }) if user_categories
     render
@@ -16,6 +15,7 @@ class PostsController < ApplicationController
     )
 
     post = Post.create!(full_params)
+    authorize post
     render_notice(t("successfully_created", entity: "Post"))
   end
 
@@ -26,19 +26,21 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by!(slug: params[:slug])
+    authorize @post
     @isOwner = @post.user_id == current_user.id
     render
   end
 
   def update
     @post = Post.find_by!(slug: params[:slug])
-    puts post_params
+    authorize @post
     @post.update!(post_params)
     render_notice(t("successfully_updated", entity: "Post"))
   end
 
   def destroy
     @post = Post.find_by!(slug: params[:slug])
+    authorize @post
     @post.destroy!
     render_notice(t("successfully_deleted", entity: "Post"))
   end

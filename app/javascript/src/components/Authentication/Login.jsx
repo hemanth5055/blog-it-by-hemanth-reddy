@@ -1,8 +1,12 @@
 import React from "react";
 
-import { Form as NeetoForm } from "neetoui/formik";
+import { setAuthHeaders } from "apis/axios";
+import { useCreateSession } from "hooks/reactQuery/useSessionApi";
+import { Form as NeetoForm } from "neetoformik";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
+import routes from "src/routes";
+import { setToLocalStorage } from "utils/storage";
 
 import {
   INITIAL_LOGIN_FORM_VALUES,
@@ -10,10 +14,6 @@ import {
 } from "./constants";
 import LoginForm from "./Form/Login";
 
-import { setAuthHeaders } from "../../apis/axios";
-import { useCreateSession } from "../../hooks/reactQuery/useSessionApi";
-import routes from "../../routes";
-import { setToLocalStorage } from "../../utils/storage";
 import { AppHeading } from "../commons";
 
 const Login = () => {

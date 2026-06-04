@@ -4,8 +4,7 @@ import { Typography, Button } from "neetoui";
 import { Input } from "neetoui/formik";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-
-import routes from "../../../routes";
+import routes from "src/routes";
 
 const SignupForm = () => {
   const { t } = useTranslation();

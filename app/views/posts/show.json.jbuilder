@@ -18,4 +18,5 @@ json.post do
   json.updatedAt @post.updated_at
 
   json.isOwner @isOwner
+  json.status @post.status
 end

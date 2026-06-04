@@ -2,18 +2,18 @@ import React from "react";
 
 import { Edit } from "@bigbinary/neeto-icons";
 import dayjs from "dayjs";
+import { useShowPost } from "hooks/reactQuery/usePostsApi";
 import { Tag, Typography, Avatar, Button } from "neetoui";
-import { useParams } from "react-router-dom";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useTranslation } from "react-i18next";
+import { useParams, useHistory } from "react-router-dom";
 
-import { useShowPost } from "../../../hooks/reactQuery/usePostsApi";
 import routes from "../../../routes";
 import PageLoader from "../../commons/PageLoader";
 import NotFound from "../commons/NotFound";
 
 const Show = () => {
   const { slug } = useParams();
-
+  const { t } = useTranslation();
   const history = useHistory();
 
   const { isLoading, data: { post = null } = {} } = useShowPost(slug);
@@ -32,7 +32,7 @@ const Show = () => {
 
   return (
     <div className="flex h-full w-full flex-col gap-3 p-10">
-      <div className="flex w-full items-center justify-between pl-5">
+      <div className="flex w-full items-center justify-between pr-5">
         <div className="flex w-full gap-2">
           {post?.categories?.map(category => (
             <Tag key={category.id} label={category.name} style="secondary" />
@@ -41,6 +41,7 @@ const Show = () => {
         {post?.isOwner && (
           <Button
             icon={Edit}
+            label={t("labels.edit")}
             style="secondary"
             onClick={() => {
               history.push(routes.edit.replace(":slug", slug));
@@ -48,9 +49,14 @@ const Show = () => {
           />
         )}
       </div>
-      <Typography className="text-gray-200" style="h1" weight="medium">
-        {post?.title}
-      </Typography>
+      <div className="flex w-full items-center gap-5">
+        <Typography className="text-gray-200" style="h1" weight="medium">
+          {post?.title}
+        </Typography>
+        {post.status === "draft" && (
+          <Tag style="danger">{t("messages.draft")}</Tag>
+        )}
+      </div>
       <div className="flex w-full items-center gap-2 pb-2">
         <div>
           <Avatar user={{ name: "Hello" }} />

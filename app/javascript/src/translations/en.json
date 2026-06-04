@@ -10,7 +10,8 @@
     "login": "Login",
     "pageNotFound": "The page you're looking for can't be found",
     "editBlogPost": "Edit blog post",
-    "myBlogPosts": "My blog posts"
+    "myBlogPosts": "My blog posts",
+    "somethingWentWrong": "Something went wrong"
   },
   "placeholders": {
     "enterTitle": "Enter title",
@@ -36,7 +37,12 @@
     "login": "Login",
     "publish": "Publish",
     "saveAsDraft": "Save as draft",
-    "delete": "Delete"
+    "delete": "Delete",
+    "updatedAt": "Updated at",
+    "status": "Status",
+    "unpublish": "Unpublish",
+    "edit": "Edit",
+    "logout": "Logout"
   },
   "messages": {
     "blogPostNotFound": "We couldn't find a blog post matching that web address.",
@@ -59,7 +65,10 @@
     "DontHaveAnAccount": "Don't have an account?",
     "login": "Log in",
     "signup": "Sign up",
-    "enterValidEmail": "Enter a valid email"
+    "enterValidEmail": "Enter a valid email",
+    "articles": "articles",
+    "draft": "Draft",
+    "somethingWentWrong": "Something went wrong!"
   },
   "tooltips": {
     "posts": "Posts",

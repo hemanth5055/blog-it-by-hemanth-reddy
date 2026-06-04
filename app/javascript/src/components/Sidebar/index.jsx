@@ -1,21 +1,18 @@
 import React, { useRef } from "react";
 
-import { Book, List, Edit, LeftArrow, Folder } from "@bigbinary/neeto-icons";
+import authApi from "apis/auth";
+import { resetAuthTokens } from "apis/axios";
+import { Book, List, Edit, LeftArrow, Folder } from "neetoicons";
 import { Avatar, Button, Popover, Typography } from "neetoui";
-import { isNil, isEmpty, either } from "ramda";
+import { isNil, isEmpty, either, equals } from "ramda";
 import { useTranslation } from "react-i18next";
-import {
-  useHistory,
-  useLocation,
-} from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, useLocation } from "react-router-dom";
+import { getFromLocalStorage, setToLocalStorage } from "utils/storage";
 
 import { EMAIL_KEY, USERNAME_KEY } from "./constants";
 import Element from "./Element";
 
-import authApi from "../../apis/auth";
-import { resetAuthTokens } from "../../apis/axios";
 import routes from "../../routes";
-import { getFromLocalStorage, setToLocalStorage } from "../../utils/storage";
 
 const Sidebar = () => {
   const { t } = useTranslation();
@@ -52,16 +49,17 @@ const Sidebar = () => {
 
   const isCreatePage = location.pathname === routes.create;
   const isEditPage = location.pathname.split("/").at(-1) === "edit";
+  const isShowPage = location.pathname.split("/").at(-1) === "show";
 
   return (
     <div className="flex w-fit flex-col items-center gap-5 bg-[#262626] px-5 py-5">
-      <div className=" flex items-center justify-center rounded-md p-2">
+      <div className=" flex items-center justify-center rounded-md bg-[#393939] p-2 shadow-lg">
         <Book />
       </div>
       <div className="flex h-full w-full flex-col items-center gap-4">
         <Element
           icon={List}
-          isActive={location.pathname === routes.root}
+          isActive={equals(routes.root, location.pathname) || isShowPage}
           to={routes.root}
           tooltipContent={t("tooltips.posts")}
         />
@@ -73,7 +71,7 @@ const Sidebar = () => {
         />
         <Element
           icon={Folder}
-          isActive={location.pathname === routes.myPosts}
+          isActive={equals(routes.myPosts, location.pathname)}
           to={routes.myPosts}
           tooltipContent={t("tooltips.myPosts")}
         />
@@ -97,7 +95,7 @@ const Sidebar = () => {
               className="flex w-full justify-center text-white"
               icon={LeftArrow}
               iconPosition="left"
-              label="Logout"
+              label={t("labels.logout")}
               style="danger"
               onClick={handleLogout}
             />

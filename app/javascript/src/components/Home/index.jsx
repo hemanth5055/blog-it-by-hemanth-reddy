@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 
-import { isNotEmpty } from "@bigbinary/neeto-cist";
-import { Category } from "@bigbinary/neeto-icons";
+import { useFetchPosts } from "hooks/reactQuery/usePostsApi";
+import { isNotEmpty } from "neetocist";
+import { Category } from "neetoicons";
 import { Button, NoData, Spinner } from "neetoui";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
+import { useCategoryStore } from "stores/useCategoryStore";
 
 import Post from "./Post";
 
-import { useFetchPosts } from "../../hooks/reactQuery/usePostsApi";
 import routes from "../../routes";
-import { useCategoryStore } from "../../stores/useCategoryStore";
 import CategorySidebar from "../Category";
 import { AppHeading } from "../commons";
 

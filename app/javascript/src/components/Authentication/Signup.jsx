@@ -1,9 +1,10 @@
 import React from "react";
 
+import { useCreateUser } from "hooks/reactQuery/useUsersApi";
 import { notEquals } from "neetocist";
 import { Form as NeetoForm } from "neetoui/formik";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
 
 import {
   INITIAL_SIGNUP_FORM_VALUES,
@@ -11,7 +12,6 @@ import {
 } from "./constants";
 import SignupForm from "./Form/Signup";
 
-import { useCreateUser } from "../../hooks/reactQuery/useUsersApi";
 import routes from "../../routes";
 import { AppHeading, Toastr } from "../commons";
 

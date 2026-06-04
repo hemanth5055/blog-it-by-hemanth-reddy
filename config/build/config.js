@@ -13,13 +13,18 @@ const alias = {
   stream: require.resolve("stream-browserify"),
   apis: absolutePath("src/apis"),
   common: absolutePath("src/common"),
+  src: absolutePath("src"),
   components: absolutePath("src/components"),
   assets: absolutePath("../assets"),
   constants: absolutePath("src/constants"),
   utils: absolutePath("src/utils"),
-  neetoui: "@bigbinary/neetoui",
+  hooks: absolutePath("src/hooks"),
+  stores: absolutePath("src/stores"),
+  apis: absolutePath("src/apis"),
   neetocist: "@bigbinary/neeto-cist",
   neetoformik: "@bigbinary/neetoui/formik",
+  neetoicons: "@bigbinary/neeto-icons",
+  neetoui: "@bigbinary/neetoui",
 };
 
 export { alias };
