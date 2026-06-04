@@ -19,6 +19,11 @@ class PostsController < ApplicationController
     render_notice(t("successfully_created", entity: "Post"))
   end
 
+  def mypost
+    @posts = Post.includes(:categories).where(user_id: current_user.id)
+    render
+  end
+
   def show
     @post = Post.find_by!(slug: params[:slug])
     @isOwner = @post.user_id == current_user.id

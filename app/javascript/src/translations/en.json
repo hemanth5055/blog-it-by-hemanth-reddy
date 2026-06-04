@@ -9,7 +9,8 @@
     "signup": "Signup",
     "login": "Login",
     "pageNotFound": "The page you're looking for can't be found",
-    "editBlogPost": "Edit blog post"
+    "editBlogPost": "Edit blog post",
+    "myBlogPosts": "My blog posts"
   },
   "placeholders": {
     "enterTitle": "Enter title",
@@ -63,6 +64,7 @@
   "tooltips": {
     "posts": "Posts",
     "createPost": "Create post",
+    "myPosts": "My posts",
     "viewAndAddCategories": "View and edit categories"
   }
 }

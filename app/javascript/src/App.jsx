@@ -16,6 +16,7 @@ import Create from "./components/Post/Create";
 import Edit from "./components/Post/Edit/Index";
 import Show from "./components/Post/Show";
 import Sidebar from "./components/Sidebar";
+import User from "./components/User";
 import routes from "./routes";
 import queryClient from "./utils/queryClient";
 
@@ -31,6 +32,7 @@ const App = () => (
             <ProtectedRoute exact component={Create} path={routes.create} />
             <ProtectedRoute exact component={Show} path={routes.show} />
             <ProtectedRoute exact component={Edit} path={routes.edit} />
+            <ProtectedRoute exact component={User} path={routes.myPosts} />
             <PublicButRestrictedWhenLoggedIn
               exact
               component={Signup}

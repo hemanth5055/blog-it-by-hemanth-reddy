@@ -17,8 +17,17 @@ export const useFetchPosts = selectedCategories =>
     retry: false,
   });
 
+export const useFetchUserPosts = () =>
+  useQuery({
+    queryKey: [QUERY_KEYS.POSTS, QUERY_KEYS.USER],
+    queryFn: () => postsApi.fetchUserPosts(),
+    retry: false,
+  });
+
 export const useCreatePost = () => useMutation(postsApi.create);
 export const useUpdatePost = () =>
   useMutation(({ slug, payload, isPostBeingPublished }) =>
     postsApi.update(slug, payload, isPostBeingPublished)
   );
+
+export const useDeletePost = () => useMutation(postsApi.destroy);

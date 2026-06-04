@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-import { Book, List, Edit, LeftArrow } from "@bigbinary/neeto-icons";
+import { Book, List, Edit, LeftArrow, Folder } from "@bigbinary/neeto-icons";
 import { Avatar, Button, Popover, Typography } from "neetoui";
 import { isNil, isEmpty, either } from "ramda";
 import { useTranslation } from "react-i18next";
@@ -61,7 +61,7 @@ const Sidebar = () => {
       <div className="flex h-full w-full flex-col items-center gap-4">
         <Element
           icon={List}
-          isActive={location.pathname === routes.to}
+          isActive={location.pathname === routes.root}
           to={routes.root}
           tooltipContent={t("tooltips.posts")}
         />
@@ -70,6 +70,12 @@ const Sidebar = () => {
           isActive={isCreatePage || isEditPage}
           to={routes.create}
           tooltipContent={t("tooltips.createPost")}
+        />
+        <Element
+          icon={Folder}
+          isActive={location.pathname === routes.myPosts}
+          to={routes.myPosts}
+          tooltipContent={t("tooltips.myPosts")}
         />
       </div>
       <div className="flex w-full flex-col items-center gap-4">

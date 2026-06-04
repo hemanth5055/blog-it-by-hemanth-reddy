@@ -12,6 +12,8 @@ const update = (slug, payload, isPostBeingPublished) => {
 
   return axios.put(`/posts/${slug}`, { post: { ...payload, status: 0 } });
 };
-const postsApi = { fetch, create, show, destroy, update };
+
+const fetchUserPosts = () => axios.get("/posts/mypost");
+const postsApi = { fetch, create, show, destroy, update, fetchUserPosts };
 
 export default postsApi;

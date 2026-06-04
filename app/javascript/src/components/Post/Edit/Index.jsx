@@ -4,6 +4,7 @@ import { MenuHorizontal } from "@bigbinary/neeto-icons";
 import { Form as NeetoForm } from "neetoformik";
 import { Button, ActionDropdown, Dropdown } from "neetoui";
 import { useTranslation } from "react-i18next";
+import { QueryClient } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
 
 import { VALIDATION_SCHEMA } from "./constants";
@@ -11,12 +12,8 @@ import { Form } from "./Form";
 
 import postsApi from "../../../apis/posts";
 import { QUERY_KEYS } from "../../../constants/query";
-import {
-  useShowPost,
-  useUpdatePost,
-} from "../../../hooks/reactQuery/usePostsApi";
+import { useShowPost } from "../../../hooks/reactQuery/usePostsApi";
 import routes from "../../../routes";
-import queryClient from "../../../utils/queryClient";
 import { AppHeading } from "../../commons";
 import PageLoader from "../../commons/PageLoader";
 import NotFound from "../commons/NotFound";
@@ -31,7 +28,6 @@ const Edit = () => {
   const { slug } = useParams();
 
   const { isLoading, data: { post = null } = {} } = useShowPost(slug);
-  const { mutate: updatePost } = useUpdatePost();
 
   if (isLoading) {
     return <PageLoader />;
@@ -45,10 +41,6 @@ const Edit = () => {
     );
   }
 
-  if (!post.isOwner) {
-    history.push(routes.show.replace(":slug", slug));
-  }
-
   const handleSubmit = () => {
     if (submitRef.current) {
       submitRef.current.click();
@@ -60,20 +52,16 @@ const Edit = () => {
   };
 
   const handleFormikSubmit = async values => {
-    let { categories } = values;
-    categories = categories.map(category => category.value);
-    const payload = { ...values, category_ids: categories };
-
-    updatePost(
-      { slug, payload, isPostBeingPublished: showActionPublish },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.POSTS] });
-          queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.POST, slug] });
-          history.push(routes.root);
-        },
-      }
-    );
+    try {
+      await postsApi.update(slug, {
+        ...values,
+        isPublished: showActionPublish,
+      });
+      history.push(routes.root);
+      QueryClient.invalidateQueries({ queryKey: [QUERY_KEYS.POSTS] });
+    } catch (error) {
+      logger.error(error);
+    }
   };
 
   const handleDelete = async () => {
