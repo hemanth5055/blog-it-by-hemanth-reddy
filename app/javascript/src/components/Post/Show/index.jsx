@@ -60,7 +60,7 @@ const Show = () => {
             {post.user.name}
           </Typography>
           <Typography className="text-gray-400" style="body2" weight="medium">
-            {dayjs(post.createdAt).format("MMM D, YYYY")}
+            {dayjs(post.updatedAt).format("MMM D, YYYY")}
           </Typography>
         </div>
       </div>

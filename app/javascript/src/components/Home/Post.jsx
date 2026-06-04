@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import { Tag, Typography } from "neetoui";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
-const Post = ({ title, createdAt, slug, categories = [], author }) => (
+const Post = ({ title, updatedAt, slug, categories = [], author }) => (
   <div className="flex w-[70%] flex-col gap-2 p-3">
     <div className="flex items-center gap-2">
       {categories.map(category => (
@@ -25,7 +25,7 @@ const Post = ({ title, createdAt, slug, categories = [], author }) => (
         {author.name} •
       </Typography>
       <Typography className="text-gray-400" style="body2" weight="medium">
-        {dayjs(createdAt).format("MMM D, YYYY")}
+        {dayjs(updatedAt).format("MMM D, YYYY")}
       </Typography>
     </div>
     <div className="neeto-ui-bg-gray-200 h-[1px] w-full" />

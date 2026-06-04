@@ -79,11 +79,11 @@ const Home = () => {
               <Post
                 author={post.author}
                 categories={post.categories}
-                createdAt={post.createdAt}
                 description={post.description}
                 key={post.id}
                 slug={post.slug}
                 title={post.title}
+                updatedAt={post.updatedAt}
               />
             ))
           ) : (
