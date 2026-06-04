@@ -39,6 +39,7 @@
     "saveAsDraft": "Save as draft",
     "delete": "Delete",
     "updatedAt": "Updated at",
+    "lastUpdatedAt": "Last updated at",
     "status": "Status",
     "unpublish": "Unpublish",
     "edit": "Edit",
@@ -75,6 +76,6 @@
     "createPost": "Create post",
     "myPosts": "My posts",
     "viewAndAddCategories": "View and edit categories",
-    "saveAsDraftAndRedirect": "Save as draft and redirect"
+    "preview": "Preview"
   }
 }

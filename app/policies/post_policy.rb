@@ -9,7 +9,15 @@ class PostPolicy
   end
 
   def show?
-    post.organization_id == user.organization_id
+    is_owner = post.user_id == user.id
+    same_org = post.organization_id == user.organization_id
+    is_draft = post.draft?
+
+    return true if is_owner
+    return false if is_draft
+    return true if same_org
+
+    false
   end
 
   def create?

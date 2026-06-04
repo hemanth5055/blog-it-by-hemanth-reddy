@@ -12,11 +12,11 @@ import {
   PublicButRestrictedWhenLoggedIn,
 } from "./components/commons";
 import Home from "./components/Home";
+import User from "./components/MyPosts";
 import Create from "./components/Post/Create";
 import Edit from "./components/Post/Edit/Index";
 import Show from "./components/Post/Show";
 import Sidebar from "./components/Sidebar";
-import User from "./components/User";
 import routes from "./routes";
 import queryClient from "./utils/queryClient";
 

@@ -26,8 +26,8 @@ export const useFetchUserPosts = () =>
 
 export const useCreatePost = () => useMutation(postsApi.create);
 export const useUpdatePost = () =>
-  useMutation(({ slug, payload, isPostBeingPublished }) =>
-    postsApi.update(slug, payload, isPostBeingPublished)
+  useMutation(({ slug, payload, isPostBeingPublished, isQuiet }) =>
+    postsApi.update(slug, payload, isPostBeingPublished, isQuiet)
   );
 
 export const useDeletePost = () => useMutation(postsApi.destroy);

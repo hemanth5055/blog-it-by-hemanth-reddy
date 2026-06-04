@@ -21,11 +21,11 @@ import NotFound from "../commons/NotFound";
 
 const Edit = () => {
   const [showActionPublish, setShowActionPublish] = useState(true);
-  const [isRedirecting, setIsRedirecting] = useState(false);
   const { t } = useTranslation();
   const history = useHistory();
 
   const submitRef = useRef();
+  const isPreviewRef = useRef(false);
 
   const { slug } = useParams();
 
@@ -33,9 +33,7 @@ const Edit = () => {
   const { mutate: updatePost } = useUpdatePost();
   const { mutate: deletePost } = useDeletePost();
 
-  if (isLoading) {
-    return <PageLoader />;
-  }
+  if (isLoading) return <PageLoader />;
 
   if (!post) {
     return (
@@ -45,69 +43,71 @@ const Edit = () => {
     );
   }
 
-  const handleSubmit = () => {
-    if (submitRef.current) {
-      submitRef.current.click();
-    }
+  if (!post.isOwner) {
+    history.push(routes.show.replace(":slug", slug));
+
+    return null;
+  }
+
+  const invalidatePostQueries = () => {
+    queryClient.invalidateQueries({
+      queryKey: [QUERY_KEYS.POSTS, QUERY_KEYS.USER],
+      refetchType: "active",
+    });
+
+    queryClient.invalidateQueries({
+      queryKey: [QUERY_KEYS.POST, slug],
+      refetchType: "active",
+    });
+
+    queryClient.invalidateQueries({
+      queryKey: [QUERY_KEYS.POSTS],
+      refetchType: "active",
+    });
   };
 
-  const handleCancel = () => {
-    history.push(routes.root);
+  const triggerFormSubmit = () => submitRef.current?.click();
+
+  const handlePreviewAndSave = () => {
+    isPreviewRef.current = true;
+    triggerFormSubmit();
   };
 
-  const handleRedirect = () => {
-    setIsRedirecting(true);
-    setShowActionPublish(false);
-    if (submitRef.current) {
-      submitRef.current.click();
-    }
+  const handleSave = () => {
+    isPreviewRef.current = false;
+    triggerFormSubmit();
   };
 
-  const handleFormikSubmit = async values => {
+  const handleCancel = () => history.push(routes.show.replace(":slug", slug));
+
+  const handleDelete = () => {
+    deletePost(slug, {
+      onSuccess: () => {
+        invalidatePostQueries();
+        history.push(routes.root);
+      },
+    });
+  };
+
+  const handleFormikSubmit = values => {
+    const isPreview = isPreviewRef.current;
+
     updatePost(
       {
         slug,
         payload: values,
-        isPostBeingPublished: isRedirecting ? false : showActionPublish,
+        isPostBeingPublished: isPreview ? false : showActionPublish,
+        isQuiet: !!isPreview,
       },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries({
-            queryKey: [QUERY_KEYS.POSTS, QUERY_KEYS.USER],
-            refetchType: "active",
-          });
-
-          queryClient.invalidateQueries({
-            queryKey: [QUERY_KEYS.POST, slug],
-            refetchType: "active",
-          });
-
-          queryClient.invalidateQueries({
-            queryKey: [QUERY_KEYS.POSTS],
-            refetchType: "active",
-          });
-
-          if (isRedirecting) {
-            setIsRedirecting(false);
-            history.push(routes.show.replace(":slug", slug));
-          } else {
-            history.push(routes.root);
-          }
+          invalidatePostQueries();
+          history.push(
+            isPreview ? routes.show.replace(":slug", slug) : routes.root
+          );
         },
       }
     );
-  };
-
-  const handleDelete = async () => {
-    deletePost(slug, {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: [QUERY_KEYS.POSTS],
-          refetchType: "active",
-        });
-        history.push(routes.root);
-      },
-    });
   };
 
   const { Menu, MenuItem } = ActionDropdown;
@@ -116,9 +116,9 @@ const Edit = () => {
   const formValues = {
     title: post.title,
     description: post.description,
-    categories: post.categories.map(category => ({
-      label: category.name,
-      value: category.id,
+    categories: post.categories.map(({ name, id }) => ({
+      label: name,
+      value: id,
     })),
   };
 
@@ -131,11 +131,11 @@ const Edit = () => {
             icon={Redirect}
             style="text"
             tooltipProps={{
-              content: t("tooltips.saveAsDraftAndRedirect"),
+              content: t("tooltips.preview"),
               position: "top",
               weight: "medium",
             }}
-            onClick={handleRedirect}
+            onClick={handlePreviewAndSave}
           />
           <Button
             label={t("labels.cancel")}
@@ -147,7 +147,7 @@ const Edit = () => {
             label={
               showActionPublish ? t("labels.publish") : t("labels.saveAsDraft")
             }
-            onClick={handleSubmit}
+            onClick={handleSave}
           >
             <Menu className="p-4">
               <MenuItem
@@ -185,7 +185,7 @@ const Edit = () => {
           }}
         >
           <Form isLoading={false} />
-          <button ref={submitRef} style={{ display: "none" }} type="submit" />
+          <button className="hidden" ref={submitRef} type="submit" />
         </NeetoForm>
       </div>
     </div>
