@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
 
 import { Redirect } from "@bigbinary/neeto-icons";
+import dayjs from "dayjs";
 import { useShowPost, useUpdatePost } from "hooks/reactQuery/usePostsApi";
 import { Form as NeetoForm } from "neetoformik";
 import { MenuHorizontal } from "neetoicons";
-import { Button, ActionDropdown, Dropdown } from "neetoui";
+import { Button, ActionDropdown, Dropdown, Typography } from "neetoui";
 import { useTranslation } from "react-i18next";
 import { useParams, useHistory } from "react-router-dom";
 import queryClient from "utils/queryClient";
@@ -127,6 +128,13 @@ const Edit = () => {
       <div className="flex w-full items-center justify-between pb-4">
         <AppHeading title={t("titles.editBlogPost")} />
         <div className="flex items-center gap-3">
+          {post.status === "draft" && (
+            <Typography className="neeto-ui-text-gray-500" weight="medium">
+              {t("messages.lastSavedAt", {
+                time: dayjs(post.updatedAt).format("hh:mm A - MMM D, YYYY"),
+              })}
+            </Typography>
+          )}
           <Button
             icon={Redirect}
             style="text"

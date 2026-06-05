@@ -182,7 +182,7 @@ const User = () => {
       <div className="flex w-full flex-col gap-4 pb-4">
         <AppHeading title={t("titles.myBlogPosts")} />
         <Typography weight="semibold">
-          {posts?.length} {t("messages.articles")}
+          {t("messages.article", { count: posts.length })}
         </Typography>
       </div>
       <div className="h-full w-full">

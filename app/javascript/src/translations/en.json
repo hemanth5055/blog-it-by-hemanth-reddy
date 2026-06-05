@@ -67,9 +67,11 @@
     "login": "Log in",
     "signup": "Sign up",
     "enterValidEmail": "Enter a valid email",
-    "articles": "articles",
+    "article_one": "{{count}} article",
+    "article_other": "{{count}} articles",
     "draft": "Draft",
-    "somethingWentWrong": "Something went wrong!"
+    "somethingWentWrong": "Something went wrong!",
+    "lastSavedAt": "Last saved at : {{time}}"
   },
   "tooltips": {
     "posts": "Posts",
