@@ -18,4 +18,9 @@ class User < ApplicationRecord
     format: { with: VALID_EMAIL_REGEX }
   validates :password, length: { minimum: MINIMUM_PASSWORD_LENGTH }, if: -> { password.present? }
   validates :password_confirmation, presence: true, on: :create
+
+  before_save :to_lowercase
+  def to_lowercase
+    email.downcase!
+  end
 end

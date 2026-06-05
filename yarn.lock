@@ -1028,9 +1028,9 @@
   resolved "https://registry.yarnpkg.com/@bigbinary/neeto-icons/-/neeto-icons-1.20.64.tgz#bbdf11043fe6d6ddf0f1455a6f7d0f150473456d"
   integrity sha512-naGxIyhd28eD89caMJrgUlR+xhmM0T6weIu97Y76p6UNVdxSM4oNK0NGe19th7BNT7uqkx1JD4HED3RG5Jv5sg==
 
-"neetoui@^8.8.1":
+"@bigbinary/neetoui@^8.8.1":
   version "8.8.1"
-  resolved "https://registry.yarnpkg.com/neetoui/-/neetoui-8.8.1.tgz#cdee6d8d4b15e4f151d490ced7f43254dab7e6c7"
+  resolved "https://registry.yarnpkg.com/@bigbinary/neetoui/-/neetoui-8.8.1.tgz#cdee6d8d4b15e4f151d490ced7f43254dab7e6c7"
   integrity sha512-joEvCxpTKU6U5Mym3h6YHRYZLsiA2OObMVC2CaMEhd7u7F6O5sX8N7UA1bPgIBSyqRNOevMWuvouVCXT4HjIfw==
 
 "@csstools/postcss-cascade-layers@^1.1.0":

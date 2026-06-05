@@ -82,3 +82,4 @@ group :development do
 end
 
 gem "data_migrate"
+gem "simplecov", require: false, group: :test
