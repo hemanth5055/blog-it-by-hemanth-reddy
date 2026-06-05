@@ -3,8 +3,9 @@
 class PostsController < ApplicationController
   def index
     user_categories = params[:categories].presence
-    @posts = Post.includes(:categories).published.where(organization_id: @current_user.organization_id)
+    @posts = Post.includes(:categories, :user).published.where(organization_id: @current_user.organization_id)
     @posts = @posts.where(categories: { id: user_categories }) if user_categories
+    @posts = @posts.order(updated_at: :desc)
     render
   end
 
@@ -14,7 +15,7 @@ class PostsController < ApplicationController
       user_id: @current_user.id
     )
 
-    post = Post.create!(full_params)
+    post = Post.includes(:categories, :user).create!(full_params)
     authorize post
     render_notice(t("successfully_created", entity: "Post"))
   end
@@ -25,7 +26,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by!(slug: params[:slug])
+    @post = Post.includes(:categories).find_by!(slug: params[:slug])
     authorize @post
     @isOwner = @post.user_id == current_user.id
     render

@@ -5,7 +5,7 @@ const routes = {
   signup: "/signup",
   login: "/login",
   edit: "/posts/:slug/edit",
-  myPosts: "/my",
+  myPosts: "/myposts",
 };
 
 export default routes;
