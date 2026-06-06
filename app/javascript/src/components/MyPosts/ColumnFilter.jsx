@@ -13,7 +13,7 @@ const ColumnFilter = () => {
   const { selectedFilters } = useColumnFilterStore();
 
   return (
-    <ActionDropdown buttonStyle="secondary" label={t("labels.coulmns")}>
+    <ActionDropdown buttonStyle="secondary" label={t("labels.columns")}>
       <ActionDropdown.Menu className="p-2">
         <NeetoForm
           formProps={{ noValidate: true }}

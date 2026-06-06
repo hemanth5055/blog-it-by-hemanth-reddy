@@ -10,7 +10,7 @@ import RowFilterForm from "./RowFilterForm";
 import { useRowFilterStore } from "../../stores/useRowFilterStore";
 
 const RowFilter = () => {
-  const [showPane, setShowPane] = useState(true);
+  const [showPane, setShowPane] = useState(false);
   const { t } = useTranslation();
   const { updateSelectedFilters, selectedFilters } = useRowFilterStore();
   const handleFormSubmit = values => {

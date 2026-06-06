@@ -10,11 +10,13 @@ import routes from "src/routes";
 import queryClient from "utils/queryClient";
 
 import { QUERY_KEYS } from "../../constants/query";
+import { useColumnFilterStore } from "../../stores/useColumnFilterStore";
 
 const Table = ({ posts }) => {
   const { t } = useTranslation();
 
   const [selectedPostIds, setSelectedPostIds] = useState([]);
+  const { selectedFilters: selectedColumnFilters } = useColumnFilterStore();
 
   const { mutate: updatePost } = useUpdatePost();
   const { mutate: deletePost } = useDeletePost();
@@ -97,14 +99,20 @@ const Table = ({ posts }) => {
       dataIndex: "status",
       key: "status",
       width: 150,
-      render: (status, post) => {
+      render: status => (
+        <Typography className="text-gray-400" style="body1" weight="medium">
+          {status ? status.charAt(0).toUpperCase() + status.slice(1) : ""}
+        </Typography>
+      ),
+    },
+    {
+      dataIndex: "action",
+      key: "action",
+      render: (_, post) => {
         const isPublished = post.status === "published";
 
         return (
           <div className="flex items-center justify-between">
-            <Typography className="text-gray-400" style="body1" weight="medium">
-              {status ? status.charAt(0).toUpperCase() + status.slice(1) : ""}
-            </Typography>
             <Dropdown
               buttonStyle="text"
               className="p-2"
@@ -137,6 +145,10 @@ const Table = ({ posts }) => {
     },
   ];
 
+  const finalColumns = columns.filter(
+    column => column.key === "action" || selectedColumnFilters[column.key]
+  );
+
   const rowData = posts.map(post => ({
     ...post,
     key: post.slug,
@@ -146,7 +158,7 @@ const Table = ({ posts }) => {
   return (
     <NeetoTable
       rowSelection
-      columnData={columns}
+      columnData={finalColumns}
       rowData={rowData}
       selectedRowKeys={selectedPostIds}
       onRowSelect={ids => setSelectedPostIds(ids)}
