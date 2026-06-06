@@ -4,9 +4,8 @@ import { useFetchUserPosts } from "hooks/reactQuery/usePostsApi";
 import { Typography, NoData, Spinner } from "neetoui";
 import { useTranslation } from "react-i18next";
 
-import ColumnFilter from "./ColumnFilter";
-import RowFilter from "./RowFilter";
 import Table from "./Table";
+import { sanitizeFilters } from "./utils";
 
 import routes from "../../routes";
 import { useRowFilterStore } from "../../stores/useRowFilterStore";
@@ -14,18 +13,10 @@ import { AppHeading } from "../commons";
 
 const User = () => {
   const { t } = useTranslation();
-  const { selectedFilters: filters } = useRowFilterStore();
-  const sanitizedFilters = {
-    ...(filters.title && { title: filters.title }),
-    ...(filters.categories?.length && {
-      category_ids: filters.categories.map(c => c.value),
-    }),
-    ...(filters.status?.value &&
-      filters.status.value !== "both" && { status: filters.status.value }),
-  };
-
-  const { isLoading, data: { posts = [] } = {} } =
-    useFetchUserPosts(sanitizedFilters);
+  const { selectedFilters } = useRowFilterStore();
+  const { isLoading, data: { posts = [] } = {} } = useFetchUserPosts(
+    sanitizeFilters(selectedFilters)
+  );
 
   if (isLoading) {
     return (
@@ -60,19 +51,10 @@ const User = () => {
 
   return (
     <div className="flex h-full w-full flex-col gap-5 p-7">
-      <div className="flex w-full flex-col gap-4 pb-4">
+      <div className="flex w-full flex-col">
         <AppHeading title={t("titles.myBlogPosts")} />
-        <div className="flex w-full items-center justify-between">
-          <Typography weight="semibold">
-            {t("messages.article", { count: posts.length })}
-          </Typography>
-          <div className="flex gap-3">
-            <ColumnFilter />
-            <RowFilter />
-          </div>
-        </div>
       </div>
-      <div className="h-full w-full">
+      <div className="flex w-full flex-col">
         <Table posts={posts} />
       </div>
     </div>

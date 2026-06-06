@@ -11,7 +11,8 @@
     "pageNotFound": "The page you're looking for can't be found",
     "editBlogPost": "Edit blog post",
     "myBlogPosts": "My blog posts",
-    "somethingWentWrong": "Something went wrong"
+    "somethingWentWrong": "Something went wrong",
+    "confirmBulkDelete": "Do you want to delete all selected posts?"
   },
   "placeholders": {
     "enterTitle": "Enter title",
@@ -67,11 +68,14 @@
     "login": "Log in",
     "signup": "Sign up",
     "enterValidEmail": "Enter a valid email",
-    "article_one": "{{count}} article",
-    "article_other": "{{count}} articles",
+    "result_one": "{{count}} result",
+    "result_other": "{{count}} results",
+    "article_one": "{{count}} article selected of {{total}}",
+    "article_other": "{{count}} articles selected of {{total}}",
     "draft": "Draft",
     "somethingWentWrong": "Something went wrong!",
-    "lastSavedAt": "Last saved at : {{time}}"
+    "lastSavedAt": "Last saved at : {{time}}",
+    "deleteSelectedPostsWarning": "All selected posts will be permanently deleted"
   },
   "tooltips": {
     "posts": "Posts",

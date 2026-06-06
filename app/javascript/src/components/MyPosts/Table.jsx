@@ -2,18 +2,32 @@ import React, { useState } from "react";
 
 import dayjs from "dayjs";
 import { useDeletePost, useUpdatePost } from "hooks/reactQuery/usePostsApi";
-import { MenuHorizontal } from "neetoicons";
-import { Typography, Dropdown, Table as NeetoTable } from "neetoui";
+import { MenuHorizontal, Delete } from "neetoicons";
+import {
+  Typography,
+  Dropdown,
+  Table as NeetoTable,
+  Button,
+  Alert,
+} from "neetoui";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import routes from "src/routes";
 import queryClient from "utils/queryClient";
 
+import AppliedFilterTags from "./AppliedFilterTags";
+import ColumnFilter from "./ColumnFilter";
+import RowFilter from "./RowFilter";
+
 import { QUERY_KEYS } from "../../constants/query";
+import { useBulkDeletePost } from "../../hooks/reactQuery/usePostsApi";
 import { useColumnFilterStore } from "../../stores/useColumnFilterStore";
 
 const Table = ({ posts }) => {
   const { t } = useTranslation();
+  const [showAlert, setShowAlert] = useState(false);
+
+  const { mutate: bulkDeletePosts } = useBulkDeletePost();
 
   const [selectedPostIds, setSelectedPostIds] = useState([]);
   const { selectedFilters: selectedColumnFilters } = useColumnFilterStore();
@@ -98,7 +112,6 @@ const Table = ({ posts }) => {
       title: t("labels.status"),
       dataIndex: "status",
       key: "status",
-      width: 150,
       render: status => (
         <Typography className="text-gray-400" style="body1" weight="medium">
           {status ? status.charAt(0).toUpperCase() + status.slice(1) : ""}
@@ -145,6 +158,18 @@ const Table = ({ posts }) => {
     },
   ];
 
+  const handleBulkDelete = () => {
+    bulkDeletePosts(selectedPostIds, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.POSTS, QUERY_KEYS.USER],
+          refetchType: "active",
+        });
+        setShowAlert(false);
+      },
+    });
+  };
+
   const finalColumns = columns.filter(
     column => column.key === "action" || selectedColumnFilters[column.key]
   );
@@ -156,13 +181,59 @@ const Table = ({ posts }) => {
   }));
 
   return (
-    <NeetoTable
-      rowSelection
-      columnData={finalColumns}
-      rowData={rowData}
-      selectedRowKeys={selectedPostIds}
-      onRowSelect={ids => setSelectedPostIds(ids)}
-    />
+    <>
+      <div className="flex w-full flex-col gap-4">
+        <div className="flex w-full items-center justify-between py-2">
+          <div className="flex items-center gap-2 ">
+            {selectedPostIds.length === 0 ? (
+              <>
+                <Typography weight="semibold">
+                  {t("messages.result", { count: posts.length })}
+                </Typography>
+                <AppliedFilterTags />
+              </>
+            ) : (
+              <div className="flex items-center gap-3">
+                <Typography weight="semibold">
+                  {t("messages.article", {
+                    count: selectedPostIds.length,
+                    total: posts.length,
+                  })}
+                </Typography>
+                <Button
+                  className="font-medium text-white"
+                  icon={Delete}
+                  iconPosition="right"
+                  label={t("labels.delete")}
+                  size="small"
+                  style="danger"
+                  onClick={() => setShowAlert(true)}
+                />
+              </div>
+            )}
+          </div>
+          <div className="flex gap-3">
+            <ColumnFilter />
+            <RowFilter />
+          </div>
+        </div>
+        <NeetoTable
+          rowSelection
+          columnData={finalColumns}
+          rowData={rowData}
+          selectedRowKeys={selectedPostIds}
+          onRowSelect={ids => setSelectedPostIds(ids)}
+        />
+      </div>
+      <Alert
+        isOpen={showAlert}
+        message={t("messages.deleteSelectedPostsWarning")}
+        submitButtonLabel={t("labels.delete")}
+        title={t("titles.confirmBulkDelete")}
+        onClose={() => setShowAlert(false)}
+        onSubmit={handleBulkDelete}
+      />
+    </>
   );
 };
 

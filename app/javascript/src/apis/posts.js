@@ -14,8 +14,18 @@ const update = (slug, payload, isPostBeingPublished, isQuiet) => {
   return axios.put(url, { post: { ...payload, status: 0 } });
 };
 
-const fetchUserPosts = filters =>
-  axios.get("/posts/mypost", { params: filters });
-const postsApi = { fetch, create, show, destroy, update, fetchUserPosts };
+const fetchUserPosts = filters => axios.get("/myposts", { params: filters });
+const bulkDeleteUserPosts = ids =>
+  axios.delete("/myposts/bulk_delete", { params: { ids } });
+
+const postsApi = {
+  fetch,
+  create,
+  show,
+  destroy,
+  update,
+  fetchUserPosts,
+  bulkDeleteUserPosts,
+};
 
 export default postsApi;

@@ -31,3 +31,5 @@ export const useUpdatePost = () =>
   );
 
 export const useDeletePost = () => useMutation(postsApi.destroy);
+export const useBulkDeletePost = () =>
+  useMutation(postsApi.bulkDeleteUserPosts);

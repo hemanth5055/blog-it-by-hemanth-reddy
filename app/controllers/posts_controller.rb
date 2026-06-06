@@ -20,15 +20,6 @@ class PostsController < ApplicationController
     render_notice(t("successfully_created", entity: "Post"))
   end
 
-  def mypost
-    puts my_post_filters.to_json
-    @posts = Post.includes(:categories).where(user_id: current_user.id)
-    @posts = @posts.where(title: my_post_filters[:title]) if my_post_filters[:title].present?
-    @posts = @posts.where(categories: { id: my_post_filters[:category_ids] }) if my_post_filters[:category_ids].present?
-    @posts = @posts.where(status: my_post_filters[:status]) if my_post_filters[:status].present?
-    render
-  end
-
   def show
     @post = Post.includes(:categories).find_by!(slug: params[:slug])
     authorize @post
@@ -54,9 +45,5 @@ class PostsController < ApplicationController
 
     def post_params
       params.require(:post).permit(:title, :description, :status, category_ids: [],)
-    end
-
-    def my_post_filters
-      params.permit(:title, :status, category_ids: [],)
     end
 end
