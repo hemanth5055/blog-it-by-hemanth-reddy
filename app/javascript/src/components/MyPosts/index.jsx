@@ -134,44 +134,42 @@ const User = () => {
       title: t("labels.status"),
       dataIndex: "status",
       key: "status",
-      render: status => (
-        <Typography className="text-gray-400" style="body1" weight="medium">
-          {status ? status.charAt(0).toUpperCase() + status.slice(1) : ""}
-        </Typography>
-      ),
-    },
-    {
-      key: "action",
-      render: (_, post) => {
+      width: 150,
+      render: (status, post) => {
         const isPublished = post.status === "published";
 
         return (
-          <Dropdown
-            buttonStyle="text"
-            className="p-2"
-            icon={MenuHorizontal}
-            strategy="fixed"
-          >
-            <Dropdown.Menu>
-              <Dropdown.MenuItem
-                className="text-md cursor-pointer  rounded-md p-2"
-                onClick={() => handleTogglePublish(post.slug, !isPublished)}
-              >
-                <Typography style="body1" weight="medium">
-                  {isPublished ? t("labels.unpublish") : t("labels.publish")}
-                </Typography>
-              </Dropdown.MenuItem>
-              <Dropdown.Divider />
-              <Dropdown.MenuItem
-                className="cursor-pointer rounded-md p-2"
-                onClick={() => handleDeletePost(post.slug)}
-              >
-                <Typography style="body1" weight="medium">
-                  {t("labels.delete")}
-                </Typography>
-              </Dropdown.MenuItem>
-            </Dropdown.Menu>
-          </Dropdown>
+          <div className="flex items-center justify-between">
+            <Typography className="text-gray-400" style="body1" weight="medium">
+              {status ? status.charAt(0).toUpperCase() + status.slice(1) : ""}
+            </Typography>
+            <Dropdown
+              buttonStyle="text"
+              className="p-2"
+              icon={MenuHorizontal}
+              strategy="fixed"
+            >
+              <Dropdown.Menu>
+                <Dropdown.MenuItem
+                  className="text-md cursor-pointer  rounded-md p-2"
+                  onClick={() => handleTogglePublish(post.slug, !isPublished)}
+                >
+                  <Typography style="body1" weight="medium">
+                    {isPublished ? t("labels.unpublish") : t("labels.publish")}
+                  </Typography>
+                </Dropdown.MenuItem>
+                <Dropdown.Divider />
+                <Dropdown.MenuItem
+                  className="cursor-pointer rounded-md p-2"
+                  onClick={() => handleDeletePost(post.slug)}
+                >
+                  <Typography style="body1" weight="medium">
+                    {t("labels.delete")}
+                  </Typography>
+                </Dropdown.MenuItem>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
         );
       },
     },
