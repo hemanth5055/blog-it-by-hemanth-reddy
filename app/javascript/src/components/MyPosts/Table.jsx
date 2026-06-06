@@ -17,23 +17,31 @@ import queryClient from "utils/queryClient";
 
 import AppliedFilterTags from "./AppliedFilterTags";
 import ColumnFilter from "./ColumnFilter";
+import { BULK_STATUS_OPTIONS } from "./constants";
 import RowFilter from "./RowFilter";
 
 import { QUERY_KEYS } from "../../constants/query";
-import { useBulkDeletePost } from "../../hooks/reactQuery/usePostsApi";
+import {
+  useBulkDeletePost,
+  useBulkUpdatePosts,
+} from "../../hooks/reactQuery/usePostsApi";
 import { useColumnFilterStore } from "../../stores/useColumnFilterStore";
 
 const Table = ({ posts }) => {
   const { t } = useTranslation();
   const [showAlert, setShowAlert] = useState(false);
-
-  const { mutate: bulkDeletePosts } = useBulkDeletePost();
-
   const [selectedPostIds, setSelectedPostIds] = useState([]);
-  const { selectedFilters: selectedColumnFilters } = useColumnFilterStore();
 
+  const { selectedFilters: selectedColumnFilters } = useColumnFilterStore();
   const { mutate: updatePost } = useUpdatePost();
   const { mutate: deletePost } = useDeletePost();
+  const { mutate: bulkDeletePosts } = useBulkDeletePost();
+  const { mutate: bulkUpdatePosts } = useBulkUpdatePosts();
+
+  const resetBulkSelection = () => {
+    setSelectedPostIds([]);
+    setShowAlert(false);
+  };
 
   const handleTogglePublish = (slug, showActionPublish) => {
     updatePost(
@@ -73,6 +81,43 @@ const Table = ({ posts }) => {
         });
       },
     });
+  };
+
+  const handleBulkDelete = () => {
+    bulkDeletePosts(selectedPostIds, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.POSTS, QUERY_KEYS.USER],
+          refetchType: "active",
+        });
+
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.POSTS],
+          refetchType: "active",
+        });
+        resetBulkSelection();
+      },
+    });
+  };
+
+  const handleBulkUpdate = status => {
+    bulkUpdatePosts(
+      { ids: selectedPostIds, status },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [QUERY_KEYS.POSTS, QUERY_KEYS.USER],
+            refetchType: "active",
+          });
+
+          queryClient.invalidateQueries({
+            queryKey: [QUERY_KEYS.POSTS],
+            refetchType: "active",
+          });
+          resetBulkSelection();
+        },
+      }
+    );
   };
 
   const columns = [
@@ -134,7 +179,7 @@ const Table = ({ posts }) => {
             >
               <Dropdown.Menu>
                 <Dropdown.MenuItem
-                  className="text-md cursor-pointer  rounded-md p-2"
+                  className="text-md cursor-pointer rounded-md p-2"
                   onClick={() => handleTogglePublish(post.slug, !isPublished)}
                 >
                   <Typography style="body1" weight="medium">
@@ -158,18 +203,6 @@ const Table = ({ posts }) => {
     },
   ];
 
-  const handleBulkDelete = () => {
-    bulkDeletePosts(selectedPostIds, {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: [QUERY_KEYS.POSTS, QUERY_KEYS.USER],
-          refetchType: "active",
-        });
-        setShowAlert(false);
-      },
-    });
-  };
-
   const finalColumns = columns.filter(
     column => column.key === "action" || selectedColumnFilters[column.key]
   );
@@ -180,19 +213,14 @@ const Table = ({ posts }) => {
     category: post.categories.map(c => c.name).join(", "),
   }));
 
+  const hasSelection = selectedPostIds.length > 0;
+
   return (
     <>
       <div className="flex w-full flex-col gap-4">
         <div className="flex w-full items-center justify-between py-2">
-          <div className="flex items-center gap-2 ">
-            {selectedPostIds.length === 0 ? (
-              <>
-                <Typography weight="semibold">
-                  {t("messages.result", { count: posts.length })}
-                </Typography>
-                <AppliedFilterTags />
-              </>
-            ) : (
+          <div className="flex w-full">
+            {hasSelection ? (
               <div className="flex items-center gap-3">
                 <Typography weight="semibold">
                   {t("messages.article", {
@@ -209,12 +237,37 @@ const Table = ({ posts }) => {
                   style="danger"
                   onClick={() => setShowAlert(true)}
                 />
+                <Dropdown
+                  buttonStyle="secondary"
+                  className="flex w-full flex-col gap-2 p-2"
+                  label={t("label.changeStatus")}
+                >
+                  {BULK_STATUS_OPTIONS.map(status => (
+                    <Button
+                      className="flex w-full hover:bg-gray-800"
+                      key={status}
+                      style="text"
+                      onClick={() => handleBulkUpdate(status)}
+                    >
+                      {t(`labels.${status}`)}
+                    </Button>
+                  ))}
+                </Dropdown>
+              </div>
+            ) : (
+              <div className="flex w-full justify-between">
+                <div>
+                  <Typography weight="semibold">
+                    {t("messages.result", { count: posts.length })}
+                  </Typography>
+                  <AppliedFilterTags />
+                </div>
+                <div className="flex items-center gap-2">
+                  <ColumnFilter />
+                  <RowFilter />
+                </div>
               </div>
             )}
-          </div>
-          <div className="flex gap-3">
-            <ColumnFilter />
-            <RowFilter />
           </div>
         </div>
         <NeetoTable

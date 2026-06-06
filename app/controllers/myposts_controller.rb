@@ -12,6 +12,13 @@ class MypostsController < ApplicationController
     render_notice(t("successfully_deleted_all", entity: "Posts"))
   end
 
+  def bulk_status_update
+    Post.where(user_id: current_user.id, id: bulk_update_params[:ids]).each do |post|
+      post.update(status: bulk_update_params[:status])
+    end
+    render_notice(t("successfully_updated_all", entity: "Posts"))
+  end
+
   private
 
     def my_post_filters
@@ -20,6 +27,10 @@ class MypostsController < ApplicationController
 
     def bulk_delete_params
       params.permit(ids: [])
+    end
+
+    def bulk_update_params
+      params.permit(:status, ids: [])
     end
 
     def add_filters

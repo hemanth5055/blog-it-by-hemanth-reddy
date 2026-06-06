@@ -7,8 +7,11 @@ Rails.application.routes.draw do
     resources :users, only: :create
     resource :session, only: %i[create destroy]
     resources :myposts, only: :index do
-      delete "bulk_delete", on: :collection
+    collection do
+      delete "bulk_delete"
+      patch "bulk_status_update"
     end
+  end
   end
 
   root "home#index"

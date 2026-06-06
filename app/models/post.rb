@@ -16,7 +16,7 @@ class Post < ApplicationRecord
   validate :slug_not_changed
   validates :status, presence: true
   before_create :set_slug
-  before_save :set_last_updated_at
+  before_save :set_last_updated_at_for_only_post_that_are_being_published
 
   private
 
@@ -43,7 +43,7 @@ class Post < ApplicationRecord
       end
    end
 
-    def set_last_updated_at
-      self.last_updated_at = Time.current if new_record? || published?
-    end
+    def set_last_updated_at_for_only_post_that_are_being_published
+      self.last_updated_at = Time.current if new_record? || (published? && status_changed?)
+  end
 end

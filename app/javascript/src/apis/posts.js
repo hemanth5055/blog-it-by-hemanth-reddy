@@ -18,6 +18,9 @@ const fetchUserPosts = filters => axios.get("/myposts", { params: filters });
 const bulkDeleteUserPosts = ids =>
   axios.delete("/myposts/bulk_delete", { params: { ids } });
 
+const bulkUpdateUserPosts = ({ ids, status }) =>
+  axios.patch("/myposts/bulk_status_update", { ids, status });
+
 const postsApi = {
   fetch,
   create,
@@ -26,6 +29,7 @@ const postsApi = {
   update,
   fetchUserPosts,
   bulkDeleteUserPosts,
+  bulkUpdateUserPosts,
 };
 
 export default postsApi;

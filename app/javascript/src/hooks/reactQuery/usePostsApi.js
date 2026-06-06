@@ -25,11 +25,16 @@ export const useFetchUserPosts = filters =>
   });
 
 export const useCreatePost = () => useMutation(postsApi.create);
+
 export const useUpdatePost = () =>
   useMutation(({ slug, payload, isPostBeingPublished, isQuiet }) =>
     postsApi.update(slug, payload, isPostBeingPublished, isQuiet)
   );
 
 export const useDeletePost = () => useMutation(postsApi.destroy);
+
 export const useBulkDeletePost = () =>
   useMutation(postsApi.bulkDeleteUserPosts);
+
+export const useBulkUpdatePosts = () =>
+  useMutation(postsApi.bulkUpdateUserPosts);

@@ -39,3 +39,5 @@ export const ROW_FILTER_INITIAL_VALUES = {
   categories: [],
   status: { label: "Both", value: "both" },
 };
+
+export const BULK_STATUS_OPTIONS = ["draft", "published"];
