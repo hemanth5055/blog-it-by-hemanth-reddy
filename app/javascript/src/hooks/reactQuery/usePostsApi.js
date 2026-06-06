@@ -10,17 +10,17 @@ export const useShowPost = slug =>
     retry: false,
   });
 
-export const useFetchPosts = selectedCategories =>
+export const useFetchPosts = filters =>
   useQuery({
-    queryKey: [QUERY_KEYS.POSTS, selectedCategories],
-    queryFn: () => postsApi.fetch(selectedCategories),
+    queryKey: [QUERY_KEYS.POSTS, filters],
+    queryFn: () => postsApi.fetch(filters),
     retry: false,
   });
 
-export const useFetchUserPosts = () =>
+export const useFetchUserPosts = filters =>
   useQuery({
-    queryKey: [QUERY_KEYS.POSTS, QUERY_KEYS.USER],
-    queryFn: () => postsApi.fetchUserPosts(),
+    queryKey: [QUERY_KEYS.POSTS, QUERY_KEYS.USER, filters],
+    queryFn: () => postsApi.fetchUserPosts(filters),
     retry: false,
   });
 

@@ -29,6 +29,7 @@ export const FILTER_FIELDS = [
 ];
 
 export const STATUS_OPTIONS = [
+  { label: "Both", value: "both" },
   { label: "Draft", value: "draft" },
   { label: "Published", value: "published" },
 ];
@@ -36,5 +37,5 @@ export const STATUS_OPTIONS = [
 export const ROW_FILTER_INITIAL_VALUES = {
   title: "",
   categories: [],
-  status: { label: "Draft", value: "draft" },
+  status: { label: "Both", value: "both" },
 };

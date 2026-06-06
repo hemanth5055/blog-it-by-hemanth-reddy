@@ -9,12 +9,23 @@ import RowFilter from "./RowFilter";
 import Table from "./Table";
 
 import routes from "../../routes";
+import { useRowFilterStore } from "../../stores/useRowFilterStore";
 import { AppHeading } from "../commons";
 
 const User = () => {
   const { t } = useTranslation();
+  const { selectedFilters: filters } = useRowFilterStore();
+  const sanitizedFilters = {
+    ...(filters.title && { title: filters.title }),
+    ...(filters.categories?.length && {
+      category_ids: filters.categories.map(c => c.value),
+    }),
+    ...(filters.status?.value &&
+      filters.status.value !== "both" && { status: filters.status.value }),
+  };
 
-  const { isLoading, data: { posts = [] } = {} } = useFetchUserPosts();
+  const { isLoading, data: { posts = [] } = {} } =
+    useFetchUserPosts(sanitizedFilters);
 
   if (isLoading) {
     return (

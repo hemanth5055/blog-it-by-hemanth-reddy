@@ -5,7 +5,7 @@ export const ROW_STORE = "row-storage";
 export const ROW_FILTER_INITIAL_VALUES = {
   title: "",
   categories: [],
-  status: { label: "Draft", value: "draft" },
+  status: { label: "Both", value: "both" },
 };
 
 export const COLUMN_FILTER_INITIAL_VALUES = {
