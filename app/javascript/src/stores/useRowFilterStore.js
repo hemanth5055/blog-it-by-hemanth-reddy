@@ -1,12 +1,12 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { COLUMN_FILTER_INITIAL_VALUES, COLUMN_STORE } from "./constants";
+import { ROW_FILTER_INITIAL_VALUES, ROW_STORE } from "./constants";
 
-export const useColumnFilterStore = create(
+export const useRowFilterStore = create(
   persist(
     set => ({
-      selectedFilters: COLUMN_FILTER_INITIAL_VALUES,
+      selectedFilters: ROW_FILTER_INITIAL_VALUES,
 
       updateSelectedFilters: updatedData => {
         set(state => ({
@@ -15,7 +15,7 @@ export const useColumnFilterStore = create(
       },
     }),
     {
-      name: COLUMN_STORE,
+      name: ROW_STORE,
     }
   )
 );

@@ -7,7 +7,7 @@ import { FILTER_FIELDS } from "./constants";
 
 import { useColumnFilterStore } from "../../stores/useColumnFilterStore";
 
-const FilterForm = () => {
+const ColumnFilterForm = () => {
   const { t } = useTranslation();
   const { selectedFilters, updateSelectedFilters } = useColumnFilterStore();
 
@@ -32,4 +32,4 @@ const FilterForm = () => {
   );
 };
 
-export default FilterForm;
+export default ColumnFilterForm;

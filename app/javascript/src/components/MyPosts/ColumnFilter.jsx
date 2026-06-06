@@ -4,7 +4,7 @@ import { Form as NeetoForm } from "neetoformik";
 import { ActionDropdown } from "neetoui";
 import { useTranslation } from "react-i18next";
 
-import FilterForm from "./FilterForm";
+import ColumnFilterForm from "./ColumnFilterForm";
 
 import { useColumnFilterStore } from "../../stores/useColumnFilterStore";
 
@@ -23,7 +23,7 @@ const ColumnFilter = () => {
             // onSubmit: handleFormSubmit,
           }}
         >
-          <FilterForm />
+          <ColumnFilterForm />
         </NeetoForm>
       </ActionDropdown.Menu>
     </ActionDropdown>

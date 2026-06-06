@@ -5,6 +5,7 @@ import { Typography, NoData, Spinner } from "neetoui";
 import { useTranslation } from "react-i18next";
 
 import ColumnFilter from "./ColumnFilter";
+import RowFilter from "./RowFilter";
 import Table from "./Table";
 
 import routes from "../../routes";
@@ -56,6 +57,7 @@ const User = () => {
           </Typography>
           <div className="flex gap-3">
             <ColumnFilter />
+            <RowFilter />
           </div>
         </div>
       </div>

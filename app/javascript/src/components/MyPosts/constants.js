@@ -27,3 +27,14 @@ export const FILTER_FIELDS = [
   { name: "lastUpdatedAt", labelKey: "labels.lastUpdatedAt" },
   { name: "status", labelKey: "labels.status" },
 ];
+
+export const STATUS_OPTIONS = [
+  { label: "Draft", value: "draft" },
+  { label: "Published", value: "published" },
+];
+
+export const ROW_FILTER_INITIAL_VALUES = {
+  title: "",
+  categories: [],
+  status: { label: "Draft", value: "draft" },
+};
