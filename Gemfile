@@ -68,7 +68,10 @@ gem "react-rails", "~> 2.7.1"
 
 group :development, :test do
   # previous gems under this group as it was
+  gem "factory_bot_rails"
 
+  # For auto-generating demo data
+  gem "faker"
   # For code formatting and linting
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
@@ -82,4 +85,5 @@ group :development do
 end
 
 gem "data_migrate"
+gem "pry-byebug"
 gem "simplecov", require: false, group: :test

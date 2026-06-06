@@ -4,15 +4,9 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @organization = Organization.new(name: "Pixel")
-
-    @user = User.new(
-      name: "Sam Smith",
-      email: "sam@example.com",
-      password: "123123123",
-      password_confirmation: "123123123",
-      organization: @organization
-    )
+    @organization = create(:organization)
+    @user = create(:user)
+    @post = create(:post)
   end
 
   def test_user_should_not_be_valid_and_saved_without_name
@@ -82,9 +76,9 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_user_should_not_be_saved_without_password_confirmation
-    @user.password_confirmation = nil
-    assert_not @user.valid?
-    assert_includes @user.errors.full_messages, "Password confirmation can't be blank"
+    new_user = User.new(name: "Brad pritt", password: "123123123", email: "hello@gmail.com")
+    assert_not new_user.valid?
+    assert_includes new_user.errors.full_messages, "Password confirmation can't be blank"
   end
 
   def test_user_should_have_matching_password_and_password_confirmation
@@ -95,10 +89,9 @@ class UserTest < ActiveSupport::TestCase
 
   def test_users_should_have_unique_auth_token
     @user.save!
-    second_user = User.create!(
-      name: "Olive Sans", email: "olive@example.com",
-      password: "123123123", password_confirmation: "123123123", organization_id: @organization.id)
+    second_user = create(:user)
 
-    assert_not_same @user.authentication_token, second_user.authentication_token
+    assert_not_same @user.authentication_token,
+      second_user.authentication_token
   end
 end
