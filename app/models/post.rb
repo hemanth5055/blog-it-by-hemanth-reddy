@@ -44,6 +44,10 @@ class Post < ApplicationRecord
    end
 
     def set_last_updated_at_for_only_post_that_are_being_published
-      self.last_updated_at = Time.current if new_record? || (published? && status_changed?)
-  end
+      should_update = new_record? ||
+        (published? && status_changed?) ||
+        (published? && !status_changed? && changed?)
+
+      self.last_updated_at = Time.current if should_update
+ end
 end

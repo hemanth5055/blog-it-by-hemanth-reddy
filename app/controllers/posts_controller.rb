@@ -15,8 +15,9 @@ class PostsController < ApplicationController
       user_id: @current_user.id
     )
 
-    post = Post.includes(:categories, :user).create!(full_params)
+    post = Post.new(full_params)
     authorize post
+    post.save!
     render_notice(t("successfully_created", entity: "Post"))
   end
 
