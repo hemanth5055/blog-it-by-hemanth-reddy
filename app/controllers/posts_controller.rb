@@ -5,7 +5,7 @@ class PostsController < ApplicationController
     user_categories = params[:categories].presence
     @posts = Post.includes(:categories, :user, :votes).published.where(organization_id: @current_user.organization_id)
     @posts = @posts.where(categories: { id: user_categories }) if user_categories
-    @posts = @posts.order(updated_at: :desc)
+    @posts = @posts.order(created_at: :desc)
     render
   end
 

@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   enum :status, { published: 1, draft: 0 }, default: :published
   belongs_to :organization
   belongs_to :user
-  has_many :votes
+  has_many :votes, dependent: :destroy
   has_and_belongs_to_many :categories, join_table: :posts_categories
 
   validates :title, presence: true, length: { maximum: MAX_TITLE_LENGTH }
@@ -18,6 +18,7 @@ class Post < ApplicationRecord
   validates :status, presence: true
   before_create :set_slug
   before_save :set_last_updated_at_for_only_post_that_are_being_published
+  before_update :update_set_bloggable
 
   private
 
@@ -51,4 +52,8 @@ class Post < ApplicationRecord
 
       self.last_updated_at = Time.current if should_update
  end
+
+    def update_set_bloggable
+      self.is_bloggable = self.net_votes > 5
+    end
 end

@@ -44,7 +44,10 @@
     "status": "Status",
     "unpublish": "Unpublish",
     "edit": "Edit",
-    "logout": "Logout"
+    "logout": "Logout",
+    "columns": "Columns",
+    "filters": "Filters",
+    "blogIt": "Blog it"
   },
   "messages": {
     "blogPostNotFound": "We couldn't find a blog post matching that web address.",

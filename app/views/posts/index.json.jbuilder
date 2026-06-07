@@ -10,8 +10,9 @@ json.posts @posts do |post|
     json.id category.id
     json.name category.name
   end
-  json.net_votes post.votes.sum(&:vote_type_before_type_cast)
-  json.current_vote post.votes.find { |vote| vote.user_id == @current_user.id }&.vote_type
+  json.netVotes post.net_votes
+  json.isBloggable post.is_bloggable
+  json.currentVote post.votes.find { |vote| vote.user_id == @current_user.id }&.vote_type
   json.author do
     json.id post.user.id
     json.name post.user.name

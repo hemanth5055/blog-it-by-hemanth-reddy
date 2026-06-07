@@ -34,7 +34,7 @@ const RowFilter = () => {
       <Pane isOpen={showPane} onClose={() => setShowPane(false)}>
         <Pane.Header>
           <Typography style="h2" weight="semibold">
-            {t("labels.filter")}
+            {t("labels.filters")}
           </Typography>
         </Pane.Header>
         <Pane.Body className="w-full">

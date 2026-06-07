@@ -46,7 +46,6 @@ const handleErrorResponse = axiosErrorObject => {
     axiosErrorObject.response?.data.error === "Couldn't find User"
   ) {
     setToLocalStorage({ authToken: null, email: null, userId: null });
-    window.location.href = "/login";
   }
 
   Toastr.error(

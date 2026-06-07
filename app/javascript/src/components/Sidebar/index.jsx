@@ -7,6 +7,7 @@ import { Avatar, Button, Popover, Typography } from "neetoui";
 import { isNil, isEmpty, either, equals } from "ramda";
 import { useTranslation } from "react-i18next";
 import { useHistory, useLocation } from "react-router-dom";
+import QueryClient from "utils/QueryClient";
 import { getFromLocalStorage, setToLocalStorage } from "utils/storage";
 
 import { EMAIL_KEY, USERNAME_KEY } from "./constants";
@@ -36,6 +37,7 @@ const Sidebar = () => {
         userName: null,
       });
       resetAuthTokens();
+      QueryClient.clear();
       history.push(routes.login);
     } catch (error) {
       logger.error(error);
