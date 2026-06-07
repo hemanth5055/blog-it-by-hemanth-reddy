@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       patch "bulk_status_update"
     end
   end
+    resource :votes, only: %i[update], via: :patch
   end
 
   root "home#index"

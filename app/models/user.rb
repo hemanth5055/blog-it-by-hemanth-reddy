@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   belongs_to :organization
   has_many :posts
+  has_many :votes
   has_secure_password
   has_secure_token :authentication_token
 

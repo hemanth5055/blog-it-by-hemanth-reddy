@@ -7,6 +7,7 @@ class Post < ApplicationRecord
   enum :status, { published: 1, draft: 0 }, default: :published
   belongs_to :organization
   belongs_to :user
+  has_many :votes
   has_and_belongs_to_many :categories, join_table: :posts_categories
 
   validates :title, presence: true, length: { maximum: MAX_TITLE_LENGTH }

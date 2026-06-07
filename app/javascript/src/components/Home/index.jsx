@@ -79,8 +79,11 @@ const Home = () => {
               <Post
                 author={post.author}
                 categories={post.categories}
+                currentVote={post.current_vote}
                 description={post.description}
+                id={post.id}
                 key={post.id}
+                netVotes={post.net_votes}
                 slug={post.slug}
                 title={post.title}
                 updatedAt={post.updatedAt}
