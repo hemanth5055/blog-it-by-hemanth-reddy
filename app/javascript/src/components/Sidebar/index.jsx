@@ -7,13 +7,12 @@ import { Avatar, Button, Popover, Typography } from "neetoui";
 import { isNil, isEmpty, either, equals } from "ramda";
 import { useTranslation } from "react-i18next";
 import { useHistory, useLocation } from "react-router-dom";
+import routes from "src/routes";
 import QueryClient from "utils/QueryClient";
 import { getFromLocalStorage, setToLocalStorage } from "utils/storage";
 
 import { EMAIL_KEY, USERNAME_KEY } from "./constants";
 import Element from "./Element";
-
-import routes from "../../routes";
 
 const Sidebar = () => {
   const { t } = useTranslation();

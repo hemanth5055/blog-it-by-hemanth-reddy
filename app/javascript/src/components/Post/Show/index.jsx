@@ -1,14 +1,14 @@
 import React from "react";
 
 import { Edit } from "@bigbinary/neeto-icons";
+import PageLoader from "commons/PageLoader";
 import dayjs from "dayjs";
 import { useShowPost } from "hooks/reactQuery/usePostsApi";
 import { Tag, Typography, Avatar, Button } from "neetoui";
 import { useTranslation } from "react-i18next";
 import { useParams, useHistory } from "react-router-dom";
+import routes from "src/routes";
 
-import routes from "../../../routes";
-import PageLoader from "../../commons/PageLoader";
 import NotFound from "../commons/NotFound";
 
 const Show = () => {

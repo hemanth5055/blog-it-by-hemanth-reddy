@@ -1,7 +1,14 @@
+import { QUERY_KEYS } from "constants/query";
+
 import React, { useState } from "react";
 
 import dayjs from "dayjs";
-import { useDeletePost, useUpdatePost } from "hooks/reactQuery/usePostsApi";
+import {
+  useDeletePost,
+  useUpdatePost,
+  useBulkDeletePost,
+  useBulkUpdatePosts,
+} from "hooks/reactQuery/usePostsApi";
 import { MenuHorizontal, Delete } from "neetoicons";
 import {
   Typography,
@@ -13,19 +20,13 @@ import {
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import routes from "src/routes";
+import { useColumnFilterStore } from "stores/useColumnFilterStore";
 import queryClient from "utils/queryClient";
 
 import AppliedFilterTags from "./AppliedFilterTags";
 import { BULK_STATUS_OPTIONS } from "./constants";
 import ColumnFilter from "./Filters/ColumnFilter";
 import RowFilter from "./Filters/RowFilter";
-
-import { QUERY_KEYS } from "../../constants/query";
-import {
-  useBulkDeletePost,
-  useBulkUpdatePosts,
-} from "../../hooks/reactQuery/usePostsApi";
-import { useColumnFilterStore } from "../../stores/useColumnFilterStore";
 
 const Table = ({ posts }) => {
   const { t } = useTranslation();
@@ -43,23 +44,27 @@ const Table = ({ posts }) => {
     setShowAlert(false);
   };
 
+  const inValidateQueriesAfterChanges = () => {
+    queryClient.invalidateQueries({
+      queryKey: [QUERY_KEYS.POSTS, QUERY_KEYS.USER],
+      refetchType: "active",
+    });
+
+    queryClient.invalidateQueries({
+      queryKey: [QUERY_KEYS.POSTS],
+      refetchType: "active",
+    });
+  };
+
   const handleTogglePublish = (slug, showActionPublish) => {
     updatePost(
       { slug, payload: {}, isPostBeingPublished: showActionPublish },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries({
-            queryKey: [QUERY_KEYS.POSTS, QUERY_KEYS.USER],
-            refetchType: "active",
-          });
+          inValidateQueriesAfterChanges();
 
           queryClient.invalidateQueries({
             queryKey: [QUERY_KEYS.POST, slug],
-            refetchType: "active",
-          });
-
-          queryClient.invalidateQueries({
-            queryKey: [QUERY_KEYS.POSTS],
             refetchType: "active",
           });
         },
@@ -70,15 +75,7 @@ const Table = ({ posts }) => {
   const handleDeletePost = slug => {
     deletePost(slug, {
       onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: [QUERY_KEYS.POSTS, QUERY_KEYS.USER],
-          refetchType: "active",
-        });
-
-        queryClient.invalidateQueries({
-          queryKey: [QUERY_KEYS.POSTS],
-          refetchType: "active",
-        });
+        inValidateQueriesAfterChanges();
       },
     });
   };
@@ -86,15 +83,7 @@ const Table = ({ posts }) => {
   const handleBulkDelete = () => {
     bulkDeletePosts(selectedPostIds, {
       onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: [QUERY_KEYS.POSTS, QUERY_KEYS.USER],
-          refetchType: "active",
-        });
-
-        queryClient.invalidateQueries({
-          queryKey: [QUERY_KEYS.POSTS],
-          refetchType: "active",
-        });
+        inValidateQueriesAfterChanges();
         resetBulkSelection();
       },
     });
@@ -105,15 +94,7 @@ const Table = ({ posts }) => {
       { ids: selectedPostIds, status },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries({
-            queryKey: [QUERY_KEYS.POSTS, QUERY_KEYS.USER],
-            refetchType: "active",
-          });
-
-          queryClient.invalidateQueries({
-            queryKey: [QUERY_KEYS.POSTS],
-            refetchType: "active",
-          });
+          inValidateQueriesAfterChanges();
           resetBulkSelection();
         },
       }
@@ -223,7 +204,7 @@ const Table = ({ posts }) => {
             {hasSelection ? (
               <div className="flex items-center gap-3">
                 <Typography weight="semibold">
-                  {t("messages.article", {
+                  {t("messages.articleSelected", {
                     count: selectedPostIds.length,
                     total: posts.length,
                   })}
@@ -240,16 +221,16 @@ const Table = ({ posts }) => {
                 <Dropdown
                   buttonStyle="secondary"
                   className="flex w-full flex-col gap-2 p-2"
-                  label={t("label.changeStatus")}
+                  label={t("labels.changeStatus")}
                 >
                   {BULK_STATUS_OPTIONS.map(status => (
                     <Button
                       className="flex w-full hover:bg-gray-800"
                       key={status}
                       style="text"
-                      onClick={() => handleBulkUpdate(status)}
+                      onClick={() => handleBulkUpdate(status.value)}
                     >
-                      {t(`labels.${status}`)}
+                      {t(`labels.${status.label}`)}
                     </Button>
                   ))}
                 </Dropdown>
@@ -258,7 +239,7 @@ const Table = ({ posts }) => {
               <div className="flex w-full justify-between">
                 <div className="flex items-center gap-2">
                   <Typography weight="semibold">
-                    {t("messages.result", { count: posts.length })}
+                    {t("messages.article", { count: posts.length })}
                   </Typography>
                   <AppliedFilterTags />
                 </div>

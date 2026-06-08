@@ -2,9 +2,8 @@ import React from "react";
 
 import { isNil, isEmpty, either } from "ramda";
 import { Redirect, Route } from "react-router-dom";
-
-import routes from "../../routes";
-import { getFromLocalStorage } from "../../utils/storage";
+import routes from "src/routes";
+import { getFromLocalStorage } from "utils/storage";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const authToken = getFromLocalStorage("authToken");

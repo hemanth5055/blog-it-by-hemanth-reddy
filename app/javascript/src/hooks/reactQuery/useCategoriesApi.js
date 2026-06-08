@@ -1,7 +1,7 @@
-import { useMutation, useQuery } from "react-query";
+import { QUERY_KEYS } from "constants/query";
 
-import categoriesApi from "../../apis/categories";
-import { QUERY_KEYS } from "../../constants/query";
+import categoriesApi from "apis/categories";
+import { useMutation, useQuery } from "react-query";
 
 export const useFetchCategories = () =>
   useQuery({

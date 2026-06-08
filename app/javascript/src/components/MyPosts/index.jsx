@@ -1,15 +1,14 @@
 import React from "react";
 
+import { AppHeading } from "commons";
 import { useFetchUserPosts } from "hooks/reactQuery/usePostsApi";
 import { Typography, NoData, Spinner } from "neetoui";
 import { useTranslation } from "react-i18next";
+import routes from "src/routes";
+import { useRowFilterStore } from "stores/useRowFilterStore";
 
 import Table from "./Table";
 import { sanitizeFilters } from "./utils";
-
-import routes from "../../routes";
-import { useRowFilterStore } from "../../stores/useRowFilterStore";
-import { AppHeading } from "../commons";
 
 const User = () => {
   const { t } = useTranslation();

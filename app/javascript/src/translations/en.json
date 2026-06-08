@@ -37,6 +37,7 @@
     "create": "Create",
     "login": "Login",
     "publish": "Publish",
+    "draft": "Draft",
     "saveAsDraft": "Save as draft",
     "delete": "Delete",
     "updatedAt": "Updated at",
@@ -48,7 +49,8 @@
     "columns": "Columns",
     "filters": "Filters",
     "blogIt": "Blog it",
-    "save": "Save"
+    "save": "Save",
+    "changeStatus": "Change status"
   },
   "messages": {
     "blogPostNotFound": "We couldn't find a blog post matching that web address.",
@@ -72,10 +74,10 @@
     "login": "Log in",
     "signup": "Sign up",
     "enterValidEmail": "Enter a valid email",
-    "result_one": "{{count}} result",
-    "result_other": "{{count}} results",
-    "article_one": "{{count}} article selected of {{total}}",
-    "article_other": "{{count}} articles selected of {{total}}",
+    "article_one": "{{count}} article",
+    "article_other": "{{count}} articles",
+    "articleSelected_one": "{{count}} article selected of {{total}}",
+    "articleSelected_other": "{{count}} articles selected of {{total}}",
     "draft": "Draft",
     "somethingWentWrong": "Something went wrong!",
     "lastSavedAt": "Last saved at : {{time}}",

@@ -3,10 +3,9 @@ import React from "react";
 import { Form as NeetoForm } from "neetoformik";
 import { ActionDropdown } from "neetoui";
 import { useTranslation } from "react-i18next";
+import { useColumnFilterStore } from "stores/useColumnFilterStore";
 
-import ColumnFilterForm from "./ColumnFilterForm";
-
-import { useColumnFilterStore } from "../../../stores/useColumnFilterStore";
+import ColumnFilterForm from "./Form/ColumnForm";
 
 const ColumnFilter = () => {
   const { t } = useTranslation();

@@ -1,23 +1,26 @@
+import { QUERY_KEYS } from "constants/query";
+
 import React, { useRef, useState } from "react";
 
-import { Redirect } from "@bigbinary/neeto-icons";
+import { AppHeading } from "commons";
+import PageLoader from "commons/PageLoader";
 import dayjs from "dayjs";
-import { useShowPost, useUpdatePost } from "hooks/reactQuery/usePostsApi";
+import {
+  useShowPost,
+  useUpdatePost,
+  useDeletePost,
+} from "hooks/reactQuery/usePostsApi";
 import { Form as NeetoForm } from "neetoformik";
-import { MenuHorizontal } from "neetoicons";
+import { Redirect, MenuHorizontal } from "neetoicons";
 import { Button, ActionDropdown, Dropdown, Typography } from "neetoui";
 import { useTranslation } from "react-i18next";
 import { useParams, useHistory } from "react-router-dom";
+import routes from "src/routes";
 import queryClient from "utils/queryClient";
 
 import { VALIDATION_SCHEMA } from "./constants";
 import { Form } from "./Form";
 
-import { QUERY_KEYS } from "../../../constants/query";
-import { useDeletePost } from "../../../hooks/reactQuery/usePostsApi";
-import routes from "../../../routes";
-import { AppHeading } from "../../commons";
-import PageLoader from "../../commons/PageLoader";
 import NotFound from "../commons/NotFound";
 
 const Edit = () => {

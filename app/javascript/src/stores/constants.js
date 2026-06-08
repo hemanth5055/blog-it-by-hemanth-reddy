@@ -12,5 +12,5 @@ export const COLUMN_FILTER_INITIAL_VALUES = {
   title: true,
   category: true,
   status: true,
-  lastUpdatedAt: true,
+  lastPublishedAt: true,
 };

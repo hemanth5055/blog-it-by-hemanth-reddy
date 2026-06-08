@@ -1,8 +1,7 @@
 import React from "react";
 
 import { Tag, Typography } from "neetoui";
-
-import { useRowFilterStore } from "../../stores/useRowFilterStore";
+import { useRowFilterStore } from "stores/useRowFilterStore";
 
 const AppliedFilterTags = () => {
   const { selectedFilters } = useRowFilterStore();

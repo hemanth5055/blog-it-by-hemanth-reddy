@@ -21,23 +21,7 @@ export const columns = [
   },
 ];
 
-export const FILTER_FIELDS = [
-  { name: "title", labelKey: "labels.title", disabled: true },
-  { name: "category", labelKey: "labels.category" },
-  { name: "lastUpdatedAt", labelKey: "labels.lastPublishedAt" },
-  { name: "status", labelKey: "labels.status" },
+export const BULK_STATUS_OPTIONS = [
+  { label: "draft", value: "draft" },
+  { value: "published", label: "publish" },
 ];
-
-export const STATUS_OPTIONS = [
-  { label: "Both", value: "both" },
-  { label: "Draft", value: "draft" },
-  { label: "Published", value: "published" },
-];
-
-export const ROW_FILTER_INITIAL_VALUES = {
-  title: "",
-  categories: [],
-  status: { label: "Both", value: "both" },
-};
-
-export const BULK_STATUS_OPTIONS = ["draft", "published"];

@@ -1,9 +1,8 @@
 import React from "react";
 
+import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { Input, Textarea, Select } from "neetoformik";
 import { useTranslation } from "react-i18next";
-
-import { useFetchCategories } from "../../../hooks/reactQuery/useCategoriesApi";
 
 export const Form = () => {
   const { data: { categories = [] } = {} } = useFetchCategories();

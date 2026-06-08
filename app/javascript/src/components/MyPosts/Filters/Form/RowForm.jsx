@@ -4,9 +4,9 @@ import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { Input, Select } from "neetoformik";
 import { Button } from "neetoui";
 import { useTranslation } from "react-i18next";
+import { useRowFilterStore } from "stores/useRowFilterStore";
 
-import { useRowFilterStore } from "../../../stores/useRowFilterStore";
-import { ROW_FILTER_INITIAL_VALUES, STATUS_OPTIONS } from "../constants";
+import { ROW_FILTER_INITIAL_VALUES, STATUS_OPTIONS } from "./constants";
 
 const RowFilterForm = ({ setShowPane }) => {
   const { t } = useTranslation();

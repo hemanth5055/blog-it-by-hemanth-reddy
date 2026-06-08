@@ -4,10 +4,9 @@ import { Form as NeetoForm } from "neetoformik";
 import { Filter } from "neetoicons";
 import { Pane, Button, Typography } from "neetoui";
 import { useTranslation } from "react-i18next";
+import { useRowFilterStore } from "stores/useRowFilterStore";
 
-import RowFilterForm from "./RowFilterForm";
-
-import { useRowFilterStore } from "../../../stores/useRowFilterStore";
+import RowFilterForm from "./Form/RowForm";
 
 const RowFilter = () => {
   const [showPane, setShowPane] = useState(false);

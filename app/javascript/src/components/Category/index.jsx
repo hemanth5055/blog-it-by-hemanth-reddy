@@ -6,11 +6,10 @@ import {
 } from "hooks/reactQuery/useCategoriesApi";
 import { Button, Input, Modal, Pane, Typography } from "neetoui";
 import { useTranslation } from "react-i18next";
+import { QUERY_KEYS } from "src/constants/query";
 import queryClient from "utils/queryClient";
 
 import Item from "./Item";
-
-import { QUERY_KEYS } from "../../constants/query";
 
 const CategorySidebar = ({ showCategories, setShowCategories }) => {
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);

@@ -2,9 +2,9 @@ import React from "react";
 
 import { Checkbox } from "neetoformik";
 import { useTranslation } from "react-i18next";
+import { useColumnFilterStore } from "stores/useColumnFilterStore";
 
-import { useColumnFilterStore } from "../../../stores/useColumnFilterStore";
-import { FILTER_FIELDS } from "../constants";
+import { FILTER_FIELDS } from "./constants";
 
 const ColumnFilterForm = () => {
   const { t } = useTranslation();

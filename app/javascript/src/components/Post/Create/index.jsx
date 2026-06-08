@@ -1,17 +1,17 @@
+import { QUERY_KEYS } from "constants/query";
+
 import React from "react";
 
+import { AppHeading } from "commons";
 import { useFetchCategories } from "hooks/reactQuery/useCategoriesApi";
 import { useCreatePost } from "hooks/reactQuery/usePostsApi";
-import { Form as NeetoForm } from "neetoui/formik";
+import { Form as NeetoForm } from "neetoformik";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import queryClient from "utils/queryClient";
 
 import { INTIAL_FORM_VALUES, VALIDATION_SCHEMA } from "./constants";
 import { Form } from "./Form";
-
-import { QUERY_KEYS } from "../../../constants/query";
-import { AppHeading } from "../../commons";
 
 export const Create = () => {
   const history = useHistory();

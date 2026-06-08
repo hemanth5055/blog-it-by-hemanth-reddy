@@ -6,11 +6,11 @@ import { Category } from "neetoicons";
 import { Button, NoData, Spinner } from "neetoui";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import routes from "src/routes";
 import { useCategoryStore } from "stores/useCategoryStore";
 
 import Post from "./Post";
 
-import routes from "../../routes";
 import CategorySidebar from "../Category";
 import { AppHeading } from "../commons";
 

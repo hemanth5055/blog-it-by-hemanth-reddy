@@ -1,3 +1,5 @@
+import { QUERY_KEYS } from "constants/query";
+
 import React from "react";
 
 import { useUpdateVote } from "hooks/reactQuery/useVotesApi";
@@ -10,8 +12,6 @@ import queryClient from "utils/queryClient";
 import { VOTE_TYPES } from "./contants";
 import PostAuthor from "./PostAuthor";
 import VoteButton from "./VoteButton";
-
-import { QUERY_KEYS } from "../../constants/query";
 
 const Post = ({
   id,

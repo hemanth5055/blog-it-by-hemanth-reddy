@@ -1,7 +1,7 @@
-import { useMutation, useQuery } from "react-query";
+import { QUERY_KEYS } from "constants/query";
 
-import postsApi from "../../apis/posts";
-import { QUERY_KEYS } from "../../constants/query";
+import postsApi from "apis/posts";
+import { useMutation, useQuery } from "react-query";
 
 export const useShowPost = slug =>
   useQuery({
