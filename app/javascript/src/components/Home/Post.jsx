@@ -93,7 +93,7 @@ const Post = ({
             style="link"
             weight="bold"
             className={classNames("rounded-md text-gray-500", {
-              "cursor-not-allowed !text-green-500": currentVote === "up",
+              "cursor-not-allowed text-green-500": currentVote === "up",
             })}
             onClick={() => handleUpdateVote("up")}
           />
@@ -104,13 +104,13 @@ const Post = ({
             style="link"
             weight="bold"
             className={classNames("rounded-md text-gray-500", {
-              "cursor-not-allowed !text-red-500": currentVote === "down",
+              "cursor-not-allowed text-red-500": currentVote === "down",
             })}
             onClick={() => handleUpdateVote("down")}
           />
         </div>
       </div>
-      <div className="neeto-ui-bg-gray-200  h-[1px] w-[75%] w-full" />
+      <div className="neeto-ui-bg-gray-200  h-[1px] w-[70%]" />
     </>
   );
 };
