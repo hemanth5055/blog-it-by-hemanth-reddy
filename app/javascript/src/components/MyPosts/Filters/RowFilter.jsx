@@ -6,6 +6,7 @@ import { Pane, Button, Typography } from "neetoui";
 import { useTranslation } from "react-i18next";
 import { useRowFilterStore } from "stores/useRowFilterStore";
 
+import { ROW_FILTER_FORM_VALIDATION_SCHEMA } from "./constants";
 import RowFilterForm from "./Form/RowForm";
 
 const RowFilter = () => {
@@ -42,7 +43,7 @@ const RowFilter = () => {
             formProps={{ noValidate: true }}
             formikProps={{
               initialValues: selectedFilters,
-              // validationSchema: LOGIN_FORM_VALIDATION_SCHEMA,
+              validationSchema: ROW_FILTER_FORM_VALIDATION_SCHEMA,
               onSubmit: handleFormSubmit,
             }}
           >

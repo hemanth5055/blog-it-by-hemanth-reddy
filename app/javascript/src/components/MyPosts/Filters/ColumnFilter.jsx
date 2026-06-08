@@ -18,8 +18,6 @@ const ColumnFilter = () => {
           formProps={{ noValidate: true }}
           formikProps={{
             initialValues: selectedFilters,
-            // validationSchema: LOGIN_FORM_VALIDATION_SCHEMA,
-            // onSubmit: handleFormSubmit,
           }}
         >
           <ColumnFilterForm />
