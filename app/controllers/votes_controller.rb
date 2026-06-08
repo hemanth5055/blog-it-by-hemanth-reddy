@@ -9,14 +9,14 @@ class VotesController < ApplicationController
 
     current_value = @vote.new_record? ? 0 : Vote.vote_types[@vote.vote_type]
     next_value = Vote.vote_types[vote_params[:vote_type]]
-    delta = next_value - current_value
+    change = next_value - current_value
 
-    return head :no_content if delta.zero?
+    return head :no_content if change.zero?
 
     ActiveRecord::Base.transaction do
       @vote.vote_type = vote_params[:vote_type]
       @vote.save!
-      @vote.post.update!(net_votes: @vote.post.net_votes + delta)
+      @vote.post.update!(net_votes: @vote.post.net_votes + change)
 
     end
 

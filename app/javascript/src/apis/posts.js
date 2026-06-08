@@ -14,12 +14,14 @@ const update = (slug, payload, isPostBeingPublished, isQuiet) => {
   return axios.put(url, { post: { ...payload, status: 0 } });
 };
 
-const fetchUserPosts = filters => axios.get("/myposts", { params: filters });
+const fetchUserPosts = filters =>
+  axios.get("/myposts", { params: { filters } });
+
 const bulkDeleteUserPosts = ids =>
   axios.delete("/myposts/bulk_delete", { params: { ids } });
 
 const bulkUpdateUserPosts = ({ ids, status }) =>
-  axios.patch("/myposts/bulk_status_update", { ids, status });
+  axios.patch("/myposts/bulk_status_update", { update: { ids, status } });
 
 const postsApi = {
   fetch,

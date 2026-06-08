@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
+  scope :selected_posts, ->(ids) { where(id: ids) }
+
   MAX_TITLE_LENGTH = 125
   MAX_DESC_LENGTH = 10_000
 
