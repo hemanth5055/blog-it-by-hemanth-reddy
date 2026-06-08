@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 json.post do
-  json.id @post.id
-  json.title @post.title
-  json.description @post.description
+  json.extract! @post, :id, :title, :description, :slug
 
   json.user do
     json.id @post.user.id
@@ -11,8 +9,8 @@ json.post do
   end
 
   json.categories @post.categories do |category|
-    json.id category.id
-    json.name category.name
+    json.extract! category, :id, :name
+
   end
   json.updatedAt @post.updated_at
 

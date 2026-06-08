@@ -11,8 +11,8 @@ class PostsController < ApplicationController
 
   def create
     full_params = post_params.merge(
-      organization_id: @current_user.organization_id,
-      user_id: @current_user.id
+      organization_id: current_user.organization_id,
+      user_id: current_user.id
     )
 
     post = Post.new(full_params)

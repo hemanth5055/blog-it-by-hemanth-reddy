@@ -3,7 +3,7 @@
 class MypostsController < ApplicationController
   def index
     @posts = current_user.posts.includes(:categories)
-    @posts = MypostsFilterService.new(@posts, my_post_filters).apply_filters
+    @posts = MypostsFilterService.new(@posts, my_post_filters).process!
   end
 
   def bulk_delete
@@ -12,6 +12,7 @@ class MypostsController < ApplicationController
   end
 
   def bulk_status_update
+    check_valid_status_option
     current_user.posts.selected_posts(bulk_update_params[:ids]).each do |post|
       post.update(status: bulk_update_params[:status])
     end
@@ -30,5 +31,11 @@ class MypostsController < ApplicationController
 
     def bulk_update_params
       params.require(:update).permit(:status, ids: [])
+    end
+
+    def check_valid_status_option
+      unless Post.statuses.keys.include?(bulk_update_params[:status])
+        render_error(t("invalid_status_option"))
+      end
     end
 end

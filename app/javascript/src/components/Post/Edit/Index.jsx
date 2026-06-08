@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import { useParams, useHistory } from "react-router-dom";
 import routes from "src/routes";
 import queryClient from "utils/queryClient";
+import { getShowUrl } from "utils/url";
 
 import { VALIDATION_SCHEMA } from "./constants";
 import { Form } from "./Form";
@@ -48,7 +49,7 @@ const Edit = () => {
   }
 
   if (!post.isOwner) {
-    history.push(routes.show.replace(":slug", slug));
+    history.push(getShowUrl(slug));
 
     return null;
   }
@@ -82,7 +83,7 @@ const Edit = () => {
     triggerFormSubmit();
   };
 
-  const handleCancel = () => history.push(routes.show.replace(":slug", slug));
+  const handleCancel = () => history.push(getShowUrl(slug));
 
   const handleDelete = () => {
     deletePost(slug, {
@@ -106,9 +107,7 @@ const Edit = () => {
       {
         onSuccess: () => {
           invalidatePostQueries();
-          history.push(
-            isPreview ? routes.show.replace(":slug", slug) : routes.root
-          );
+          history.push(isPreview ? getShowUrl(slug) : routes.root);
         },
       }
     );

@@ -1,14 +1,10 @@
 # frozen_string_literal: true
 
 json.posts @posts do |post|
-  json.id post.id
-  json.title post.title
-  json.description post.description
-  json.slug post.slug
+  json.extract! post, :id, :title, :description, :slug
   json.updatedAt post.updated_at
   json.categories post.categories do |category|
-    json.id category.id
-    json.name category.name
+    json.extract! category, :id, :name
   end
   json.netVotes post.net_votes
   json.isBloggable post.is_bloggable

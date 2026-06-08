@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import routes from "src/routes";
 
 import {
+  DEFAULT_ORGANIZATION_ID,
   INITIAL_SIGNUP_FORM_VALUES,
   SIGNUP_FORM_VALIDATION_SCHEMA,
 } from "./constants";
@@ -40,7 +41,7 @@ const Signup = () => {
       email,
       password,
       password_confirmation,
-      organization_id: 2,
+      organization_id: DEFAULT_ORGANIZATION_ID,
     };
 
     createUser(payload, {

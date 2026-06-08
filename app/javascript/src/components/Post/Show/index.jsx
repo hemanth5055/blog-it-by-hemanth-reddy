@@ -7,7 +7,7 @@ import { useShowPost } from "hooks/reactQuery/usePostsApi";
 import { Tag, Typography, Avatar, Button } from "neetoui";
 import { useTranslation } from "react-i18next";
 import { useParams, useHistory } from "react-router-dom";
-import routes from "src/routes";
+import { getEditUrl } from "utils/url";
 
 import NotFound from "../commons/NotFound";
 
@@ -44,7 +44,7 @@ const Show = () => {
             label={t("labels.edit")}
             style="secondary"
             onClick={() => {
-              history.push(routes.edit.replace(":slug", slug));
+              history.push(getEditUrl(slug));
             }}
           />
         )}

@@ -19,8 +19,6 @@ class VotesController < ApplicationController
       @vote.post.update!(net_votes: @vote.post.net_votes + change)
 
     end
-
-    render json: { net_votes: @vote.post.net_votes }, status: :ok
   end
 
   private

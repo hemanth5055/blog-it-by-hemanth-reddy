@@ -19,9 +19,9 @@ import {
 } from "neetoui";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import routes from "src/routes";
 import { useColumnFilterStore } from "stores/useColumnFilterStore";
 import queryClient from "utils/queryClient";
+import { getShowUrl } from "utils/url";
 
 import AppliedFilterTags from "./AppliedFilterTags";
 import { BULK_STATUS_OPTIONS } from "./constants";
@@ -107,7 +107,7 @@ const Table = ({ posts }) => {
       dataIndex: "title",
       key: "title",
       render: (_, post) => (
-        <Link to={routes.show.replace(":slug", post.slug)}>
+        <Link to={getShowUrl(post.slug)}>
           <Typography className="neeto-ui-text-primary-500" weight="medium">
             {post.title}
           </Typography>

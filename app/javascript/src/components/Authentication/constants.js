@@ -63,3 +63,5 @@ export const LOGIN_FORM_VALIDATION_SCHEMA = Yup.object({
       t("messages.passwordMinCharactersNotMet", { MIN_PASSWORD_LENGTH })
     ),
 });
+
+export const DEFAULT_ORGANIZATION_ID = 2;

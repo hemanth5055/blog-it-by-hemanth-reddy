@@ -6,10 +6,10 @@ class MypostsFilterService
     @filters = filters || {}
   end
 
-  def apply_filters
-    @posts = @posts.where("title LIKE ?", "%#{@filters[:title]}%") if @filters[:title].present?
+  def process!
+    filter_by_title
     filter_by_categories
-    @posts = @posts.where(status: @filters[:status]) if @filters[:status].present?
+    filter_by_status
 
     @posts
   end
@@ -18,5 +18,13 @@ class MypostsFilterService
     return unless @filters[:category_ids].present?
 
     @posts = @posts.joins(:categories).where(categories: { id: @filters[:category_ids] })
+  end
+
+  def filter_by_title
+    @posts = @posts.where("title LIKE ?", "%#{@filters[:title]}%") if @filters[:title].present?
+  end
+
+  def filter_by_status
+    @posts = @posts.where(status: @filters[:status]) if @filters[:status].present?
   end
 end
