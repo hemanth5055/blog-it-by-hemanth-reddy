@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import ColumnFilterForm from "./ColumnFilterForm";
 
-import { useColumnFilterStore } from "../../stores/useColumnFilterStore";
+import { useColumnFilterStore } from "../../../stores/useColumnFilterStore";
 
 const ColumnFilter = () => {
   const { t } = useTranslation();

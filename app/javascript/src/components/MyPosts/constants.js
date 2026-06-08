@@ -24,7 +24,7 @@ export const columns = [
 export const FILTER_FIELDS = [
   { name: "title", labelKey: "labels.title", disabled: true },
   { name: "category", labelKey: "labels.category" },
-  { name: "lastUpdatedAt", labelKey: "labels.lastUpdatedAt" },
+  { name: "lastUpdatedAt", labelKey: "labels.lastPublishedAt" },
   { name: "status", labelKey: "labels.status" },
 ];
 

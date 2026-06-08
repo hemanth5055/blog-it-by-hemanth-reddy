@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 import RowFilterForm from "./RowFilterForm";
 
-import { useRowFilterStore } from "../../stores/useRowFilterStore";
+import { useRowFilterStore } from "../../../stores/useRowFilterStore";
 
 const RowFilter = () => {
   const [showPane, setShowPane] = useState(false);

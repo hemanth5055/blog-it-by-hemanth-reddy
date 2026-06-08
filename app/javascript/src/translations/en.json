@@ -40,7 +40,7 @@
     "saveAsDraft": "Save as draft",
     "delete": "Delete",
     "updatedAt": "Updated at",
-    "lastUpdatedAt": "Last updated at",
+    "lastPublishedAt": "Last published at",
     "status": "Status",
     "unpublish": "Unpublish",
     "edit": "Edit",

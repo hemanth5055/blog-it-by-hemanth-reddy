@@ -7,12 +7,12 @@ class MypostsController < ApplicationController
   end
 
   def bulk_delete
-    @posts = Post.where(user_id: current_user.id, id: bulk_delete_params[:ids]).destroy_all
+    @posts = current_user.posts.where(id: bulk_delete_params[:ids]).destroy_all
     render_notice(t("successfully_deleted_all", entity: "Posts"))
   end
 
   def bulk_status_update
-    Post.where(user_id: current_user.id, id: bulk_update_params[:ids]).each do |post|
+    current_user.posts.where(id: bulk_delete_params[:ids]).each do |post|
       post.update(status: bulk_update_params[:status])
     end
     render_notice(t("successfully_updated_all", entity: "Posts"))

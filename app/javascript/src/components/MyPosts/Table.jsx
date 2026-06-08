@@ -16,9 +16,9 @@ import routes from "src/routes";
 import queryClient from "utils/queryClient";
 
 import AppliedFilterTags from "./AppliedFilterTags";
-import ColumnFilter from "./ColumnFilter";
 import { BULK_STATUS_OPTIONS } from "./constants";
-import RowFilter from "./RowFilter";
+import ColumnFilter from "./Filters/ColumnFilter";
+import RowFilter from "./Filters/RowFilter";
 
 import { QUERY_KEYS } from "../../constants/query";
 import {
@@ -144,12 +144,12 @@ const Table = ({ posts }) => {
       ),
     },
     {
-      title: t("labels.lastUpdatedAt"),
-      dataIndex: "lastUpdatedAt",
-      key: "lastUpdatedAt",
-      render: lastUpdatedAt => (
+      title: t("labels.lastPublishedAt"),
+      dataIndex: "lastPublishedAt",
+      key: "lastPublishedAt",
+      render: lastPublishedAt => (
         <Typography className="text-gray-400" style="body1" weight="medium">
-          {dayjs(lastUpdatedAt).format("MMM D, YYYY - hh:mm:ss A")}
+          {dayjs(lastPublishedAt).format("MMM D, YYYY - hh:mm:ss A")}
         </Typography>
       ),
     },
