@@ -3,8 +3,7 @@
 class MypostsController < ApplicationController
   def index
     @posts = Post.includes(:categories).where(user_id: current_user.id)
-    add_filters
-    render
+    apply_filters
   end
 
   def bulk_delete
@@ -33,11 +32,15 @@ class MypostsController < ApplicationController
       params.permit(:status, ids: [])
     end
 
-    def add_filters
+    def apply_filters
       @posts = @posts.where("title LIKE ?", "%#{my_post_filters[:title]}%") if my_post_filters[:title].present?
-      if my_post_filters[:category_ids].present?
-        @posts = @posts.where(categories: { id: my_post_filters[:category_ids] })
-      end
+      filter_by_categories
       @posts = @posts.where(status: my_post_filters[:status]) if my_post_filters[:status].present?
+    end
+
+    def filter_by_categories
+      return @posts unless my_post_filters[:category_ids].present?
+
+      @posts = @posts.where(categories: { id: my_post_filters[:category_ids] })
     end
 end

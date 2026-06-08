@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
+  before_action :load_post!, only: %i[show update destroy]
   def index
-    user_categories = params[:categories].presence
-    @posts = Post.includes(:categories, :user, :votes).published.where(organization_id: @current_user.organization_id)
-    @posts = @posts.where(categories: { id: user_categories }) if user_categories
+    @posts = policy_scope(Post).includes(:categories, :user, :votes)
+    @posts = filter_by_categories(@posts)
     @posts = @posts.order(created_at: :desc)
     render
   end
@@ -22,21 +22,17 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.includes(:categories).find_by!(slug: params[:slug])
     authorize @post
-    @isOwner = @post.user_id == current_user.id
     render
   end
 
   def update
-    @post = Post.find_by!(slug: params[:slug])
     authorize @post
     @post.update!(post_params)
     render_notice(t("successfully_updated", entity: "Post")) unless params.key?(:quiet)
   end
 
   def destroy
-    @post = Post.find_by!(slug: params[:slug])
     authorize @post
     @post.destroy!
     render_notice(t("successfully_deleted", entity: "Post"))
@@ -44,7 +40,17 @@ class PostsController < ApplicationController
 
   private
 
+    def load_post!
+      @post = Post.find_by!(slug: params[:slug], organization_id: current_user.organization_id)
+    end
+
     def post_params
       params.require(:post).permit(:title, :description, :status, category_ids: [],)
+    end
+
+    def filter_by_categories(posts)
+      return posts unless params[:categories].present?
+
+      posts.joins(:categories).where(categories: { id: params[:categories] })
     end
 end

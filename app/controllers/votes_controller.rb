@@ -7,17 +7,20 @@ class VotesController < ApplicationController
       user_id: current_user.id
     )
 
-    is_up = vote_params[:vote_type] == "up"
-    @vote.vote_type = is_up ? 1 : -1
+    current_value = @vote.new_record? ? 0 : Vote.vote_types[@vote.vote_type]
+    next_value = Vote.vote_types[vote_params[:vote_type]]
+    delta = next_value - current_value
 
-    if @vote.new_record?
-      delta = is_up ? 1 : -1
+    return head :no_content if delta.zero?
+
+    ActiveRecord::Base.transaction do
+      @vote.vote_type = vote_params[:vote_type]
+      @vote.save!
       @vote.post.update!(net_votes: @vote.post.net_votes + delta)
-    else
-      delta = is_up ? 2 : -2
-      @vote.post.update!(net_votes: @vote.post.net_votes + delta)
+
     end
-    @vote.save!
+
+    render json: { net_votes: @vote.post.net_votes }, status: :ok
   end
 
   private

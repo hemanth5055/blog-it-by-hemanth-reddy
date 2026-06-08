@@ -9,26 +9,37 @@ class PostPolicy
   end
 
   def show?
-    is_owner = post.user_id == user.id
-    same_org = post.organization_id == user.organization_id
-    is_draft = post.draft?
-
-    return true if is_owner
-    return false if is_draft
-    return true if same_org
-
-    false
+    owner? || published?
   end
 
   def create?
-    post.user_id == user.id
+    true
   end
 
   def update?
-    create?
+    owner?
   end
 
   def destroy?
     create?
+  end
+
+  def owner?
+    post.user_id == user.id
+  end
+
+  def published?
+    !post.draft?
+  end
+
+  class Scope
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+
+    def resolve
+      @scope.where(organization_id: @user.organization_id).published
+    end
   end
 end

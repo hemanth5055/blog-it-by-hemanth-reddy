@@ -16,6 +16,6 @@ json.post do
   end
   json.updatedAt @post.updated_at
 
-  json.isOwner @isOwner
+  json.isOwner @post.user_id == @current_user.id
   json.status @post.status
 end

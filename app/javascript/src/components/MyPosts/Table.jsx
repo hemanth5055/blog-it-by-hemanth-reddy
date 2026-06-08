@@ -256,7 +256,7 @@ const Table = ({ posts }) => {
               </div>
             ) : (
               <div className="flex w-full justify-between">
-                <div>
+                <div className="flex items-center gap-2">
                   <Typography weight="semibold">
                     {t("messages.result", { count: posts.length })}
                   </Typography>

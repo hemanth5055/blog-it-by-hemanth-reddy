@@ -47,7 +47,8 @@
     "logout": "Logout",
     "columns": "Columns",
     "filters": "Filters",
-    "blogIt": "Blog it"
+    "blogIt": "Blog it",
+    "save": "Save"
   },
   "messages": {
     "blogPostNotFound": "We couldn't find a blog post matching that web address.",

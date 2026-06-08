@@ -23,7 +23,13 @@ const AppliedFilterTags = () => {
         />
       ))}
       {selectedFilters.status.value !== "both" && (
-        <Tag label={selectedFilters.status.label} size="large" style="danger" />
+        <Tag
+          label={selectedFilters.status.label}
+          size="large"
+          style={
+            selectedFilters.status.value === "draft" ? "warning" : "success"
+          }
+        />
       )}
     </div>
   );

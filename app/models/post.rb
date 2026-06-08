@@ -43,7 +43,7 @@ class Post < ApplicationRecord
       if will_save_change_to_slug? && self.persisted?
         errors.add(:slug, I18n.t("post.slug.immutable"))
       end
-   end
+    end
 
     def set_last_updated_at_for_only_post_that_are_being_published
       should_update = new_record? ||
@@ -51,9 +51,9 @@ class Post < ApplicationRecord
         (published? && !status_changed? && changed?)
 
       self.last_updated_at = Time.current if should_update
- end
+    end
 
     def update_set_bloggable
-      self.is_bloggable = self.net_votes > 5
+      self.is_bloggable = self.net_votes > Constants::IS_BLOGGABLE_THRESHOLD
     end
 end
