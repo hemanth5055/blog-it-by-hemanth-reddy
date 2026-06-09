@@ -54,14 +54,9 @@ const Edit = () => {
     return null;
   }
 
-  const invalidatePostQueries = () => {
+  const invalidatePostsQueries = () => {
     queryClient.invalidateQueries({
       queryKey: [QUERY_KEYS.POSTS, QUERY_KEYS.USER],
-      refetchType: "active",
-    });
-
-    queryClient.invalidateQueries({
-      queryKey: [QUERY_KEYS.POST, slug],
       refetchType: "active",
     });
 
@@ -88,7 +83,7 @@ const Edit = () => {
   const handleDelete = () => {
     deletePost(slug, {
       onSuccess: () => {
-        invalidatePostQueries();
+        invalidatePostsQueries();
         history.push(routes.root);
       },
     });
@@ -106,7 +101,11 @@ const Edit = () => {
       },
       {
         onSuccess: () => {
-          invalidatePostQueries();
+          invalidatePostsQueries();
+          queryClient.invalidateQueries({
+            queryKey: [QUERY_KEYS.POST, slug],
+            refetch: false,
+          });
           history.push(isPreview ? getShowUrl(slug) : routes.root);
         },
       }

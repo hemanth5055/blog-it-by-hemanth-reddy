@@ -11,7 +11,7 @@ en:
   generic_error: "Something went wrong. Please try again later."
   successfully_created: "%{entity} was successfully created!"
   successfully_updated: "%{entity} was successfully updated!"
-  successfully_deleted: "%{entity} was successfully updated!"
+  successfully_deleted: "%{entity} was successfully deleted!"
   successfully_deleted_all: "%{entity} are successfully deleted!"
   successfully_updated_all: "%{entity} are successfully updated!"
   session:

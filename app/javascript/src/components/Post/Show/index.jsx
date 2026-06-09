@@ -4,7 +4,7 @@ import PageLoader from "commons/PageLoader";
 import dayjs from "dayjs";
 import { useShowPost } from "hooks/reactQuery/usePostsApi";
 import { Download, Edit } from "neetoicons";
-import { Tag, Typography, Avatar, Button, Modal } from "neetoui";
+import { Tag, Typography, Avatar, Button, Modal, Tooltip } from "neetoui";
 import { useTranslation } from "react-i18next";
 import { useParams, useHistory } from "react-router-dom";
 import { getEditUrl } from "utils/url";
@@ -53,11 +53,13 @@ const Show = () => {
                 }}
               />
             )}
-            <Button
-              icon={Download}
-              style="secondary"
-              onClick={() => setShowDownloadModal(true)}
-            />
+            <Tooltip content={t("labels.download")} position="bottom">
+              <Button
+                icon={Download}
+                style="secondary"
+                onClick={() => setShowDownloadModal(true)}
+              />
+            </Tooltip>
           </div>
         </div>
         <div className="flex w-full items-center gap-5">
