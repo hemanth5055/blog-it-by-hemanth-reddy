@@ -50,7 +50,7 @@ const DownloadPost = ({ slug }) => {
   useEffect(() => {
     if (progress === 100) {
       setIsLoading(false);
-      setMessage("Report is ready to be downloaded");
+      setMessage("Pdf is ready to be downloaded");
     }
   }, [progress]);
 
@@ -66,9 +66,11 @@ const DownloadPost = ({ slug }) => {
         <Typography style="body2" weight="medium">
           {message}
         </Typography>
-        <Button className="w-fit" disabled={isLoading} onClick={downloadPdf}>
-          Download
-        </Button>
+        <div className="flex w-full justify-end">
+          <Button disabled={isLoading} onClick={downloadPdf}>
+            Download
+          </Button>
+        </div>
       </Modal.Body>
     </>
   );

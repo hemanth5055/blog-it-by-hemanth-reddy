@@ -23,10 +23,10 @@ const bulkDeleteUserPosts = ids =>
 const bulkUpdateUserPosts = ({ ids, status }) =>
   axios.patch("/myposts/bulk_status_update", { update: { ids, status } });
 
-const generatePdf = slug => axios.post(`/posts/${slug}/report`, {});
+const generatePdf = slug => axios.post(`/posts/${slug}/pdf`, {});
 
 const download = slug =>
-  axios.get(`/posts/${slug}/report/download`, { responseType: "blob" });
+  axios.get(`/posts/${slug}/pdf/download`, { responseType: "blob" });
 
 const postsApi = {
   fetch,

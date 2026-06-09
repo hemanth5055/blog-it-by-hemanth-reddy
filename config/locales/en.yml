@@ -2,6 +2,10 @@ en:
   post:
     slug:
       immutable: "is immutable!"
+    render: "Rendering the report"
+    generate: "Generating the PDF report"
+    upload: "Uploading to server"
+    attach: "Attaching the report to the user"
   authorization:
     denied: "Access denied. You are not authorized to perform this action."
   generic_error: "Something went wrong. Please try again later."
@@ -15,8 +19,3 @@ en:
     incorrect_credentials: "Incorrect credentials, try again."
   logged_out: "User was successfully logged out!"
   invalid_status_option: "Invalid status option"
-  report:
-    render: "Rendering the report"
-    generate: "Generating the PDF report"
-    upload: "Uploading to server"
-    attach: "Attaching the report to the user"

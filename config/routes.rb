@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   constraints(lambda { |req| req.format == :json }) do
     resources :posts, only: %i[index create show destroy update], param: :slug do
-      resource :report, only: :create do
+      resource :pdf, only: :create do
         get :download, on: :collection
 
       end
