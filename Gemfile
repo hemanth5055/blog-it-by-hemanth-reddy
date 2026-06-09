@@ -63,7 +63,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
 end
 
-gem "connection_pool", "~> 2.4"
+gem "connection_pool", "~> 3.0"
 gem "react-rails", "~> 2.7.1"
 
 group :development, :test do
