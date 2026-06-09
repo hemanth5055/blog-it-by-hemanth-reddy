@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   belongs_to :organization
   has_many :posts
+  has_one_attached :report
+
   has_many :votes, dependent: :destroy
   has_secure_password
   has_secure_token :authentication_token

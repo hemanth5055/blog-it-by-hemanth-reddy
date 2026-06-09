@@ -6,6 +6,7 @@ const routes = {
   login: "/login",
   edit: "/posts/:slug/edit",
   myPosts: "/myposts",
+  download: "/posts/:slug/download",
 };
 
 export default routes;

@@ -1,5 +1,6 @@
 import AppHeading from "./AppHeading";
 import PageNotFound from "./PageNotFound";
+import ProgressBar from "./ProgessBar";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicButRestrictedWhenLoggedIn from "./PublicButRestrictedWhenLoggedIn";
 import Toastr from "./Toastr";
@@ -10,4 +11,5 @@ export {
   ProtectedRoute,
   Toastr,
   PublicButRestrictedWhenLoggedIn,
+  ProgressBar,
 };

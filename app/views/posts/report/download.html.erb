@@ -1,0 +1,32 @@
+<div class="mb-4 font-bold">Post Details:</div>
+<div class="p-4 mb-8 bg-white neeto-ui-shadow-s rounded">
+  <div class="flex-row w-full mb-4">
+
+    <div class="ml-4">
+      <div class="mb-3">
+        <div class="text-gray-500 text-sm">Title</div>
+        <div class="font-semibold text-lg"><%= @post.title %></div>
+      </div>
+
+       <div class="mb-3">
+        <div class="text-gray-500 text-sm">Categories</div>
+        <div class="flex flex-wrap gap-2 mt-1">
+          <% @post.categories.each do |category| %>
+            <span class="px-2 py-1 bg-gray-100 rounded text-sm"><%= category.name %></span>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="text-gray-500 text-sm">Authored by</div>
+        <div><%= @post.user.name %></div>
+      </div>
+    </div>
+
+      <div class="mb-3">
+        <div class="text-gray-500 text-sm">Description</div>
+        <div><%= @post.description %></div>
+      </div>
+
+  </div>
+</div>

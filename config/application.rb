@@ -29,5 +29,6 @@ module BlogIt
       g.test_framework :test_unit, fixture: false
     end
     config.assets.pipeline = :sprockets
+    config.active_job.queue_adapter = :sidekiq
   end
 end

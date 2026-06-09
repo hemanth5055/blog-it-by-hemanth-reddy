@@ -87,3 +87,11 @@ end
 gem "data_migrate"
 gem "pry-byebug"
 gem "simplecov", require: false, group: :test
+
+gem "sidekiq", "~> 7.0"
+# PDF generation gem
+gem "wicked_pdf"
+# wicked_pdf uses the following binary
+gem "wkhtmltopdf-binary"
+
+gem "redis"
