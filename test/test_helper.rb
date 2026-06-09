@@ -4,6 +4,7 @@ def enable_test_coverage
   require "simplecov"
   SimpleCov.start do
     add_filter "/test/"
+    add_filter "app/controllers/concerns"
     add_group "Models", "app/models"
     add_group "Mailers", "app/mailers"
     add_group "Controllers", "app/controllers"
@@ -33,4 +34,13 @@ module ActiveSupport
 
     # Add more helper methods to be used by all tests here...
   end
+end
+
+def headers(user, options = {})
+  {
+    Accept: "application/json",
+    "Content_Type" => "application/json",
+    "X-Auth-Token" => user.authentication_token,
+    "X-Auth-Email" => user.email
+  }.merge(options)
 end

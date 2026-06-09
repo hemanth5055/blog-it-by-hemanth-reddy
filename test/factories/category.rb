@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :category do
-    name { Faker::Book.unique.genre }
+    name { Faker::Lorem.word.then { |w| w.length >= 3 ? w : "#{w}#{SecureRandom.hex(2)}" } }
   end
 end

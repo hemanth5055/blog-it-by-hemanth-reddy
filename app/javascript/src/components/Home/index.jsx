@@ -75,21 +75,7 @@ const Home = () => {
         </div>
         <div className="flex h-full w-full flex-col items-center gap-3 overflow-y-scroll">
           {isNotEmpty(posts) ? (
-            posts.map(post => (
-              <Post
-                author={post.author}
-                categories={post.categories}
-                currentVote={post.currentVote}
-                description={post.description}
-                id={post.id}
-                isBloggable={post.isBloggable}
-                key={post.id}
-                netVotes={post.netVotes}
-                slug={post.slug}
-                title={post.title}
-                updatedAt={post.updatedAt}
-              />
-            ))
+            posts.map(post => <Post {...post} key={post.id} />)
           ) : (
             <div className="flex h-full w-full items-center justify-center">
               <NoData

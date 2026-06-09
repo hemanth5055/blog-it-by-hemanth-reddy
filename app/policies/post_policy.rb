@@ -21,7 +21,7 @@ class PostPolicy
   end
 
   def destroy?
-    create?
+    owner?
   end
 
   def owner?
