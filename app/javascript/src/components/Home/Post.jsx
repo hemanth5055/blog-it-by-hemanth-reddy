@@ -88,7 +88,7 @@ const Post = ({
           />
         </div>
       </div>
-      <div className="neeto-ui-bg-gray-200 h-[1px] w-[70%]" />
+      <div className="border-b-1 my-1 flex w-[75%] border  border-gray-500 opacity-50" />
     </>
   );
 };
