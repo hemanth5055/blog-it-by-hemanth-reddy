@@ -5,12 +5,14 @@ import createConsumer from "channels/consumer";
 import { subscribeToPostDownloadChannel } from "channels/downloadPostChannel";
 import { ProgressBar } from "commons";
 import FileSaver from "file-saver";
-import { Modal, Typography, Button } from "neetoui";
+import { Modal, Typography } from "neetoui";
+import { useTranslation } from "react-i18next";
 
 const DownloadPost = ({ slug }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState("");
+  const { t } = useTranslation();
 
   const consumer = createConsumer();
 
@@ -45,32 +47,33 @@ const DownloadPost = ({ slug }) => {
     return () => {
       consumer.disconnect();
     };
+    // Disabled because the use effect should only run on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (progress === 100) {
       setIsLoading(false);
-      setMessage("Pdf is ready to be downloaded");
+      setTimeout(() => {
+        downloadPdf();
+      }, 1000);
     }
+    // Disabled because downloadPdf is intentionally omitted to avoid re-running
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [progress]);
 
   return (
     <>
       <Modal.Header>
         <Typography style="h3" weight="medium">
-          Downloading Post
+          {t("titles.downloadingPost")}
         </Typography>
       </Modal.Header>
       <Modal.Body className="flex w-full flex-col gap-4 py-4">
         <ProgressBar progress={progress} />
         <Typography style="body2" weight="medium">
-          {message}
+          {isLoading ? message : t("messages.pdfIsReadyToDownload")}
         </Typography>
-        <div className="flex w-full justify-end">
-          <Button disabled={isLoading} onClick={downloadPdf}>
-            Download
-          </Button>
-        </div>
       </Modal.Body>
     </>
   );

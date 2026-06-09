@@ -12,7 +12,8 @@
     "newCategory": "New category",
     "confirmBulkDelete": "Do you want to delete all selected posts?",
     "somethingWentWrong": "Something went wrong",
-    "pageNotFound": "The page you're looking for can't be found"
+    "pageNotFound": "The page you're looking for can't be found",
+    "downloadingPost": "Downloading blog post"
   },
   "placeholders": {
     "enterTitle": "Enter title",
@@ -50,7 +51,8 @@
     "updatedAt": "Updated at",
     "lastPublishedAt": "Last published at",
     "changeStatus": "Change status",
-    "blogIt": "Blog it"
+    "blogIt": "Blog it",
+    "download": "Download"
   },
   "messages": {
     "nameRequired": "Name is required",
@@ -82,7 +84,8 @@
     "lastSavedAt": "Last saved at : {{time}}",
     "deleteSelectedPostsWarning": "All selected posts will be permanently deleted",
     "somethingWentWrong": "Something went wrong!",
-    "statusMustBeBothOrDraftOrPublished": "Status must be Both, Draft, or Published"
+    "statusMustBeBothOrDraftOrPublished": "Status must be Both, Draft, or Published",
+    "pdfIsReadyToDownload": "Your PDF is ready to download!"
   },
   "tooltips": {
     "posts": "Posts",
