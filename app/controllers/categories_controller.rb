@@ -7,8 +7,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    category = Category.new(category_params)
-    category.save!
+    Category.create!(category_params)
     render_notice(t("successfully_created", entity: "Category"))
   end
 
