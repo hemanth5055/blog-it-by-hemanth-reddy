@@ -3,7 +3,6 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user_using_x_auth_token, only: :create
 
-  # previous code
   def create
     user = User.new(user_params)
     user.save!
